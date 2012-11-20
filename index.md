@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Kavi
+title: Kavi's workstation
 tagline: 永远一知半解
 ---
 {% include JB/setup %}
