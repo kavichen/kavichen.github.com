@@ -14,9 +14,7 @@ tagline: 永远一知半解
 
 
 -------  
-Read [Jekyll Quick Start](http://jekyllbootstrap.com/usage/jekyll-quick-start.html)
-
-Complete usage and documentation available at: [Jekyll Bootstrap](http://jekyllbootstrap.com)
-  
-Blogger KaviChen
+	Read [Jekyll Quick Start](http://jekyllbootstrap.com/usage/jekyll-quick-start.html)
+	
+	Complete usage and documentation available at: [Jekyll Bootstrap](http://jekyllbootstrap.com)
 
