@@ -5,19 +5,6 @@ tagline: 永远一知半解
 ---
 {% include JB/setup %}
 
-Read [Jekyll Quick Start](http://jekyllbootstrap.com/usage/jekyll-quick-start.html)
-
-Complete usage and documentation available at: [Jekyll Bootstrap](http://jekyllbootstrap.com)
-
-
-    
-## Sample Posts
-
-This blog contains sample posts which help stage pages and blog data.
-When you don't need the samples anymore just delete the `_posts/core-samples` folder.
-
-    $ rm -rf _posts/core-samples
-
 
 <ul class="posts">
   {% for post in site.posts %}
@@ -25,4 +12,11 @@ When you don't need the samples anymore just delete the `_posts/core-samples` fo
   {% endfor %}
 </ul>
 
+
+-------  
+Read [Jekyll Quick Start](http://jekyllbootstrap.com/usage/jekyll-quick-start.html)
+
+Complete usage and documentation available at: [Jekyll Bootstrap](http://jekyllbootstrap.com)
+  
+Blogger KaviChen
 
