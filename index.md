@@ -1,6 +1,7 @@
 ---
 layout: page
-title: 永远一知半解
+title: Kavi  
+tagline: 永远一知半解
 ---
 {% include JB/setup %}
 
