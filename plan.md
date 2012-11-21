@@ -46,7 +46,7 @@ description: "The Development Plan of Haswing Remote App"
   
 - 未计划    
   
-## 1.3网络传输  
+## 1.3 网络传输  
   
 ### 1.3.1 参考书  
   
@@ -57,32 +57,30 @@ description: "The Development Plan of Haswing Remote App"
 
 # 2 策划阶段  
   
-## 2.1 iPhone App策划阶段  
+## 2.1 iPhone App策划阶段 [ 34 days ]
   
-### 2.1.1 参考书
+### 2.1.1 参考书 [ 4 days ]
   
 - [ 2days ]《iPhone 应用用户体验设计施展与案例》学习  
   
 - [ 2days ]《触动人心 - 设计优秀的iPhone应用》学习
 	  
-- [ 30days ] Haswing推进器App UI策划 - for iOS 
+### 2.1.2 Haswing推进器App UI策划 - for iOS [ 30 days ]
 	  
-	* v1 for 10 days
+- v1 for 10 days
 	  
-	* v2 for 5 days
+- v2 for 5 days
 	  
-	* v3 for 5 days
+- v3 for 5 days
 	  
-	* v4 for 5 days
+- v4 for 5 days
 	  
-	* v5 for 5 days</br>
+- v5 for 5 days</br>
  
-*5 iteration to final version*    
+*5 iteration to final version*      
   
-* 30 days in total  
-
+### 2.2 船控电路策划阶段
   
-2. **船控电路策划阶段**    
 
 - 标准接口策划  
 
