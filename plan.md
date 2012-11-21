@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Plan"
+title: "The Development Plan of Haswing Remote App"
 description: "The Development Plan of Haswing Remote App"
 ---
 {% include JB/setup %}
@@ -20,10 +20,9 @@ description: "The Development Plan of Haswing Remote App"
 
 	* 2 day/chapter   
   
-	* 2 * 22 = 44 days  
-  
----  
-   
+	* 2 * 22 = 44 days    
+
+---   
   
 ### 1.1.2 视频资料 
 	  
@@ -45,8 +44,6 @@ description: "The Development Plan of Haswing Remote App"
 ## 1.2 Linux嵌入式系统开发学习   
 </br>    
   
----
-  
 ### 1.2.1 参考书    
   
 - 未计划      
@@ -57,8 +54,6 @@ description: "The Development Plan of Haswing Remote App"
   
 ## 1.3 网络传输  
 </br>   
----  
-   
 
 ### 1.3.1 参考书   
  
@@ -78,7 +73,9 @@ description: "The Development Plan of Haswing Remote App"
   
 - *2 days*《iPhone 应用用户体验设计施展与案例》学习  
   
-- *2 days*《触动人心 - 设计优秀的iPhone应用》学习  
+- *2 days*《触动人心 - 设计优秀的iPhone应用》学习   
+  
+--- 
 
   
 ### 2.1.2 Haswing推进器App UI策划 - for iOS *30 day*  
@@ -95,6 +92,7 @@ description: "The Development Plan of Haswing Remote App"
  
 *5 iteration to final version*   
   
+---  
 ---
   
 ### 2.2 船控电路策划
@@ -117,18 +115,22 @@ description: "The Development Plan of Haswing Remote App"
 
 ### 3.1.1 参考书  
   
-- *3 days* 阅读《人月神话》
+- *3 days* 阅读《人月神话》  
   
-### 3.2.2 项目原型开发  
+---
+  
+### 3.1.2 项目原型开发  
   
 - 未计划
   
 ---  
----  
+---    
+---
 
 # 测试阶段
 </br>  
   
+---  
 ---  
 ---  
 
