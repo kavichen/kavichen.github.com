@@ -11,10 +11,13 @@ description: "The Development Plan of Haswing Remote App"
 --------  
 
 #1 学习阶段  
+</br>  
 
 ## 1.1 Objective - C 学习  
+</br>  
   
 ### 1.1.1 参考书
+</br>  
   
 - [ 44 days ] Beginning iOS5 Development
   
@@ -41,22 +44,25 @@ description: "The Development Plan of Haswing Remote App"
   
  
 ## 1.2 Linux嵌入式系统开发学习   
+</br>  
   
 ### 1.2.1 参考书  
+</br>  
   
 - 未计划    
   
 ## 1.3 网络传输  
-  
+</br>  
 ### 1.3.1 参考书  
-  
+</br>  
+ 
 - 未计划  
 
   
 ===  
 
 # 2 策划阶段    
-
+</br>
   
 ## 2.1 iPhone App策划阶段 *34 days*  
 </br>
