@@ -15,7 +15,7 @@ description: "The Development Plan of Haswing Remote App"
   
 - *44 days* Beginning iOS5 Development
   
-	* 22 chapters in total  
+	* 22 chapters in total  	
 	* 2 day/chapter   
 	* 2 * 22 = 44 days    
 
@@ -99,8 +99,8 @@ description: "The Development Plan of Haswing Remote App"
 	* 数据格式  
 
 	* 接口：<br/>1. 船控与驱动部分<br/>2. 船控与iOS部分  
-</br>
-  
+
+---  
 ---  
 ---  
 
