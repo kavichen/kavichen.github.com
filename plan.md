@@ -16,7 +16,7 @@ description: "The Development Plan of Haswing Remote App"
   
 ### 参考书
   
-- <Beginning iOS5 Development>
+- Beginning iOS5 Development
   
 	* 22 chapters in total  
 
