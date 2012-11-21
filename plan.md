@@ -57,7 +57,7 @@ description: "The Development Plan of Haswing Remote App"
 
 # 2 策划阶段  
   
-## 2.1 iPhone App策划阶段 {34 days}
+## 2.1 iPhone App策划阶段 *34 days*
   
 ### 2.1.1 参考书 [ 4 days ]
   
