@@ -4,20 +4,26 @@ title: "Plan"
 description: "The Development Plan of Haswing Remote App"
 ---
 {% include JB/setup %}
+# 项目阶段  
 
-#开发计划 V1
-Each month has 26 work days.
+## 阶段细分  
+  
+--------  
 
-##学习阶段
-1. **Objective - C**
-	  
-	- Beginning iOS5 Development 
-		  
-		* 22 chapters in total
-		* 2 day/chapter = > 44days  
+#学习阶段  
+
+## Objective - C 学习  
+  
+### 参考书
+  
+- Beginning iOS5 Development 
+  
+	* 22 chapters in total
+	* 2 day/chapter = > 44days  
 	  
 	- Stranford教程
-  		* 19 lectures
+  		  
+		* 19 lectures
   		* 1 day/lecture = > 19days
   		* 5 assignments
    		* 2 day/assignment = > 10days
