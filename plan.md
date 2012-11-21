@@ -26,9 +26,10 @@ description: "The Development Plan of Haswing Remote App"
 	* 2 day/chapter   
   
 	* 2 * 22 = 44 days  
-   
+</br>   
   
 ### 1.1.2 视频资料
+</br>  
 	  
 - [ 29days ] Stanford教程
   		  
@@ -41,7 +42,7 @@ description: "The Development Plan of Haswing Remote App"
 	* 2 day/assignment = > 10days
   		  
 	* 19 + 10 = 29 days  
-  
+</br>  
  
 ## 1.2 Linux嵌入式系统开发学习   
 </br>  
@@ -52,7 +53,8 @@ description: "The Development Plan of Haswing Remote App"
 - 未计划    
   
 ## 1.3 网络传输  
-</br>  
+</br>    
+
 ### 1.3.1 参考书  
 </br>  
  
@@ -67,14 +69,17 @@ description: "The Development Plan of Haswing Remote App"
 ## 2.1 iPhone App策划阶段 *34 days*  
 </br>
   
-### 2.1.1 参考书 *4 days*
+### 2.1.1 参考书 *4 days*  
+</br>
   
 - *2 days*《iPhone 应用用户体验设计施展与案例》学习  
   
-- *2 days*《触动人心 - 设计优秀的iPhone应用》学习
+- *2 days*《触动人心 - 设计优秀的iPhone应用》学习  
+</br>
   
-### 2.1.2 Haswing推进器App UI策划 - for iOS [ 30 days ]
-  
+### 2.1.2 Haswing推进器App UI策划 - for iOS *30 day*
+ </br>  
+ 
 - v1 for 10 days
 	  
 - v2 for 5 days
@@ -85,7 +90,8 @@ description: "The Development Plan of Haswing Remote App"
 	  
 - v5 for 5 days</br>
  
-*5 iteration to final version*      
+*5 iteration to final version*  
+</br>      
   
 ### 2.2 船控电路策划阶段
   
