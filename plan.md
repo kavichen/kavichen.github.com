@@ -57,13 +57,13 @@ description: "The Development Plan of Haswing Remote App"
 
 # 2 策划阶段  
   
-## 2.1 iPhone App策划阶段_34 days
+## 2.1 iPhone App策划阶段 *34 days*
   
-### 2.1.1 参考书 [ 4 days ]
+### 2.1.1 参考书 *4 days*
   
-- [ 2days ]《iPhone 应用用户体验设计施展与案例》学习  
+- *2 days*《iPhone 应用用户体验设计施展与案例》学习  
   
-- [ 2days ]《触动人心 - 设计优秀的iPhone应用》学习
+- *2 days*《触动人心 - 设计优秀的iPhone应用》学习
   
 ### 2.1.2 Haswing推进器App UI策划 - for iOS [ 30 days ]
   
