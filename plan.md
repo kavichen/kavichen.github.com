@@ -22,11 +22,12 @@ Each month has 26 work days.
   		* 5 assignments
    		* 2 day/assignment = > 10days
   		* 19 + 10 = 29 days    
-
+  
+  
 	  
 Total Days   | Beginning iOS5 Development | Stanford Lecture
------------- | -------------              | ------------
-	73 days      | 44 days                    | 29 days
+------------ | --------------             | ------------
+	73 days  | 44 days                    | 29 days
 
 
 2. **电路板开发**
