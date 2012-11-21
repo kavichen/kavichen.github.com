@@ -4,12 +4,9 @@ title: "Plan"
 description: "The Development Plan of Haswing Remote App"
 ---
 {% include JB/setup %}
-# 项目阶段  
-
-## 阶段细分  
   
---------  
-
+---  
+---
 #1 学习阶段  
 </br>  
 
@@ -41,13 +38,16 @@ description: "The Development Plan of Haswing Remote App"
   		  
 	* 19 + 10 = 29 days  
   
+---  
  
 ## 1.2 Linux嵌入式系统开发学习   
 </br>  
   
 ### 1.2.1 参考书    
   
-- 未计划    
+- 未计划      
+
+---  
   
 ## 1.3 网络传输  
 </br>    
@@ -57,7 +57,8 @@ description: "The Development Plan of Haswing Remote App"
 - 未计划  
 
   
-===  
+---
+---  
 
 # 2 策划阶段    
 </br>
@@ -85,7 +86,8 @@ description: "The Development Plan of Haswing Remote App"
 - v5 for 5 days
  
 *5 iteration to final version*   
-
+  
+---
   
 ### 2.2 船控电路策划
 
@@ -95,6 +97,9 @@ description: "The Development Plan of Haswing Remote App"
 
 	* 接口：<br/>1. 船控与驱动部分<br/>2. 船控与iOS部分  
 </br>
+  
+---  
+---  
 
 # 3 开发阶段  
 </br>  
@@ -109,9 +114,15 @@ description: "The Development Plan of Haswing Remote App"
 ### 3.2.2 项目原型开发  
   
 - 未计划
+  
+---  
+---  
 
 # 测试阶段
 </br>  
+  
+---  
+---  
 
 # 收尾阶段
 </br>
