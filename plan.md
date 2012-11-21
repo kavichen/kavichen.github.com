@@ -5,8 +5,6 @@ description: "The Development Plan of Haswing Remote App"
 ---
 {% include JB/setup %}
   
----  
----
 #1 学习阶段  
 </br>  
 
@@ -22,6 +20,8 @@ description: "The Development Plan of Haswing Remote App"
 	* 2 day/chapter   
   
 	* 2 * 22 = 44 days  
+  
+---  
    
   
 ### 1.1.2 视频资料 
@@ -38,7 +38,8 @@ description: "The Development Plan of Haswing Remote App"
   		  
 	* 19 + 10 = 29 days  
   
----  
+---    
+---
  
 ## 1.2 Linux嵌入式系统开发学习   
 </br>  
