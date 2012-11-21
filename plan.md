@@ -38,12 +38,24 @@ description: "The Development Plan of Haswing Remote App"
 	* 2 day/assignment = > 10days
   		  
 	* 19 + 10 = 29 days       
- 
-	**Phase 1: 44 days + 29 days = 73 days**  	
-
-2. **电路板开发**
+  	
+## Linux嵌入式系统开发学习  
   
-- 与供应商沟通 （未计划）
+### 参考书  
+  
+- 未计划    
+  
+## 网络传输  
+  
+### 参考书  
+  
+- 未计划  
+
+  
+===  
+
+##   
+  
 
 3. **网络传输**
   
