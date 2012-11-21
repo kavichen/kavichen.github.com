@@ -16,18 +16,28 @@ description: "The Development Plan of Haswing Remote App"
   
 ### 参考书
   
-- Beginning iOS5 Development 
+- \<\<Beginning iOS5 Development\>\>
   
-	* 22 chapters in total
-	* 2 day/chapter = > 44days  
+	* 22 chapters in total  
+
+	* 2 day/chapter   
+  
+	* 2 * 22 = 44 days  
+   
+  
+### 视频资料
 	  
-	- Stranford教程
+- Stranford教程
   		  
-		* 19 lectures
-  		* 1 day/lecture = > 19days
-  		* 5 assignments
-   		* 2 day/assignment = > 10days
-  		* 19 + 10 = 29 days       
+	* 19 lectures
+  		  
+	* 1 day/lecture = > 19days
+  		  
+	* 5 assignments
+   		  
+	* 2 day/assignment = > 10days
+  		  
+	* 19 + 10 = 29 days       
  
 	**Phase 1: 44 days + 29 days = 73 days**  	
 
