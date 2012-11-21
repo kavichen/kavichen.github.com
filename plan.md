@@ -70,7 +70,7 @@ description: "The Development Plan of Haswing Remote App"
 - *2 days*《iPhone 应用用户体验设计施展与案例》学习  
   
 - *2 days*《触动人心 - 设计优秀的iPhone应用》学习  
-</br>
+
   
 ### 2.1.2 Haswing推进器App UI策划 - for iOS *30 day*  
  
@@ -82,7 +82,7 @@ description: "The Development Plan of Haswing Remote App"
 	  
 - v4 for 5 days
 	  
-- v5 for 5 days</br>
+- v5 for 5 days
  
 *5 iteration to final version*   
 
@@ -105,7 +105,7 @@ description: "The Development Plan of Haswing Remote App"
 ### 3.1.1 参考书  
   
 - *3 days* 阅读《人月神话》
-		
+  
 ### 3.2.2 项目原型开发  
   
 - 未计划
