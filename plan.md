@@ -70,15 +70,13 @@ description: "The Development Plan of Haswing Remote App"
 </br>
   
 ### 2.1.1 参考书 *4 days*  
-</br>
   
 - *2 days*《iPhone 应用用户体验设计施展与案例》学习  
   
 - *2 days*《触动人心 - 设计优秀的iPhone应用》学习  
 </br>
   
-### 2.1.2 Haswing推进器App UI策划 - for iOS *30 day*
- </br>  
+### 2.1.2 Haswing推进器App UI策划 - for iOS *30 day*  
  
 - v1 for 10 days
 	  
@@ -90,19 +88,19 @@ description: "The Development Plan of Haswing Remote App"
 	  
 - v5 for 5 days</br>
  
-*5 iteration to final version*  
+*5 iteration to final version*   
 </br>      
   
-### 2.2 船控电路策划阶段
-  
+### 2.2 船控电路策划
 
-- 标准接口策划  
+- *2 days* 标准接口策划 
 
 	* 数据格式  
 
-	* 接口：<br/>1. 船控与驱动部分<br/>2. 船控与iOS部分
+	* 接口：<br/>1. 船控与驱动部分<br/>2. 船控与iOS部分  
+</br>
 
-## 开发阶段
+# 3 开发阶段
 1. **学习开发迭代**  
 	- 阅读《人月神话》
 		* 3 days  
