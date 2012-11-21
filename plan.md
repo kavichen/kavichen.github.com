@@ -10,9 +10,12 @@ Each month has 26 work days.
 
 ##学习阶段
 1. **Objective - C**
+	  
 	- Beginning iOS5 Development 
+		  
 		* 22 chapters in total
 		* 2 day/chapter = > 44days  
+	  
 	- Stranford教程
   		* 19 lectures
   		* 1 day/lecture = > 19days
