@@ -25,5 +25,7 @@ title: 如何为Jekyll绑定域名
 	- 记录值：204.232.175.78
 	- 其他：默认
 
-
+### 参考  
+[github:help](https://help.github.com/articles/setting-up-a-custom-domain-with-pages)  
+[再谈github页面域名帮顶](http://yanping.me/cn/blog/2011/12/26/github-pages-domain-2/)  
 *此步骤只适合绑定顶级域名*
