@@ -16,7 +16,7 @@ description: "The Development Plan of Haswing Remote App"
   
 ### 1.1.1 参考书
   
-- Beginning iOS5 Development
+- [ 44 days ] Beginning iOS5 Development
   
 	* 22 chapters in total  
 
@@ -27,7 +27,7 @@ description: "The Development Plan of Haswing Remote App"
   
 ### 1.1.2 视频资料
 	  
-- Stanford教程
+- [ 29days ] Stanford教程
   		  
 	* 19 lectures
   		  
@@ -61,23 +61,21 @@ description: "The Development Plan of Haswing Remote App"
   
 ### 2.1.1 参考书
   
--《iPhone 应用用户体验设计施展与案例》学习  
-  * 2 days in total  
+- [ 2days ]《iPhone 应用用户体验设计施展与案例》学习  
   
--《触动人心 - 设计优秀的iPhone应用》学习
-	* 2 days in total    
-
-- Haswing推进器App UI策划 - for iOS 
+- [ 2days ]《触动人心 - 设计优秀的iPhone应用》学习
 	  
-* v1 for 10 days
+- [ 30days ] Haswing推进器App UI策划 - for iOS 
 	  
-* v2 for 5 days
+	* v1 for 10 days
 	  
-* v3 for 5 days
+	* v2 for 5 days
 	  
-* v4 for 5 days
+	* v3 for 5 days
 	  
-* v5 for 5 days</br>
+	* v4 for 5 days
+	  
+	* v5 for 5 days</br>
  
 *5 iteration to final version*    
   
