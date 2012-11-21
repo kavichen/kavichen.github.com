@@ -66,24 +66,23 @@ description: "The Development Plan of Haswing Remote App"
 * 2 days in total
 
 - 《触动人心 - 设计优秀的iPhone应用》学习
-	  
-* 2 days in total  
+* 2 days in total    
 
 - Haswing推进器App UI策划 - for iOS 
 	  
-	* v1 for 10 days
-		  
-	* v2 for 5 days
-		  
-	* v3 for 5 days
-		  
-	* v4 for 5 days
-		  
-	* v5 for 5 days</br>
-  
-	*5 iteration to final version*    
+* v1 for 10 days
 	  
-	* 30 days in total  
+* v2 for 5 days
+	  
+* v3 for 5 days
+	  
+* v4 for 5 days
+	  
+* v5 for 5 days</br>
+ 
+*5 iteration to final version*    
+  
+* 30 days in total  
 
   
 2. **船控电路策划阶段**    
