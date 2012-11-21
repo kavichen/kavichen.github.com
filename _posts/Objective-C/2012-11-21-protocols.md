@@ -1,6 +1,7 @@
 ---
-layout: post
-title:Objective-C Protocol Wiki 
+layout: post  
+title: Objective-C Protocol Wiki  
+
 ---
 
 ## Protocols
