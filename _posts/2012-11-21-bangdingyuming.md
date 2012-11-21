@@ -15,7 +15,8 @@ title: 如何为Jekyll绑定域名
 
 		git add CNAME
 		git commit -am "CNAME ADDED"  
-		git push
+		git push  
+
 2. 登陆域名管理，在域名解析中添加  
 
 主机记录  | 记录类型  | 线路类型 | 记录值 | 其他
