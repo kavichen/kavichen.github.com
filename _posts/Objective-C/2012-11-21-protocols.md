@@ -1,7 +1,7 @@
 ---
-layout:post
+layout: post
 title:Objective-C Protocol Wiki 
-----
+---
 
 ## Protocols
 ### **Similar to @interface, but someone else does the implementing**
