@@ -16,22 +16,20 @@ description: "The Development Plan of Haswing Remote App"
 ## 1.1 Objective - C 学习  
 </br>  
   
-### 1.1.1 参考书
-</br>  
+### 1.1.1 参考书 
   
-- [ 44 days ] Beginning iOS5 Development
+- *44 days* Beginning iOS5 Development
   
 	* 22 chapters in total  
 
 	* 2 day/chapter   
   
 	* 2 * 22 = 44 days  
-</br>   
+   
   
-### 1.1.2 视频资料
-</br>  
+### 1.1.2 视频资料 
 	  
-- [ 29days ] Stanford教程
+- *29 days* Stanford教程
   		  
 	* 19 lectures
   		  
@@ -42,7 +40,7 @@ description: "The Development Plan of Haswing Remote App"
 	* 2 day/assignment = > 10days
   		  
 	* 19 + 10 = 29 days  
-</br>  
+  
  
 ## 1.2 Linux嵌入式系统开发学习   
 </br>  
