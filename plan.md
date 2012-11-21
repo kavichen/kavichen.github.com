@@ -12,9 +12,9 @@ description: "The Development Plan of Haswing Remote App"
 
 #1 学习阶段  
 
-## 1.1 Objective - C 学习  
+## 1.1Objective - C 学习  
   
-### 1.1.1 参考书
+### 1.1.1`参考书
   
 - Beginning iOS5 Development
   
@@ -46,7 +46,7 @@ description: "The Development Plan of Haswing Remote App"
   
 - 未计划    
   
-## 1.3 网络传输  
+## 1.3网络传输  
   
 ### 1.3.1 参考书  
   
