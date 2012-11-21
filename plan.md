@@ -36,16 +36,27 @@ Each month has 26 work days.
 ## 策划阶段
 1. **iPhone App策划阶段**
 	- 《iPhone 应用用户体验设计施展与案例》学习
-		* 2 days in total
+	  
+	* 2 days in total
+	  
 	- 《触动人心 - 设计优秀的iPhone应用》学习
-		* 2 days in total
+	  
+	* 2 days in total
+	  
 	- Haswing推进器App UI策划 - for iOS 
-		* v1 for 10 days
-		* v2 for 5 days
-		* v3 for 5 days
-		* v4 for 5 days
-		* v5 for 5 days</br>
-		*5 iteration to final version*  
+	  
+	* v1 for 10 days
+		  
+	* v2 for 5 days
+		  
+	* v3 for 5 days
+		  
+	* v4 for 5 days
+		  
+	* v5 for 5 days</br>
+	  
+	*5 iteration to final version*  
+  
 2. **船控电路策划阶段**  
 	- 标准接口策划
 		* 数据格式
