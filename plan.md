@@ -6,7 +6,8 @@ description: "The Development Plan of Haswing Remote App"
 {% include JB/setup %}
   
 #1 学习阶段  
-</br>  
+</br>   
+</br> 
 
 ## 1.1 Objective - C 学习  
 </br>  
@@ -42,27 +43,33 @@ description: "The Development Plan of Haswing Remote App"
 ---
  
 ## 1.2 Linux嵌入式系统开发学习   
-</br>  
+</br>    
+  
+---
   
 ### 1.2.1 参考书    
   
 - 未计划      
 
 ---  
+---  
+  
   
 ## 1.3 网络传输  
-</br>    
+</br>   
+---  
+   
 
 ### 1.3.1 参考书   
  
 - 未计划  
 
-  
+---  
 ---
 ---  
 
 # 2 策划阶段    
-</br>
+</br>  
   
 ## 2.1 iPhone App策划阶段 *34 days*  
 </br>
