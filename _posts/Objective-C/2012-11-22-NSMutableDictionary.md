@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: Objective-C NSSortDescriptor Wiki  
+title: Objective-C NSMutableDictionary Wiki  
 
 ---   
   
