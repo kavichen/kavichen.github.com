@@ -20,4 +20,10 @@ title: Objective-C Core Location
   
 	@property (readonly) CLLocationDistance altitude; // meters  
   
-A negative value means "below sea level".
+A negative value means "below sea level".  
+  
+## How close to that latitude/longitude is the actual location?  
+`@property (readonly) CLLocationAccuracy horizontalAccuracy; // in meters`    
+`@property (readonly) CLLocationAccuracy verticalAccuracy; // in meters`    
+A negative value means the coordinate or altitude (respectively) is invalid.
+
