@@ -31,8 +31,7 @@ ViewDidUnload/Dispose - Available to you, but usually not necessary in Monotouch
 </br>  
 
 # 问题  
-</br>  
-  
+   
 ## UIViewController. viewDidLoad vs. viewWillAppear: What is the proper division of labor?    
   
 
