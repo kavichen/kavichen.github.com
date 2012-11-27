@@ -37,4 +37,18 @@ Since the file system is limited in scope, there is usually only one path in the
 	error:(NSError **)error;  
   
 	- (BOOL)isReadableFileAtPath:(NSString *)path;  
-	- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError **)error;
+	- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError **)error;  
+  
+## NSString  
+Path construction methods and reading/writing strings to files.  
+  
+	- (NSString *)stringByAppendingPathComponent:(NSString *)component;  
+	- (NSString *)stringByDeletingLastPathComponent;  
+	- (BOOL)writeToFile:(NSString *)path  
+	        atomically:(BOOL)flag  
+            encoding:(NSStringEncoding)encoding //e.g. ASCII, ISOLatin1, etc.  
+            error:(NSError **)error;  
+  
+	- (NSString *)stringWithContentsOfFile:(NSString *)path
+				  usedEncoding:(NSStringEncoding *)encoding  
+				  error:(NSError **)error;
