@@ -59,9 +59,9 @@ Description
 Performs a shallow search of the specified directory and returns URLs for the contained items.  
   
 ## NSURL中的Path怎么理解？  
-### - (NSString *)path  
+### `- (NSString *)path ` 
 
-#### Descriptio
+#### Description
 Returns the path of a URL conforming to RFC 1808.  
 
 #### Returns	
