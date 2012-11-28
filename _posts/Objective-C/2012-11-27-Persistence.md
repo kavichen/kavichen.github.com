@@ -77,7 +77,7 @@ RFC 1808           Relative Uniform Resource Locators          June 1995
 
       <scheme>://<net_loc>/<path>;<params>?<query>#<fragment>
 
-   each of which, except <scheme>, may be absent from a particular URL.
+   each of which, except` <scheme>`, may be absent from a particular URL.
    These components are defined as follows (a complete BNF is provided
    in Section 2.2):
 
@@ -102,8 +102,8 @@ RFC 1808           Relative Uniform Resource Locators          June 1995
    recognize the fragment when it is present and set it aside as part of
    the parsing process.
 
-   The order of the components is important.  If both <params> and
-   <query> are present, the <query> information must occur after the
-   <params>.
+   The order of the components is important.  If both `<params>` and
+   `<query>` are present, the `<query>` information must occur after the
+   `<params>`.
   
 [原文链接](http://www.w3.org/Addressing/rfc1808.txt)  
