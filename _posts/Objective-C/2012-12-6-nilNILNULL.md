@@ -9,26 +9,26 @@ nil is the literal null value for Objective-C objects, corresponding to the abst
   
 For instance:
 
-NSString *someString = nil;
-NSURL *someURL = nil;
-id someObject = nil;
-
-if (anotherObject == nil) // do something  
+	NSString *someString = nil;
+	NSURL *someURL = nil;
+	id someObject = nil;
+	
+	if (anotherObject == nil) // do something  
   
 # Nil  
 </br>
 Nil is the literal null value for Objective-C classes, corresponding to the type Class. Since most code doesn’t need variables to reference classes, its use is not common. One example is:
 
-Class someClass = Nil;
-Class anotherClass = [NSString class];  
+	Class someClass = Nil;
+	Class anotherClass = [NSString class];  
   
 # NULL  
 </br>					
 NULL is the literal null value for arbitrary C pointers. For instance,
 
-int *pointerToInt = NULL;
-char *pointerToChar = NULL;
-struct TreeNode *rootNode = NULL;  
+	int *pointerToInt = NULL;
+	char *pointerToChar = NULL;
+	struct TreeNode *rootNode = NULL;  
   
 #NSNull  
 </br>  
@@ -38,14 +38,17 @@ NSNull is often used in Foundation collections since they cannot store nil value
 
 For instance, the following throws an exception because dictionaries cannot store nil values:
 
-NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-[dict setObject:nil forKey:@"someKey"];
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	[dict setObject:nil forKey:@"someKey"];  
+
 On the other hand, the following code is valid since [NSNull null] is a non-nil object:
 
-NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-[dict setObject:[NSNull null] forKey:@"someKey"];
-It’s worth mentioning that Foundation collections have initialisers that use nil as a marker for the end of a list of objects without having to specify the number of elements in the list. This can only happen because nil cannot be stored in a Foundation collection. For instance,
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	[dict setObject:[NSNull null] forKey:@"someKey"];  
 
-NSArray *array = [NSArray arrayWithObjects:@"one", @"two", nil];
+It’s worth mentioning that Foundation collections have initialisers that use nil as a marker for the end of a list of objects without having to specify the number of elements in the list. This can only happen because nil cannot be stored in a Foundation collection. For instance,
+  
+	NSArray *array = [NSArray arrayWithObjects:@"one", @"two", nil];  
+
 As for NIL or NSNil, there are no such things in Objective-C or Apple Foundation.
 
