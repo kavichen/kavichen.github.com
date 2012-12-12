@@ -4,8 +4,9 @@ title: Delegation
 
 ---
 
-## 用delegation时，可能会出现Cannot find protocol declaration的error
-(原文链接)[http://stackoverflow.com/questions/6447573/cannot-find-protocol-declaration]  
+## 用delegation时，可能会出现Cannot find protocol declaration的error  
+### ANS_1：
+[原文链接](http://stackoverflow.com/questions/6447573/cannot-find-protocol-declaration)
   
 Let me reduce the sample even further, and label the lines:
 
@@ -65,4 +66,9 @@ VC1Delegate.h
 	@interface VC2 : UIViewController <VC1Delegate> // F
 	@end  
 
-If you trace through the imports now, you'll see that the appropriate protocols will now always be declared before the @interface lines try to use them.
+If you trace through the imports now, you'll see that the appropriate protocols will now always be declared before the @interface lines try to use them.  
+  
+### ANS_2  
+I had almost the same problem, and I fixed it thanks to the answer above, but in a slightly different way.
+
+all I did was to put the #import line after the protocol declaration in the header file. hope I can help. and if anyone know that this is bad programing for some reason, pls let me know    
