@@ -11,25 +11,27 @@ title: Delegation
 写出自己心中的委托。。
 
 a 要委托 b 来做某事 ： 那么
-1，a必须有一个委托，也就是说， a中必须声明 一个 id<delegate>  delegate 类型的变量；
-2，b 是被a委托的对象。 那么， a * a = [[a alloc] a];    a.delegate = b;
+1，a必须有一个委托，也就是说， a中必须声明 一个 `id<delegate> delegate` 类型的变量；
+2，b 是被a委托的对象。 那么， `a * a = [[a alloc] init];`    `a.delegate = b`;
 
-这两个也就定义了委托的核心。 id 是任意类型的成员， 当 a.delegate = b;， 也就可以认定， a中的 id<delegete> delegate 也就是b ； 当你在 a中用delegate调用了某方法，也就是说b在调用某方法；
+这两个也就定义了委托的核心。 id 是任意类型的成员，   
+当 a.delegate = b; 也就可以认定，a中的`id<delegete> delegate` 也就是b ；   
+当你在 a中用delegate调用了某方法，也就是说b在调用某方法；
 
-我们经常用的 一个  UITableView ，那么在一个类中，有成员变量UITableView *table,    self.tabelView.delegate = self;  这是我们最长用的一句话。
+我们经常用的 一个  UITableView ，那么在一个类中，有成员变量UITableView *table,    `self.tabelView.delegate = self; ` 这是我们最长用的一句话。
 现在来理解。
-tabelView.delegate ,说明 tabelView 中有一个 delegate ，而这个delegate ，由于 self.tabelView.delegate = self;   self 把自己赋给了 delete ，self就是 delegate； 
-而 UITableView 中的 各个函数：- tableView: numberOfRowsInSection: heightForRowAtIndexPath； 等等，  这都是  @protocol 的， 这些函数都等同于 c++的虚函数。
+tabelView.delegate ,说明 tabelView 中有一个 delegate ，而这个delegate ，由于 `self.tabelView.delegate = self;`   self 把自己赋给了 delete ，self就是 delegate； 
+而 UITableView 中的 各个函数：`- tableView: numberOfRowsInSection: heightForRowAtIndexPath；` 等等，  这都是  @protocol 的， 这些函数都等同于 c++的虚函数。
 
-UITableView中       id <UITableViewDelegate>   delegate;     这个参数 会调用 numberOfRowsInSection: heightForRowAtIndexPath；等函数，
+UITableView中 `id <UITableViewDelegate> delegate;` 这个参数会调用 numberOfRowsInSection: heightForRowAtIndexPath；等函数，
 
 剩下的 ，也就可以用 c++ 的 虚函数（或者说是@protocol ）一个道理了 。。呵呵
 
 @protocol 也就是 实现了动态绑定，也就是多态。。没啥难理解的。
 其中@required， 是必须实现的， 类似于 纯虚函数；
 @optional 是非必须的， 类似与 虚函数；。 
-
-
+</br>
+</br>
 ## 用delegation时，可能会出现Cannot find protocol declaration的error  
 ### ANS_1：
 [原文链接](http://stackoverflow.com/questions/6447573/cannot-find-protocol-declaration)
