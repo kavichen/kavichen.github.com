@@ -50,5 +50,17 @@ It’s worth mentioning that Foundation collections have initialisers that use n
   
 	NSArray *array = [NSArray arrayWithObjects:@"one", @"two", nil];  
 
-As for NIL or NSNil, there are no such things in Objective-C or Apple Foundation.
-
+As for NIL or NSNil, there are no such things in Objective-C or Apple Foundation.  
+  
+## 补充  
+  
+向`nil`发送消息不会导致系统崩溃  
+  
+### BOOL陷阱  
+  
+- 将`int`值转换为`BOOL`时应特别小心。避免直接和`YES`比较    
+- Objective - C中，将`BOOL`定义为`unsigned char`,这意味着除了`YES`(1)和`NO`(0)外，它还可以是其他值。*禁止将`int`直接转换(cast or convert)为`BOOL`*  
+- 常见的错误包括：将数组的大小，指针值或位运算符的结果转换(cast or convert)为`BOOL`，因为该`BOOL`值的结果取决于*整型值的最后一位*  
+- 将整型值转换为`BOOL`的方法：使用三元运算符返回`YES`/`NO`,或使用位运算符（&&，||，！）  
+- `BOOL`，`_Bool`和`bool`之间的转换是安全的，但是`BOOL`和`Boolean`间的转换是不安全的，所以将Boolean看成整型值。  
+- 在Objective-C中，只允许使用`BOOL`
