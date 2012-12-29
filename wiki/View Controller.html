@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>View Controller</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<p>
+*<a href="AwakeFromNib.html">AwakeFromNib</a>*
+它由storyboard产生，不过outlets都没有被连起来.   <br>
+View Controller's really not in a fully constructed state, but there's some things like setting that split view delegate that you want to do early. <br>
+<hr />
+*After instantiation and outlet-setting, <code>viewDidLoad</code> is called*
+</p>
+<pre>
+  `-(void)viewDidLoad;`  在你的UIViewController完全初始化完毕，所有的outlets已经Hooked的情况下被调用。它没有显示在屏幕上，但是它确实已经准备好了。
+</pre>
+<p>
+This is an exceptionally good place to put a lot of setup code.<strong>But be careful because the geometry of your view (its bounds) is not set yet! 比如横屏或者竖屏的时候（挤压或替换）</strong>  
+If you NEED to initialize something based on the geometry of the view, use the next method…  
+<hr />
+<strong>Just before the view appears on screen, you get notified</strong>
+<code>- (void)viewWillAppear:(BOOL)animated;</code><br>
+是一个去做那些很费资源的事情的地方。<br>  
+一，在最后时刻延时加载一些高开销操作。 <br>
+二. 改变几何特征。<br>
+When this is called, your bounds has been set (via your frame by your superview or some such).  
+Your view will probably only get "loaded" <strong>once</strong>,but it might be appear and disappear a lot. So DON'T put something in this method that really wants to be in <code>viewDidLoad</code>.
+<hr />
+</p>
+
+</body>
+</html>
