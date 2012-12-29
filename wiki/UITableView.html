@@ -33,7 +33,8 @@ Here is the <code>UITableViewDataSource</code> method to get that cell for a giv
   UITableViewCell *cell;   
   cell = [self.tableView dequeueReusableCellWithIdentifier:@"My Table View Cell"];  //**get a  cell to use (instance of  UITableViewCell)**    
 if(!cell){  
-  cell  = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"My Table View Cell"];  //如果pool里面没有上面的cell，这里是保护代码
+  cell  = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"My Table View Cell"];  
+  //如果pool里面没有上面的cell，这里是保护代码
 }    
   cell.textLabel.text = [self getMyDataForRow:indexPath.row inSection:indexPath.section];  
   return cell; 
@@ -95,15 +96,11 @@ You can tailor whatever data the MVC needs to whichever cell was selected.
 
 <h3 id="toc_0.0.4">5 steps to Delegate</h3>
 <p>
-1. Create the <code>@protocol</code>  
-2. Add <code>delegate @property</code> to delegator's public @interface  
-3. Use delegate property inside delegator's implementation
-4. Set the delegate property somewhere inside the delegate's @implementation
-5. Implement the protocol's method(s) in the delegate (include &lt;&gt; on @interface)  
-</p>
-
-<p>
-==
+1. Create the <code>@protocol</code>  <br>
+2. Add <code>delegate @property</code> to delegator's public @interface   <br>
+3. Use delegate property inside delegator's implementation <br>
+4. Set the delegate property somewhere inside the delegate's @implementation <br>
+5. Implement the protocol's method(s) in the delegate (include &lt;&gt; on @interface)  <br>
 </p>
 
 </body>
