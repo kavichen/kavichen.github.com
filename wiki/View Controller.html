@@ -55,10 +55,22 @@ The property will have the current orientation when each of the above is called.
 <p>
 <code>- (void)viewDidAppear:(BOOL)animated;</code>  
 <code>- (void)viewDidDisappear:(BOOL)animated;</code> 
-当用户按下“back”键的时候，是<code>viewWillDisappear</code>,而已经离开了，则执行<code>viewDidDisappear</code>。  
-*执行<code>viewDidXXX</code>或者<code>viewWillXXX</code>时，都要call superclass.*
+当用户按下“back”键的时候，是<code>viewWillDisappear</code>,而已经离开了，则执行<code>viewDidDisappear</code>。  <br>
+执行<code>viewDidXXX</code>或者<code>viewWillXXX</code>时，都要call superclass.
 <hr />
 </p>
+<h2 id="toc_0.5">UIWebView</h2>
+<h3 id="toc_0.5.1">Property to control whether page is scaled to fit the UIView</h3>
+<p>
+<code>property (nonatomic) BOOL scalesPagesToFit;  </code>
+If <code>YES</code>, then page will be squished or stretched to fit the width  of the UIView.   <br>
+</p>
+  
+<p>
+If <code>NO</code>, the page will be its natural size and the user cannot  zoom inside it.  
+<hr />
+</p>
+<h2 id="toc_0.6"><a href="UITableView.html">UITableView</a></h2>
 
 </body>
 </html>
