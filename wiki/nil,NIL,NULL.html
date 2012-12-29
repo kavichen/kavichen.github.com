@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>nil,NIL,NULL</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">nil</h1>
+<p>
+nil is the literal null value for Objective-C objects, corresponding to the abstract type id or any Objective-C type declared via @interface.  \
+For instance:
+</p>
+<pre>
+  NSString *someString = nil;
+	NSURL *someURL = nil;
+	id someObject = nil;
+	
+	if (anotherObject == nil) // do something  
+</pre>
+
+<h1 id="toc_2">Nil</h1>
+<p>
+Nil is the literal null value for Objective-C classes, corresponding to the type Class. Since most code doesn’t need variables to reference classes, its use is not common. One example is:
+</p>
+<pre>
+  Class someClass = Nil;
+	Class anotherClass = [NSString class];  
+</pre>
+
+<h1 id="toc_3">NULL</h1>
+<p>
+NULL is the literal null value for arbitrary C pointers. For instance,
+</p>
+<pre>
+  int *pointerToInt = NULL;
+	char *pointerToChar = NULL;
+	struct TreeNode *rootNode = NULL;  
+</pre>
+
+<h1 id="toc_4">NSNull</h1>
+<p>
+NSNull is a class for objects that represent null. In fact, there’s only one object, namely the one returned by +[NSNull null]. It is different from nil because nil is a literal null value, i.e., it isn’t an object. The single instance of NSNull, on the other hand, is a proper object.<br>
+NSNull is often used in Foundation collections since they cannot store nil values. In the case of dictionaries, -objectForKey: returns nil to indicate that a given key has no corresponding object in the dictionary, i.e., the key hasn’t been added to the dictionary. If you want to make it explicit that you have a certain key but it doesn’t have a value yet, you can use [NSNull null].<br>
+</p>
+
+<p>
+For instance, the following throws an exception because dictionaries cannot store nil values:
+</p>
+<pre>
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	[dict setObject:nil forKey:@"someKey"];  
+</pre>
+
+<p>
+On the other hand, the following code is valid since [NSNull null] is a non-nil object:
+</p>
+<pre>
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	[dict setObject:[NSNull null] forKey:@"someKey"];  
+</pre>
+
+<p>
+It’s worth mentioning that Foundation collections have initialisers that use nil as a marker for the end of a list of objects without having to specify the number of elements in the list. This can only happen because nil cannot be stored in a Foundation collection. For instance,
+</p>
+<pre>
+  NSArray *array = [NSArray arrayWithObjects:@"one", @"two", nil];
+</pre>
+
+<p>
+As for NIL or NSNil, there are no such things in Objective-C or Apple Foundation.  
+</p>
+
+<h1 id="toc_5">补充</h1>
+<p>
+向<code>nil</code>发送消息不会导致系统崩溃 
+</p>
+
+</body>
+</html>

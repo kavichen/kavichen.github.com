@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>NSIndexPath</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">NSIndexPath</h1>
+<h2 id="toc_1.1">Overview</h2>
+<p>
+The <code>NSIndexPath</code> class represents the path to a specific node in a tree of nested array collections. This path is known as an index path.  <br>
+</p>
+  
+<p>
+Each index in an index path represents the index into an array of children from one node in the tree to another, deeper, node. For example, the index path 1.4.3.2 specifies the path shown in Figure 1.  
+</p>
+
+<p>
+<a href="http://ww3.sinaimg.cn/large/a74ecc4cjw1dz4qxddszrj.jpg">Figure1</a>
+</p>
+
+<p>
+*Note: iOS adds programming interfaces to the <code>NSIndexPath</code> class of the Foundation framework to facilitate the identification of rows and sections in <code>UITableView</code> objects. The API consists of a class method and two properties. The <code>indexPathForRow:inSection: </code>method creates an <code>NSIndexPath</code> object from row and section index numbers. The properties return the row index number and the section index number from such objects. See <code>NSIndexPath</code> UIKit Additions for details.*  
+</p>
+
+<h3 id="toc_1.1.1">Example</h3>
+<pre>
+  - (UITableViewCell *)tableView:(UITableView *)tableView
+	         cellForRowAtIndexPath:(NSIndexPath *)indexPath  
+</pre>
+
+<p>
+在这个Method中，<code>indexPath.section</code>表示Array中的第几个section，<code>indexPath.row</code>
+</p>
+
+</body>
+</html>

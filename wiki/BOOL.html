@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>BOOL</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">BOOL</h1>
+<ul>
+<li>
+将<code>int</code>值转换为<code>BOOL</code>时应特别小心。避免直接和<code>YES</code>比较    
+
+<li>
+Objective - C中，将<code>BOOL</code>定义为<code>unsigned char</code>,这意味着除了<code>YES</code>(1)和<code>NO</code>(0)外，它还可以是其他值。*禁止将<code>int</code>直接转换(cast or convert)为<code>BOOL</code>*  
+
+<li>
+常见的错误包括：将数组的大小，指针值或位运算符的结果转换(cast or convert)为<code>BOOL</code>，因为该<code>BOOL</code>值的结果取决于*整型值的最后一位*  
+
+<li>
+将整型值转换为<code>BOOL</code>的方法：使用三元运算符返回<code>YES</code>/<code>NO</code>,或使用位运算符（&amp;&amp;，||，！）  
+
+<li>
+<code>BOOL</code>，<code>_Bool</code>和<code>bool</code>之间的转换是安全的，但是<code>BOOL</code>和<code>Boolean</code>间的转换是不安全的，所以将Boolean看成整型值。  
+
+<li>
+在Objective-C中，只允许使用<code>BOOL</code>
+
+</ul>
+
+</body>
+</html>
