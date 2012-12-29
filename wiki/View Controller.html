@@ -7,13 +7,13 @@
 </head>
 <body>
 
+<h2 id="toc_0.1">AwakeFromNib</h2>
 <p>
-*<a href="AwakeFromNib.html">AwakeFromNib</a>*
 它由storyboard产生，不过outlets都没有被连起来.   <br>
 View Controller's really not in a fully constructed state, but there's some things like setting that split view delegate that you want to do early. <br>
 <hr />
-*After instantiation and outlet-setting, <code>viewDidLoad</code> is called*
 </p>
+<h2 id="toc_0.2">After instantiation and outlet-setting, <code>viewDidLoad</code> is called</h2>
 <pre>
   `-(void)viewDidLoad;`  在你的UIViewController完全初始化完毕，所有的outlets已经Hooked的情况下被调用。它没有显示在屏幕上，但是它确实已经准备好了。
 </pre>
@@ -21,13 +21,42 @@ View Controller's really not in a fully constructed state, but there's some thin
 This is an exceptionally good place to put a lot of setup code.<strong>But be careful because the geometry of your view (its bounds) is not set yet! 比如横屏或者竖屏的时候（挤压或替换）</strong>  
 If you NEED to initialize something based on the geometry of the view, use the next method…  
 <hr />
-<strong>Just before the view appears on screen, you get notified</strong>
+== Just before the view appears on screen, you get notified ==<br>
 <code>- (void)viewWillAppear:(BOOL)animated;</code><br>
 是一个去做那些很费资源的事情的地方。<br>  
 一，在最后时刻延时加载一些高开销操作。 <br>
 二. 改变几何特征。<br>
 When this is called, your bounds has been set (via your frame by your superview or some such).  
 Your view will probably only get "loaded" <strong>once</strong>,but it might be appear and disappear a lot. So DON'T put something in this method that really wants to be in <code>viewDidLoad</code>.
+====Summary==== <em>this method is for geometry-related initialization and lazy execution for performance.</em>
+<hr />
+</p>
+<h2 id="toc_0.3">Specific notification that rotation will/did happen</h2>
+<p>
+<code>- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)anOrientation duration:(NSTimeInterval)seconds;</code>  
+</p>
+  
+<p>
+<code>- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOriention)orient duration:(NSTimeInterval)seconds;</code>  
+</p>
+  
+<p>
+<code>- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)anOrientation;</code>  
+</p>
+  
+<p>
+<code>- @property UIInterfaceOrientation interfaceOrientation;</code>
+<br>
+The property will have the current orientation when each of the above is called.
+<strong>Example use: doing anything expensive (e.g. an animation maybe?) in will and resume it in did.</strong>
+<hr />
+</p>
+<h2 id="toc_0.4">Thre are "did" versions of both of these methods too</h2>
+<p>
+<code>- (void)viewDidAppear:(BOOL)animated;</code>  
+<code>- (void)viewDidDisappear:(BOOL)animated;</code> 
+当用户按下“back”键的时候，是<code>viewWillDisappear</code>,而已经离开了，则执行<code>viewDidDisappear</code>。  
+*执行<code>viewDidXXX</code>或者<code>viewWillXXX</code>时，都要call superclass.*
 <hr />
 </p>
 
