@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>LifeCycle</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">LifeCycle</h1>
+<h2 id="toc_1.1"><a href="http://stackoverflow.com/questions/5562938/looking-to-understand-the-ios-uiviewcontroller-lifecycles">原文</a></h2>
+<h3 id="toc_1.1.1">Ans #1:</h3>
+  
+<p>
+There's nothing special you need to do in Monotouch that's different from how you would do things normally in ObjectiveC<br>
+</p>
+
+<p>
+All these commands are called automatically at the appropriate times by iOS when you load/present/hide the view controller. It's important to note that these methods are attached to UIViewController and not to UIViews themselves. You won't get any of these features just using a UIView.<br>
+</p>
+
+<p>
+There's great documentation on apple's site here: <a href="http://developer.apple.com/library/ios/#documentation/uikit/reference/UIViewController_Class/Reference/Reference.html">http://developer.apple.com/library/ios/#documentation/uikit/reference/UIViewController_Class/Reference/Reference.html</a>
+</p>
+
+<p>
+Putting in simply though :<br>
+</p>
+
+<p>
+ViewDidLoad - Called when you create the class and load from xib. Great for initial setup and one-time-only work<br>
+</p>
+
+<p>
+ViewWillAppear - Called right before your view appears, good for hiding/showing fields or any operations that you want to happen every time before the view is visible. Because you might be going back and forth between views, this will be called every time your view is about to appear on the screen<br>
+</p>
+
+<p>
+ViewDidAppear - Called after the view appears - great place to start an animations or the loading of external data from an API.<br>
+</p>
+
+<p>
+ViewWill/DidDisappear - Same idea as the WillAppear.<br>
+</p>
+
+<p>
+ViewDidUnload/Dispose - Available to you, but usually not necessary in Monotouch. In objective-c, this is where you do your cleanup and release of stuff, but this is handled automatically so not much you really need to do here.  <br>
+</p>
+
+<hr />
+<h3 id="toc_1.1.2">Ans #2:</h3>
+<p>
+<a href="http://ww1.sinaimg.cn/large/a74e55b4jw1dz7ayki65tj.jpg">图示</a>
+</p>
+
+<h2 id="toc_1.2">问题</h2>
+<h3 id="toc_1.2.1">UIViewController. viewDidLoad vs. viewWillAppear: What is the proper division of labor?</h3>
+<p>
+<a href="http://stackoverflow.com/questions/1579550/uiviewcontroller-viewdidload-vs-viewwillappear-what-is-the-proper-division-of">原文</a>
+viewDidLoad is things you have to do once. viewWillAppear gets called every time the view appears. You should do things that you only have to do once in viewDidLoad - like setting your UILabel texts. However, you may want to modify a specific part of the view every time the user gets to view it, e.g. the iPod application scrolls the lyrics back to the top every time you go to the "Now Playing" view.<br>
+</p>
+
+<p>
+However, when you are loading things from a server, you also have to think about latency. If you pack all of your network communication into viewDidLoad or viewWillAppear, they will be executed before the user gets to see the view - possibly resulting a short freeze of your app. It may be good idea to first show the user an unpopulated view with an activity indicator of some sort. When you are done with your networking, which may take a second or two (or may even fail - who knows?), you can populate the view with your data. Good examples on how this could be done can be seen in various twitter clients. For example, when you view the author detail page in Twitterrific, the view only says "Loading..." until the network queries have completed.
+</p>
+
+</body>
+</html>
