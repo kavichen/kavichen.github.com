@@ -19,6 +19,7 @@ Three important methods in <code>dataSource</code> protocol:  <br>
 1. How many sections in the table?  <br>
 2. How many rows in the table?  <br>
 3. Give me a UIView to use to draw each cell at a given row in a given section.  <br>
+<hr />
 </p>
 
 <h3 id="toc_0.0.1">UITableViewSourceData</h3>
@@ -45,6 +46,64 @@ TableView把自己作为第一个参数传递。第二个参数是index path(sta
 
 <p>
 <code>dequeueReusableCellWithIdentifier:</code>tableView就像是一个管理这些<code>UITableViewCells</code>的一个pool，当UITableViews离开屏幕，他们从屏幕的底部或者顶部离开，就把他们放进pool. 然后，当其中一个需要去到屏幕上时，它就进入pool中找 出一个来。reuse identifier 制定了要用的池子（pool）的名字。如果第一次进入pool，就会用Prototype画一个cell. <br>
+<hr />
+</p>
+
+<h3 id="toc_0.0.2">UITableViewDelegate</h3>
+<p>
+<strong>The delegate controls how the UITableView is displayed, NOT what is displays(that's the dataSource's job).</strong>
+*Common for <code>dataSource</code> and <code>delegate</code> to be the same object* - usually the contrller of the MVC in which the UITableView is part of the (or is the entire) View. 
+<strong>The delegate also lets you observe what the table view is doing</strong>
+Especially responding to when the user selects a row.<br>
+We often will use segues when this happens, but we can also track it directly.  
+</p>
+<pre>
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //...
+}
+</pre>
+<hr />
+
+<h3 id="toc_0.0.3">Table View Segues</h3>
+<p>
+<strong>You can segue when a row is touched, just like from a button.</strong>
+Segues will call <code>prepareForSegue:sender:</code> with the chosen <code>UITableViewCell</code> as sender.
+You can tailor whatever data the MVC needs to whichever cell was selected.  
+</p>
+
+<p>
+<strong>This works whether dynamic or static</strong>
+</p>
+<pre>
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender  
+{  
+  NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];  
+  //prepare `segue.destinationController` to display based on information  
+  //about my data structure corresponding to `indexPath.row` in `indexPath.section`  
+}
+</pre>
+
+<p>
+<strong>What if your Model changes?</strong>
+</p>
+<pre>
+  -(void)reloadData;  
+  -(void)reloadRowAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)animationStyle; //只重载一部分用户界面
+</pre>
+<hr />
+
+<h3 id="toc_0.0.4">5 steps to Delegate</h3>
+<p>
+1. Create the <code>@protocol</code>  
+2. Add <code>delegate @property</code> to delegator's public @interface  
+3. Use delegate property inside delegator's implementation
+4. Set the delegate property somewhere inside the delegate's @implementation
+5. Implement the protocol's method(s) in the delegate (include &lt;&gt; on @interface)  
+</p>
+
+<p>
+==
 </p>
 
 </body>
