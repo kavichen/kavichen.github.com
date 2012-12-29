@@ -42,9 +42,7 @@ It take only 1 argument which is <strong>block</strong>, the <strong>block</stro
   }]; 
 </pre>
 <hr />
-<p>
-== But they are read only! 
-</p>
+<h2 id="toc_1.4">But they are read only!</h2>
 <pre>
   BOOL stoppedEarly = NO;
   double stopValue = 53.5;
@@ -56,7 +54,7 @@ It take only 1 argument which is <strong>block</strong>, the <strong>block</stro
 } }];
 </pre>
 <hr />
-<h2 id="toc_1.4">Unless you mark the local variable as <code>__block</code></h2>
+<h2 id="toc_1.5">Unless you mark the local variable as <code>__block</code></h2>
 <pre>
 __block BOOL stoppedEarly = NO;
 double stopValue = 53.5;
@@ -70,12 +68,12 @@ double stopValue = 53.5;
 if (stoppedEarly) NSLog(@“I stopped logging dictionary values early!”);
 </pre>
 <hr />
-<h2 id="toc_1.5">Or if the “variable” is an instance variable</h2>
+<h2 id="toc_1.6">Or if the “variable” is an instance variable</h2>
 <p>
 But we only access instance variables (e.g. _display) in setters and getters. So this is of minimal value to us.
 <hr />
 </p>
-<h2 id="toc_1.6">So what about objects which are messaged inside the block?</h2>
+<h2 id="toc_1.7">So what about objects which are messaged inside the block?</h2>
 <pre>
   	NSString *stopKey = [@“Enough” uppercaseString];
 	__block BOOL stoppedEarly = NO;
@@ -89,6 +87,80 @@ But we only access instance variables (e.g. _display) in setters and getters. So
 	}];
 	if (stoppedEarly) NSLog(@“I stopped logging dictionary values early!”);  
 </pre>
+<p>
+<code>stopKey</code> will essentially have a <code>strong</code> pointer to it until the <code>block</code> goes out of scope
+or the <code>block</code> itself leaves the heap (i.e. no one points <code>strong</code>ly to the <code>block</code> anymore).  <br>
+这里的key是在block里面被引用的，这个block 保持了strong pointer指向它们， 直到block不再运行。
+<hr />
+</p>
+<h2 id="toc_1.8">Creating a “type” for a variable that can hold a block</h2>
+<p>
+Blocks are kind of like “objects” with an unusual syntax for declaring variables that hold them. Usually if we are going to store a block in a variable, we typedef a type for that variable, e.g.,   <br>
+<code>typedef double (^unary_operation_t)(double op);</code>  //typedef double 说明返回double.  
+ This declares a type called “<code>unary_operation_t</code>” for variables which can store a <strong>block</strong>.  //name of a type<br>
+(specifically, a <strong>block</strong> which takes a <code>double</code> as its only argument and returns a <code>double</code>)   <br>
+_t:这个带符号的type是我们自己定义的  <br>
+Then we could declare a variable, square, of this type and give it a value ...   <br>
+</p>
+<pre>
+  	unary_operation_t square;
+	square = ^(double operand) { // the value of the square variable is a block
+	    return operand * operand;
+	}  
+</pre>
+<p>
+And then use the variable <code>square</code> like this ...  <br>
+	<code>double squareOfFive = square(5.0); // squareOfFive would have the value 25.0 after this</code> 
+(You don’t have to typedef, for example, the following is also a legal way to create square ...)   <br>
+	<code>double (^square)(double op) = ^(double op) { return op * op; };</code>   
+*Hint: unary_operation_t 是一个类型，像NSString一样。 square是定义的变量。在square这个<code>block</code>中，有一个类型为<code>double</code>的变量<code>op</code>，返回的是 <code>op * op</code>*
+<hr />
+</p>
+<h2 id="toc_1.9">We don’t always typedef</h2>
+<p>
+When a block is an argument to a method and is used immediately, often there is no typedef.   
+Here is the declaration of the dictionary enumerating method we showed earlier ...   
+</p>
+<pre>
+  - (void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block;  
+</pre>
+<p>
+<strong>This (“block”) is the keyword for the argument (e.g. the local variable name for the argument inside the method implementation).</strong>
+No "name" for the type appears here.    <br>
+The syntax is exactly the same as the typedef except that the name of the typedef is not there.<br>
+For reference, here’s what a typedef for this argument would look like this ...  <br>
+<code>typedef void (^enumeratingBlock)(id key, id obj, BOOL *stop);</code>  <br>
+(i.e. the enumeratingBlock is not used in the method argument)<br>
+<hr />
+</p>
+<h2 id="toc_1.10">Some shorthand allowed when defining a block</h2>
+<p>
+(“Defining” means you are writing the code between the {}.)  <br>
+1. You do not have to declare the return type if it can be inferred from your code in the block.   <br>
+2. If there are no arguments to the block, you do not need to have any parentheses. <br>
+Recall this code ... <br>
+</p>
+<pre>
+  	NSNumber *secret = [NSNumber numberWithDouble:42.0];
+	[brain addUnaryOperation:@“MoLtUaE” whichExecutesBlock:^(double operand) {
+	￼￼    return operand * [secret doubleValue];
+	}];
+</pre>
+<p>
+No return type. Inferred from the return inside.  
+</p>
+
+<h2 id="toc_1.11">Another example ...</h2>
+<pre>
+  	[UIView animateWithDuration:5.0 animations:^{
+	    view.opacity = 0.5;
+	}];  
+</pre>
+<p>
+No arguments to this block. No need to say ^( ){…}  
+<hr />
+<a href="http://imyk.net/2012/11/21/blocks/">其他例子</a>
+</p>
 
 </body>
 </html>
