@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>dataSource</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">dataSource</h1>
+<p>
+==以“FlickrApp”为例子
+1. 建立一个Protocol
+</p>
+<ul>
+<li>
+<code>PlacesMapViewDataSource.h</code> 
+
+<li>
+Code
+<pre>
+  #import &lt;Foundation/Foundation.h&gt;
+		
+		@class PlacesMapViewController;
+		
+		@protocol PlacesMapViewDataSource
+		
+		-(NSArray *) placesToDisplay: (PlacesMapViewController *)sender;
+		
+		@end 
+</pre>
+
+</ul>
+
+<p>
+2. 将数据源所在的Class <code>PlacesUITableViewController.m</code> 中遵循<code>PlaceMapViewDataSource</code>  
+</p>
+<pre>
+  @interface PlacesUITableViewController() &lt;TopPhotoTableViewControllerDataSource, PlacesMapViewDataSource&gt;
+</pre>
+
+<p>
+3. 在数据源所在的Class <code>PlacesUITableViewControlle.h</code> 中添加
+</p>
+<pre>
+  @property (nonatomic, weak) id&lt;PlacesMapViewDataSource&gt; dataSource; 
+</pre>
+
+<p>
+4. 将数据源所在的Class <code>PlacesUITableViewController.m</code> 中实现<code>placesToDisplay</code>
+</p>
+<pre>
+- (NSArray *)placesToDisplay:(PlacesMapViewController *)sender
+		{
+		    return self.places;
+		} 
+  
+</pre>
+
+<p>
+5. 在<code>PlacesMapViewController.m</code>的<code>viewDidLoad</code>中实现 
+</p>
+<pre>
+  self.places = [self.dataSource placesToDisplay:self];
+</pre>
+
+</body>
+</html>

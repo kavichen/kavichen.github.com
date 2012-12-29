@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Core Location</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Core Location</h1>
+<h2 id="toc_1.1">Basic object is <code>CLLocation</code></h2>
+<p>
+@properties:<code>coordinate</code>,<code>altitude</code>,<code>horizontal/verticalAccuracy</code>,<code>timestamp</code>,<code>speed</code>,<code>course</code>  
+</p>
+
+<h2 id="toc_1.2">Where is this location?</h2>
+<pre>
+  @property (readonly) CLLocationCoordinate2D coordinate;  
+	typedef {  
+		CLLocationDegrees latitude; // a double  
+		CLLocationDegress longitude // a double  
+	}  CLLocationCoordinate2D;  
+  
+	@property (readonly) CLLocationDistance altitude; // meters  
+</pre>
+
+<p>
+A negative value means "below sea level". 
+</p>
+
+<h2 id="toc_1.3">How close to that latitude/longitude is the actual location?</h2>
+<p>
+<code>@property (readonly) CLLocationAccuracy horizontalAccuracy; // in meters</code>    
+<code>@property (readonly) CLLocationAccuracy verticalAccuracy; // in meters</code>    <br>
+A negative value means the coordinate or altitude (respectively) is invalid.
+</p>
+
+</body>
+</html>

@@ -77,7 +77,7 @@ Then send it the following message if you want to observe another object:
 
 <h3 id="toc_1.1.7">Don't forget to remove yourself when you're down watching.</h3>
 <p>
-<code>[center removeObserver:self];</code> or <code>[center removeObserver:self name:UIDocumentStateChangedNotification object:self.document];</code>  
+<code>[center removeObserver:self];</code> or <code>[center removeObserver:self name:UIDocumentStateChangedNotification object:self.document];</code><br>  
 Failure to remove yourself can sometimes result in crashers.  <br>
 This is because the NSNotificationCenter keeps an "unsafe unretained" pointer to you.  
 </p>
