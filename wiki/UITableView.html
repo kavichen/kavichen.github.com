@@ -8,9 +8,9 @@
 <body>
 
 <p>
-<strong>Lots and lots of customization via a <em>dataSource</em> protocol and a <em>delegate</em> protocol</strong>
-<a href="http://ww2.sinaimg.cn/large/a74ecc4cjw1dywjvmyy5zj.jpg">http://ww2.sinaimg.cn/large/a74ecc4cjw1dywjvmyy5zj.jpg</a>
-<a href="http://ww4.sinaimg.cn/large/a74eed94jw1dywk2rop5hj.jpg">http://ww4.sinaimg.cn/large/a74eed94jw1dywk2rop5hj.jpg</a>
+<strong>Lots and lots of customization via a <em>dataSource</em> protocol and a <em>delegate</em> protocol</strong><br>
+<a href="http://ww2.sinaimg.cn/large/a74ecc4cjw1dywjvmyy5zj.jpg 1">http://ww2.sinaimg.cn/large/a74ecc4cjw1dywjvmyy5zj.jpg 1</a><br>
+<a href="http://ww4.sinaimg.cn/large/a74eed94jw1dywk2rop5hj.jpg 2">http://ww4.sinaimg.cn/large/a74eed94jw1dywk2rop5hj.jpg 2</a><br>
 <strong>The UITableViewController, the class automatically sets itself as both the delegate and the data source to the TableView that's inside of it.</strong>
 </p>
 
@@ -21,13 +21,13 @@ Three important methods in <code>dataSource</code> protocol:  <br>
 3. Give me a UIView to use to draw each cell at a given row in a given section.  <br>
 </p>
 
+<h3 id="toc_0.0.1">UITableViewSourceData</h3>
 <p>
-### UITableViewSourceData
-<strong>How do we control what is drawn in each cell in a dynamic table?</strong>
-Here is the <code>UITableViewDataSource</code> method to get that cell for a given row in a given section. 
+<strong>How do we control what is drawn in each cell in a dynamic table?</strong><br>
+Here is the <code>UITableViewDataSource</code> method to get that cell for a given row in a given section. <br>
 </p>
 <pre>
-  - (UITableViewCell *)tableView:(UITableView *)sender cellForRowAtIndexPath:(NSIndexPath *)indexPath  
+- (UITableViewCell *)tableView:(UITableView *)sender cellForRowAtIndexPath:(NSIndexPath *)indexPath  
 {
   UITableViewCell *cell;   
   cell = [self.tableView dequeueReusableCellWithIdentifier:@"My Table View Cell"];  //**get a  cell to use (instance of  UITableViewCell)**    
@@ -39,9 +39,12 @@ if(!cell){
 }  
 </pre>
 <p>
-TableView把自己作为第一个参数传递。第二个参数是index path(static table,you do not need to implement this method), <code>NSIndexPath</code> is just an object with two important properties for use with <code>UITableView：row</code> and <code>section</code>.  用来封装<code>row</code>和<code>section</code>。  
-<strong>因此，这个方法只是说，给我一个用来画这个section里的这个row的UITableView。</strong>
-<code>dequeueReusableCellWithIdentifier:</code>tableView就像是一个管理这些<code>UITableViewCells</code>的一个pool，当UITableViews离开屏幕，他们从屏幕的底部或者顶部离开，就把他们放进pool. 然后，当其中一个需要去到屏幕上时，它就进入pool中找 出一个来。reuse identifier 制定了要用的池子（pool）的名字。如果第一次进入pool，就会用Prototype画一个cell. 
+TableView把自己作为第一个参数传递。第二个参数是index path(static table,you do not need to implement this method), <code>NSIndexPath</code> is just an object with two important properties for use with <code>UITableView：row</code> and <code>section</code>.  用来封装<code>row</code>和<code>section</code>。  <br>
+<strong>因此，这个方法只是说，给我一个用来画这个section里的这个row的UITableView。</strong><br>
+</p>
+
+<p>
+<code>dequeueReusableCellWithIdentifier:</code>tableView就像是一个管理这些<code>UITableViewCells</code>的一个pool，当UITableViews离开屏幕，他们从屏幕的底部或者顶部离开，就把他们放进pool. 然后，当其中一个需要去到屏幕上时，它就进入pool中找 出一个来。reuse identifier 制定了要用的池子（pool）的名字。如果第一次进入pool，就会用Prototype画一个cell. <br>
 </p>
 
 </body>
