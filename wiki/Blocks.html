@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Blocks</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Blocks</h1>
+<h2 id="toc_1.1">What is a <strong>block</strong>?</h2>
+<p>
+A block of code (i.e. a sequence of statements inside <strong>{}</strong>).  <br>
+Usually included "in-line"(内联) with the calling of method that is going to use the block of code.  <br>
+Very smart about local variables, referenced object, ect.  <br>
+</p>
+
+<h2 id="toc_1.2">What does it look like?</h2>
+<p>
+Here’s an example of calling a method that takes a block as an argument. 
+</p>
+<pre>
+[aDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+  NSLog(@“value for key %@ is %@”, key, value);
+  if ([@“ENOUGH” isEqualToString:key]) {
+  *stop = YES; }
+}];
+</pre>
+<p>
+This <code>NSLog()</code>s every <code>key</code> and <code>value</code> in <code>aDictionary</code> (but stops if the <code>key</code> is <code>ENOUGH</code>).  <br>
+It take only 1 argument which is <strong>block</strong>, the <strong>block</strong> takes 3 argument - <code>key</code>,<code>value</code> and a <code>Boolean</code>. <br> 
+它会遍历dictionary并把里面所有的key和value一组组展示，每组都会执行这个block,就是花括号之间的东西。 <br>
+<hr />
+</p>
+<h2 id="toc_1.3">Can use local variables declared before the block inside the block</h2>
+<pre>
+  double stopValue = 53.5;
+  [aDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+      NSLog(@“value for key %@ is %@”, key, value);
+      if ([@“ENOUGH” isEqualToString:key] || ([value doubleValue] == stopValue)) {
+      *stop = YES; }
+  }]; 
+</pre>
+<hr />
+<p>
+== But they are read only! 
+</p>
+<pre>
+  BOOL stoppedEarly = NO;
+  double stopValue = 53.5;
+  [aDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+      NSLog(@“value for key %@ is %@”, key, value);
+      if ([@“ENOUGH” isEqualToString:key] || ([value doubleValue] == stopValue)) {
+      *stop = YES;
+      stoppedEarly = YES;  // ILLEGAL
+} }];
+</pre>
+<hr />
+<h2 id="toc_1.4">Unless you mark the local variable as <code>__block</code></h2>
+<pre>
+__block BOOL stoppedEarly = NO;
+double stopValue = 53.5;
+[aDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+    NSLog(@“value for key %@ is %@”, key, value);
+    if ([@“ENOUGH” isEqualToString:key] || ([value doubleValue] == stopValue)) {
+      *stop = YES;
+       stoppedEarly = YES;  // this is legal now
+    }
+}];
+if (stoppedEarly) NSLog(@“I stopped logging dictionary values early!”);
+</pre>
+<hr />
+<h2 id="toc_1.5">Or if the “variable” is an instance variable</h2>
+<p>
+But we only access instance variables (e.g. _display) in setters and getters. So this is of minimal value to us.
+<hr />
+</p>
+<h2 id="toc_1.6">So what about objects which are messaged inside the block?</h2>
+<pre>
+  	NSString *stopKey = [@“Enough” uppercaseString];
+	__block BOOL stoppedEarly = NO;
+	double stopValue = 53.5;
+	[aDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+	    NSLog(@“value for key %@ is %@”, key, value);
+	    if ([stopKey isEqualToString:key] || ([value doubleValue] == stopValue)) {
+			￼*stop = YES;
+	        stoppedEarly = YES;  // this is legal now
+	    }
+	}];
+	if (stoppedEarly) NSLog(@“I stopped logging dictionary values early!”);  
+</pre>
+
+</body>
+</html>
