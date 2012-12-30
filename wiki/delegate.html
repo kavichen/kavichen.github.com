@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>delegate</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">delegate</h1>
+<h2 id="toc_1.1">定义理解</h2>
+<h3 id="toc_1.1.1">理解1</h3>
+<p>
+<a href="http://www.cocoachina.com/bbs/read.php?tid=88766">原文链接</a>
+<hr />
+</p>
+<h3 id="toc_1.1.2">理解2</h3>
+<p>
+a 要委托 b 来做某事 ： 那么<br>
+1，a必须有一个委托，也就是说， a中必须声明 一个 <code>id&lt;delegate&gt; delegate</code> 类型的变量；<br>
+2，b 是被a委托的对象。 那么， <code>a * a = [[a alloc] init];</code>    <code>a.delegate = b</code>;<br>
+</p>
+
+<p>
+这两个也就定义了委托的核心。 id 是任意类型的成员，   <br>
+当 a.delegate = b; 也就可以认定，a中的<code>id&lt;delegete&gt; delegate</code> 也就是b ；   <br>
+当你在 a中用delegate调用了某方法，也就是说b在调用某方法；<br>
+</p>
+
+<p>
+我们经常用的 一个  UITableView ，那么在一个类中，有成员变量UITableView *table,    <code>self.tabelView.delegate = self; </code> 这是我们最长用的一句话。<br>
+现在来理解。<br>
+tabelView.delegate ,说明 tabelView 中有一个 delegate ，而这个delegate ，由于 <code>self.tabelView.delegate = self;</code>   self 把自己赋给了 delete ，self就是 delegate； <br>
+而 UITableView 中的 各个函数：<code>- tableView: numberOfRowsInSection: heightForRowAtIndexPath；</code> 等等，  这都是  @protocol 的， 这些函数都等同于 c++的虚函数。<br>
+</p>
+
+<p>
+UITableView中 <code>id &lt;UITableViewDelegate&gt; delegate;</code> 这个参数会调用 numberOfRowsInSection: heightForRowAtIndexPath；等函数，<br>
+</p>
+
+<p>
+剩下的 ，也就可以用 c++ 的 虚函数（或者说是@protocol ）一个道理了 。。呵呵<br>
+</p>
+
+<p>
+@protocol 也就是 实现了动态绑定，也就是多态。。没啥难理解的。<br>
+其中@required， 是必须实现的， 类似于 纯虚函数；<br>
+@optional 是非必须的， 类似与 虚函数；。 <br>
+</p>
+
+<h2 id="toc_1.2">疑难问题</h2>
+<p>
+-<a href="用delegation时，可能会出现Cannot find protocol declaration的error.html">用delegation时，可能会出现Cannot find protocol declaration的error</a>
+</p>
+
+</body>
+</html>
