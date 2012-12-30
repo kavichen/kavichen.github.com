@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>如何在终端用mvim命令打开文件</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">如何在终端用mvim命令打开文件</h1>
+<h2 id="toc_1.1">步骤</h2>
+<ul>
+<li>
+将Macvim.app拷入app
+
+<li>
+将mvim拷入<code>$sudo cp -f mvim /usr/bin</code>下
+
+</ul>
+
+<p>
+然后在终端命令行调用键入: mvim project_file.php 出现了一个macvim窗口<br>
+但MacVim支持当前窗口多标签页功能，每次打开都是新窗口，虽然苹果有Mission Control切换，但文件窗口多了，显示很麻烦，<br>
+所以想让mvim打开文件直接在macvim当前窗口的新标签页里打开，需要在命令后加–remote-tab参数，不过这篇文章里给出了直接修改脚本的方法，把mvim底部从# Last step: fire up vim开始的部分删掉，改成：
+</p>
+<pre>
+  $cd /usr/bin
+  $mvim mvim
+</pre>
+<p>
+在文件头部加入
+</p>
+<pre>
+  tabs = true
+</pre>
+<p>
+把底部的if模块替换成下面的
+</p>
+<pre>
+  # Last step:  fire up vim.
+if [ "$gui" ]; then
+  if $tabs &amp;&amp; [[ `$binary --serverlist` = "VIM" ]]; then
+    exec "$binary" -g $opts --remote-tab-silent ${1:+"$@"}
+  else
+    exec "$binary" -g $opts ${1:+"$@"}
+  fi
+else
+  exec "$binary" $opts ${1:+"$@"}
+fi
+</pre>
+
+</body>
+</html>
