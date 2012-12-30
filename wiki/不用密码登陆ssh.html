@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>不用密码登陆ssh</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">不用密码登陆ssh</h1>
+
+<h2 id="toc_1.1">步骤</h2>
+<ol>
+<li>
+例如：本机为client，192.168.1.122为Server.
+
+<li>
+在本机输入 <code>ssh-keygen -t rsa</code> &lt;== 这个步骤产生Key Pair
+
+<li>
+在本机输入 <code>cd ~/.ssh</code>
+
+<li>
+在本机输入 <code>scp id_rsa.pub pi@192.168.1.122:~/</code>
+
+<li>
+在Server输入 <code>cd ~/.ssh</code>
+
+<li>
+在Server输入 <code>cat ../id_rsa.pub &gt;&gt; authorized_keys</code>
+
+<li>
+Done
+
+</ol>
+
+<p>
+<em>参考</em>
+<em>《鸟哥的Linux私房菜》</em>
+</p>
+
+</body>
+</html>

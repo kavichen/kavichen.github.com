@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>如何创建日志</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">如何创建日志</h1>
+<p>
+#打开kavichen.github.com/_post/
+#新建以<code>YEAR-MONTH-DATA-title.md</code>为格式的md文件
+#在文章开头加上 <a href="https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter">详细参考YAML Front Matter</a>
+</p>
+<pre>
+&lt;pre&gt;
+---
+layout: post
+title: Blogging Like a Hacker
+---
+&lt;/pre&gt;  
+</pre>
+
+<p>
+#编辑日志
+#提交
+</p>
+<pre>
+  git add .  
+	git commit -an "message"  
+	git push
+</pre>
+
+<p>
+<code>git add . </code>//表示添加当前目录下的所有文件
+<code>git commit -am "message"</code> //表示提交所有更改，这是提交到本地，<code>“message”</code>换成自己的注释 
+<code>git push</code> //把在本地的更改提交到远程服务器
+</p>
+
+<p>
+#Done
+</p>
+
+</body>
+</html>

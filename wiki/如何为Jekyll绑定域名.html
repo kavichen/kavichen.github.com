@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>如何为Jekyll绑定域名</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">如何为Jekyll绑定域名</h1>
+
+<p>
+之前从来没有帮顶过域名，第一次用，在google简单搜索了一下，居然成功了。
+我这里用的是 <a href="http://paomi.com">http://paomi.com</a> 泡米网的域名管理服务。如果选用其他域名地址，原理也是一样的。  
+</p>
+
+<h2 id="toc_1.1">步骤</h2>
+<p>
+#在本地代码库里新建名为CNAME文本文件，在Terminal中输入，以为例:example.com <br>
+</p>
+<pre>
+  echo 'example.com' &gt; CNAME
+</pre>
+<p>
+然后push
+</p>
+<pre>
+  git add CNAME
+  git commit -am "CNAME ADDED"
+  git push
+</pre>
+
+<p>
+#登陆域名管理，在域名解析中添加
+  -主机记录：@
+  -记录类型：A
+  -路线类型：默认
+  -记录值：204.232.175.78
+  -其他：默认
+</p>
+
+<p>
+ <em>参考</em>
+-<a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">github:help</a>
+-<a href="http://yanping.me/cn/blog/2011/12/26/github-pages-domain-2/">再谈github页面域名绑定</a>
+<strong>此步骤只适合绑定顶级域名</strong>
+</p>
+
+</body>
+</html>
