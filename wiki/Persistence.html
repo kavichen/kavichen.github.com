@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Persistence</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Persistence</h1>
+<h2 id="toc_1.1">Property List</h2>
+<p>
+In <code>NSArray</code> <code>NSDictionary</code> or <code>NSUserDefaults</code>, we can use <code>writeToURL:atomically:</code> and <code>initWithContentsOfURL</code>  <br>
+<code>NSPropertyListSerialization</code> converts Property List to/from NSData.
+</p>
+
+<h2 id="toc_1.2">File System</h2>
+<h3 id="toc_1.2.1">How do you get the paths to these special sandbox directories?</h3>
+<p>
+Use this <code>NSFileManager</code> method …    
+</p>
+<pre>
+  - (NSArray *)URLsForDirectory:(NSSearchPathDirectory)directory  //see below
+                      inDomains:(NSSearchPathDomainMask)domainMask; //NSUserDomainMask  
+</pre>
+
+<h3 id="toc_1.2.2">Notice that it returns an <code>NSArray</code> of paths (not a single path)</h3>
+<p>
+Since the file system is limited in scope, there is usually only one path in the array in iOS. No user home directory, no shared system directories (for the most part),etc.  
+*Thus you will almost just use <code>lastObject</code> (for simplicity)* 
+</p>
+
+<h3 id="toc_1.2.3">Examples of <code>NSSearchPathDirectory</code> values</h3>
+<p>
+<code>NSDocumentsDirectory</code>,<code>NSCachesDirectory</code>,<code>NSAutosavedInformationDirectory</code>,etc.  
+</p>
+
+<h3 id="toc_1.2.4">NSFileManager</h3>
+<pre>
+  	NSFileManager *manager = [[NSFileManager alloc] init];  
+	- (BOOL)createDirectoryAtPath:(NSString *)path  
+	withIntermediateDirectories:(BOOL)createIntermediates  
+	attributes:(NSDictionary *)attributes  
+	error:(NSError **)error;  
+  
+	- (BOOL)isReadableFileAtPath:(NSString *)path;  
+	- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError **)error;  
+</pre>
+
+<h3 id="toc_1.2.5">NSString</h3>
+<p>
+Path construction methods and reading/writing strings to files. 
+</p>
+<pre>
+  	- (NSString *)stringByAppendingPathComponent:(NSString *)component;  
+	- (NSString *)stringByDeletingLastPathComponent;  
+	- (BOOL)writeToFile:(NSString *)path  
+	        atomically:(BOOL)flag  
+            encoding:(NSStringEncoding)encoding //e.g. ASCII, ISOLatin1, etc.  
+            error:(NSError **)error;  
+  
+	- (NSString *)stringWithContentsOfFile:(NSString *)path
+				  usedEncoding:(NSStringEncoding *)encoding  
+				  error:(NSError **)error;  
+</pre>
+
+<h4 id="toc_1.2.5.1"><code>- (NSArray *)contentsOfDirectoryAtURL:(NSURL *)url includingPropertiesForKeys:(NSArray *)keys options:(NSDirectoryEnumerationOptions)mask error:(NSError **)error Description</code></h4>
+<p>
+Performs a shallow search of the specified directory and returns URLs for the contained items. 
+</p>
+
+<h3 id="toc_1.2.6">NSURL中的Path怎么理解？</h3>
+<h4 id="toc_1.2.6.1"><code>- (NSString *)path </code></h4>
+<h5 id="toc_1.2.6.1.1">Description</h5>
+<p>
+Returns the path of a URL conforming to RFC 1808. 
+</p>
+
+<h5 id="toc_1.2.6.1.2">Returns</h5>
+<p>
+The path of the URL, unescaped with the stringByReplacingPercentEscapesUsingEncoding: method. If the receiver does not conform to RFC 1808, returns nil.<br>
+If this URL object contains a file URL (as determined with isFileURL), the return value of this method is suitable for input into methods of NSFileManager or NSPathUtilities. If the path has a trailing slash it is stripped.  <br>
+</p>
+
+<p>
+Per RFC 3986, the leading slash after the authority (host name and port) portion is treated as part of the path.  <br>
+</p>
+
+<p>
+什么是<a href="RFC1808.html">RFC1808</a>
+</p>
+
+</body>
+</html>

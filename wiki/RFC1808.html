@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>RFC1808</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<p>
+RFC 1808           Relative Uniform Resource Locators          June 1995<br>
+&lt;scheme&gt;://&lt;net_loc&gt;/&lt;path&gt;;&lt;params&gt;?&lt;query&gt;#&lt;fragment&gt;
+each of which, except<code> &lt;scheme&gt;</code>, may be absent from a particular URL.
+   These components are defined as follows (a complete BNF is provided
+   in Section 2.2):
+</p>
+<blockquote>
+scheme ":"   ::= scheme name, as per Section 2.1 of RFC 1738 [2].
+</blockquote>
+<blockquote>
+"//" net_loc ::= network location and login information, as per
+Section 3.1 of RFC 1738 [2].
+</blockquote>
+<blockquote>
+"/" path     ::= URL path, as per Section 3.1 of RFC 1738 [2].
+</blockquote>
+<blockquote>
+";" params   ::= object parameters (e.g., ";type=a" as in
+Section 3.2.2 of RFC 1738 [2]).
+</blockquote>
+<blockquote>
+"?" query    ::= query information, as per Section 3.3 of
+RFC 1738 [2].
+</blockquote>
+<blockquote>
+"#" fragment ::= fragment identifier.
+</blockquote>
+
+<p>
+   Note that the fragment identifier (and the "#" that precedes it) is
+   not considered part of the URL.  However, since it is commonly used
+   within the same string context as a URL, a parser must be able to
+   recognize the fragment when it is present and set it aside as part of
+   the parsing process.
+</p>
+
+<p>
+   The order of the components is important.  If both <code>&lt;params&gt;</code> and
+   <code>&lt;query&gt;</code> are present, the <code>&lt;query&gt;</code> information must occur after the
+   <code>&lt;params&gt;</code>.
+</p>
+
+<p>
+ <a href="http://www.w3.org/Addressing/rfc1808.txt">原文链接</a>
+</p>
+
+</body>
+</html>
