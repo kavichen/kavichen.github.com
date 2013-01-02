@@ -10,17 +10,21 @@
 <h1 id="toc_1">CGFloat常见问题</h1>
 <h2 id="toc_1.1">What’s the difference between using CGFloat and float?</h2>
 <p>
-ANS_1:
+ANS_1:<br>
 </p>
-<pre>
-As @weichsel stated, CGFloat is just a typedef for either float or double. You can see for yourself by Command-double-clicking on "CGFloat" in Xcode — it will jump to the CGBase.h header where the typedef is defined. The same approach is used for NSInteger and NSUInteger as well.
 
-These types were introduced to make it easier to write code that works on both 32-bit and 64-bit without modification. However, if all you need is float precision within your own code, you can still use float if you like — it will reduce your memory footprint somewhat. Same goes for integer values.
+<p>
+As @weichsel stated, CGFloat is just a typedef for either float or double. You can see for yourself by Command-double-clicking on "CGFloat" in Xcode — it will jump to the CGBase.h header where the typedef is defined. The same approach is used for NSInteger and NSUInteger as well.<br>
+</p>
 
-I suggest you invest the modest time required to make your app 64-bit clean and try running it as such, since most Macs now have 64-bit CPUs and Snow Leopard is fully 64-bit, including the kernel and user applications. Apple's 64-bit Transition Guide for Cocoa is a useful resource.
+<p>
+These types were introduced to make it easier to write code that works on both 32-bit and 64-bit without modification. However, if all you need is float precision within your own code, you can still use float if you like — it will reduce your memory footprint somewhat. Same goes for integer values.<br>
+</p>
 
-</pre>
+<p>
+I suggest you invest the modest time required to make your app 64-bit clean and try running it as such, since most Macs now have 64-bit CPUs and Snow Leopard is fully 64-bit, including the kernel and user applications. Apple's 64-bit Transition Guide for Cocoa is a useful resource.<br>
 <hr />
+</p>
 
 </body>
 </html>

@@ -12,13 +12,18 @@
 <p>
 ANS_1:
 </p>
-<pre>
-You can try this:&lt;br&gt;
 
-NSLog(@"%@", NSStringFromCGPoint(cgPoint));&lt;br&gt;
+<p>
+You can try this:<br>
+</p>
 
-There are a number of functions provided by UIKit that convert the various CG structs into NSStrings. The reason it doesn't work is because %@ signifies an object. A CGPoint is a C struct (and so are CGRects and CGSizes).&lt;br&gt;
-</pre>
+<p>
+NSLog(@"%@", NSStringFromCGPoint(cgPoint));<br>
+</p>
+
+<p>
+There are a number of functions provided by UIKit that convert the various CG structs into NSStrings. The reason it doesn't work is because %@ signifies an object. A CGPoint is a C struct (and so are CGRects and CGSizes).<br>
+</p>
 
 <p>
 ANS_2:
