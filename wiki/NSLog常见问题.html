@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>NSLog常见问题</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">NSLog常见问题</h1>
+<h2 id="toc_1.1">Is It Possible to NSLog C Structs (Like CGRect or CGPoint)?</h2>
+<p>
+ANS_1:
+</p>
+<pre>
+You can try this:&lt;br&gt;
+
+NSLog(@"%@", NSStringFromCGPoint(cgPoint));&lt;br&gt;
+
+There are a number of functions provided by UIKit that convert the various CG structs into NSStrings. The reason it doesn't work is because %@ signifies an object. A CGPoint is a C struct (and so are CGRects and CGSizes).&lt;br&gt;
+</pre>
+
+<p>
+ANS_2:
+</p>
+<pre>
+There are a few functions like:&lt;br&gt;
+
+NSStringFromCGPoint  
+NSStringFromCGSize  
+NSStringFromCGRect  
+NSStringFromCGAffineTransform  
+NSStringFromUIEdgeInsetsAn example:
+
+NSLog(@"rect1: %@", NSStringFromCGRect(rect1));
+</pre>
+<hr />
+
+</body>
+</html>

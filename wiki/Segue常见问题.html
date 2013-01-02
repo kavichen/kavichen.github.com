@@ -1,0 +1,20 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Segue常见问题</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Segue常见问题</h1>
+<h2 id="toc_1.1">How to call <code>didselectrowatindexpath</code> before <code>prepareforsegue</code></h2>
+<pre>
+You are meshing two different ways to do it.&lt;br&gt;
+1 - First Alternative - use only storyboards and prepareForSegue: Connect your prototype cell to the second viewcontroller in storyboard (the connection must start from the cell and end on the second viewcontroller). In this case, you must use only prepareForSegue method and not didSelectRowAtIndexPath. The second VC is pushed automatically after the prepareForSegue.&lt;br&gt;
+2 - Second Alternative - use didSelectRowAtIndexPath: You use didSelectRowAtIndexPath only if you connect the segue from the first viewcontroller (and not from the cell) to the second viewcontroller. At the end of didSelectRowAtIndexPath method, you must call performSegue.&lt;br&gt;
+</pre>
+<hr />
+
+</body>
+</html>

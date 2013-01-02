@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>CoreData常见问题</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">CoreData常见问题</h1>
+<h2 id="toc_1.1">entity和managed object的区别</h2>
+
+<ul>
+<li>
+Entity refers to description of an object.
+
+<li>
+Managed object refers to actual concrete instances of that entity created at runtime.
+
+<li>
+The distinction between entities and managed objects is similar to the distinction between a class and instances of that class.
+
+</ul>
+ 
+<p>
+You generally won’t work with your persistent store directly, but rather will use something called a managed object context, often referred to as just a context. The context manages access to the persistent store and maintains information about which properties have changed since the last time an object was saved. The context also undo a single change or roll back all the way to the last time data was saved.
+<hr />
+</p>
+
+<h2 id="toc_1.2">使用coredata的时候，要加入coredata framework</h2>
+<hr />
+<h2 id="toc_1.3">Core Data and Table View</h2>
+<p>
+NSFetchedResultsController<br>
+</p>
+
+<p>
+它不是一个view controller, 而是控制fetched resultstable view 通信方式的Controller.<br>
+</p>
+
+<p>
+它可以回答所有UITableViewDataSource protocol的问题，比如sections 和 rows.(不能回答cellForRowAiIndexPath)<br>
+</p>
+
+</body>
+</html>

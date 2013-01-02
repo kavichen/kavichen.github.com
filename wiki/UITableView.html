@@ -7,6 +7,12 @@
 </head>
 <body>
 
+<h1 id="toc_1">UITableView</h1>
+<h2 id="toc_1.1">UITableView常见问题</h2>
+<p>
+<a href="UITableView常见问题.html">UITableView常见问题</a>
+</p>
+<h2 id="toc_1.2">概念</h2>
 <p>
 <strong>Lots and lots of customization via a <em>dataSource</em> protocol and a <em>delegate</em> protocol</strong><br>
 <a href="http://ww2.sinaimg.cn/large/a74ecc4cjw1dywjvmyy5zj.jpg">图示1</a><br>
@@ -22,7 +28,7 @@ Three important methods in <code>dataSource</code> protocol:  <br>
 <hr />
 </p>
 
-<h3 id="toc_0.0.1">UITableViewSourceData</h3>
+<h3 id="toc_1.2.1">UITableViewSourceData</h3>
 <p>
 <strong>How do we control what is drawn in each cell in a dynamic table?</strong><br>
 Here is the <code>UITableViewDataSource</code> method to get that cell for a given row in a given section. <br>
@@ -50,7 +56,7 @@ TableView把自己作为第一个参数传递。第二个参数是index path(sta
 <hr />
 </p>
 
-<h3 id="toc_0.0.2">UITableViewDelegate</h3>
+<h3 id="toc_1.2.2">UITableViewDelegate</h3>
 <p>
 <strong>The delegate controls how the UITableView is displayed, NOT what is displays(that's the dataSource's job).</strong>
 *Common for <code>dataSource</code> and <code>delegate</code> to be the same object* - usually the contrller of the MVC in which the UITableView is part of the (or is the entire) View. 
@@ -66,7 +72,7 @@ We often will use segues when this happens, but we can also track it directly.
 </pre>
 <hr />
 
-<h3 id="toc_0.0.3">Table View Segues</h3>
+<h3 id="toc_1.2.3">Table View Segues</h3>
 <p>
 <strong>You can segue when a row is touched, just like from a button.</strong>
 Segues will call <code>prepareForSegue:sender:</code> with the chosen <code>UITableViewCell</code> as sender.
@@ -94,7 +100,7 @@ You can tailor whatever data the MVC needs to whichever cell was selected.
 </pre>
 <hr />
 
-<h3 id="toc_0.0.4">5 steps to Delegate</h3>
+<h3 id="toc_1.2.4">5 steps to Delegate</h3>
 <p>
 1. Create the <code>@protocol</code>  <br>
 2. Add <code>delegate @property</code> to delegator's public @interface   <br>

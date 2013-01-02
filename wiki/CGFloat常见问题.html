@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>CGFloat常见问题</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">CGFloat常见问题</h1>
+<h2 id="toc_1.1">What’s the difference between using CGFloat and float?</h2>
+<p>
+ANS_1:
+</p>
+<pre>
+As @weichsel stated, CGFloat is just a typedef for either float or double. You can see for yourself by Command-double-clicking on "CGFloat" in Xcode — it will jump to the CGBase.h header where the typedef is defined. The same approach is used for NSInteger and NSUInteger as well.
+
+These types were introduced to make it easier to write code that works on both 32-bit and 64-bit without modification. However, if all you need is float precision within your own code, you can still use float if you like — it will reduce your memory footprint somewhat. Same goes for integer values.
+
+I suggest you invest the modest time required to make your app 64-bit clean and try running it as such, since most Macs now have 64-bit CPUs and Snow Leopard is fully 64-bit, including the kernel and user applications. Apple's 64-bit Transition Guide for Cocoa is a useful resource.
+
+</pre>
+<hr />
+
+</body>
+</html>
