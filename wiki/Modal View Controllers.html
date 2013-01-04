@@ -1,0 +1,330 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Modal View Controllers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<p>
+%Modal View Controllers
+</p>
+<h1 id="toc_1">Model View Controllers</h1>
+<h2 id="toc_1.1">This is what we mean by segueing to a View Controller "modally"</h2>
+<p>
+"Modally" means "in a mode":nothing else  can go on while that other View Controller is up.<br>
+There are different transition styles and presentation styles (more on this in a moment).
+Just <strong>ctrl-drag</strong> from a button to the modal View Controller. Inspect segue to set style.
+</p>
+
+<h2 id="toc_1.2">Can be done from code as well (less common)</h2>
+<p>
+Example. Putting  up a modal view that asks the user to find an address.
+</p>
+<pre>
+  - (IBAction)lookupAddress
+  {
+    AddressLookupViewController *alvc = 
+      [self.storyboard instantiateViewControllerWithIdentifier:@"AddressLookup"];
+    [self presentModalViewController:alvc animated:YES completion:^{
+      //alvc is now on screen; often we do nothing here
+    }];
+  }
+</pre>
+<p>
+当Modal View Controllers完成动画之后，completion block里面的代码会被调用。
+</p>
+
+<p>
+为什么用block?
+</p>
+<ul>
+<li>
+因为这里是异步的，completion block不会阻塞主线程。
+
+</ul>
+
+<h2 id="toc_1.3">So when does it all end?</h2>
+<p>
+It stays this way until someone sends this message to the view controller which put alcv up ...
+<code>- (void)dismissModalViewControllerAnimated:(BOOL)animated;</code>
+You do <strong>NOT</strong> send this to alvc! You send it to the view controller that presented alvc.<br>
+(i.e. the one that implements the method lookupAddress above).
+</p>
+
+<h2 id="toc_1.4">Reporting results from a modal view controller</h2>
+<p>
+Example delegation.
+</p>
+<pre>
+  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"Lookup Address"]) {
+      AddressLookupViewController *alvc = (AddressLookupViewController *)segue.dest...;
+      //other setup here
+      alvc.delegate = self;
+    }
+  }
+  //(One of) AddressLookupViewController's delegate method(s) implemented in presenter ...
+
+  - (void)addressLookupViewController:(AddressLookupViewController *)sender
+                     didSelectAddress:(Address *)anAddress
+  {
+    // do something with the address the user selected (anAddress)
+    [self dismissModalViewControllerAnimated:YES];
+  }
+</pre>
+
+<h2 id="toc_1.5">How is the modal view controller animated onto the screen?</h2>
+<p>
+Depends on this property in the view controller that is being put up modally ...
+<code>@property UIModalTransitionStyle modalTransitionStyle; </code>
+<code>UIModalTransitionStyleCoverVertical //slidesupanddownfrombottomofscreen </code>
+<code>UIModalTransitionStyleFlipHorizontal // flips the current view controller view over to modal </code>
+<code>UIModalTransitionStyleCrossDissolve //oldfadesoutasnewfadesin </code>
+<code>UIModalTransitionStylePartialCurl // only if presenter is full screen (and no more modal)</code>
+</p>
+
+<h2 id="toc_1.6">What about iPad?</h2>
+<p>
+Sometimes it might not look good for a presented view to take up the entire screen.<br>
+<code>@property UIModalPresentationStyle modalPresentationStyle; // in the modal VC</code>
+<code>UIModalPresentationFullScreen // full screen anyway (always on iPhone/iPod Touch)</code>
+<code>UIModalPresentationPageSheet // full screen height, but portrait width even if landscape</code>
+<code>UIModalPresentationFormSheet //centered on the screen (all else dimmed)</code>
+<code>UIModalPresentationCurrentContext // parent’s context (e.g. in a popover)</code>
+Also possible for the presenting VC to control these things (see definesPresentationContext).
+<hr />
+</p>
+<h1 id="toc_2">UITextField</h1>
+<h2 id="toc_2.1">Like UILabel, but editable</h2>
+<p>
+Typing things in on an iPhone is secondary UI (keyboard is tiny).<br>
+More of a mainstream UI element on iPad.<br>
+Don’t be fooled by your UI in the simulator (because you can use physical keyboard!). You can set text color, alignment, font, etc., just like a UILabel.
+</p>
+
+<h2 id="toc_2.2">Keyboard appears when UITextField becomes “first responder”</h2>
+<p>
+It will do this automatically when the user taps on it.<br>
+Or you can make it the first responder by sending it the <code>becomeFirstResponder</code> message.<br>
+To make the keyboard go away, send <code>resignFirstResponder</code> to the UITextField.
+</p>
+
+<h2 id="toc_2.3">The text is obtained from the UITextField via its delegate</h2>
+<p>
+<code>-(BOOL)textFieldShouldReturn:(UITextField*)sender; //sentwhenreturnkeyispressed </code>
+<code>- (void)textFieldDidEndEditing:(UITextField *)sender;</code>
+This last one is sent when the text field resigns being first responder.<br>
+This is usually where you extract the text from the field using the text property.
+</p>
+
+<h2 id="toc_2.4">Other UITextField properties</h2>
+<p>
+<code>@property BOOL clearsOnBeginEditing;</code>
+<code>@property BOOL adjustsFontSizeToFitWidth;</code>
+<code>@propertyCGFloatminimumFontSize; //alwayssetthisifyousetadjustsFontSizeToFitWidth</code> 
+<code>@property NSString *placeholder; // drawn in gray when text field is empty</code>
+<code>@property UIImage *background/disabledBackground;</code>
+</p>
+
+<h2 id="toc_2.5">Other UITextField functionality</h2>
+<p>
+UITextFields have a “left” and “right” overlays (similar to accessory views in MKAnnotationView). <br>
+You can control in detail the layout of the text field (border, left/right view, clear button).
+</p>
+
+<hr />
+<h1 id="toc_3">Keyboard</h1>
+<h2 id="toc_3.1">Controlling the appearance of the keyboard</h2>
+<p>
+Set the properties defined in the UITextInputTraits protocol (which UITextField implements).<br>
+<code>@property UITextAutocapitalizationType autocapitalizationType; // words, sentences, etc.</code>
+<code>@property UITextAutocorrectionType autocorrectionType; // UITextAutocorrectionTypeYES/NO</code>
+<code>@property UIReturnKeyType returnKeyType;</code> // Go, Search, Google, Done, etc.
+<code>@property BOOL secureTextEntry;</code>  // for passwords, for example
+<code>@property UIKeyboardType keyboardType;</code> // ASCII, URL, PhonePad, etc.
+</p>
+
+<h2 id="toc_3.2">The keyboard comes up over other views</h2>
+<p>
+So you need to adjust your view positioning (especially to keep the text field itself visible).
+You do this by reacting to the <code>UIKeyboard{Will,Did}{Show,Hide}Notification</code>s sent by <code>UIWindow</code>.
+</p>
+<pre>
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(theKeyboardAppeared:)
+                                             name:UIKeyboardDidShowNotification
+                                           object:self.view.window];
+</pre>
+<p>
+Your theKeyboardAppeared: method will get called with an NSNotification as the argument.
+Inside the NSNotification is a userInfo which will have details about the appearance.
+</p>
+
+<h2 id="toc_3.3">Other Keyboard functionality</h2>
+<p>
+Keyboards can have accessory views that appear above the keyboard (custom toolbar, etc.). 
+<code>@property(retain)UIView*inputAccessoryView; //UITextFieldmethod</code>
+<hr />
+</p>
+<h1 id="toc_4">UITextView</h1>
+<h2 id="toc_4.1"><code>UITextVie</code>w is for multi-line, scrolling text</h2>
+<p>
+Editable.<br>
+Can set font and color of (the entire) text, of course.<br>
+But does not support per-character formatting (use UIWebView and HTML for that).
+</p>
+
+<h2 id="toc_4.2">UITextViewDelegate</h2>
+<p>
+Get notified when editing starts/ends.<br>
+Control editing (prevent changes, etc.).<br>
+</p>
+
+<h2 id="toc_4.3">UITextView is a UIScrollView</h2>
+<p>
+Has a text-specific scrolling method ...<br>
+<code>- (void)scrollRangeToVisible:(NSRange)rangeOfCharactersToScrollToVisible;</code>
+</p>
+
+<h2 id="toc_4.4">UITextView v.s UITextField</h2>
+<p>
+UITextView用来显示大段的文字<br>
+UITextField用来显示小段的文字
+</p>
+
+<h1 id="toc_5">UIView Animation</h1>
+<h2 id="toc_5.1">Changes to certain UIView properties can be animated over time</h2>
+<p>
+View hierarchy (adding and removing subviews)<br>
+<code>hidden</code>
+<code>frame</code>
+<code>transform</code> (translation, rotation and scale) 
+<code>alpha</code> (opacity)
+</p>
+
+<h2 id="toc_5.2">Done with UIView class method and blocks</h2>
+<p>
+The class method takes animation parameters and an animation block as arguments.<br>
+The animation block contains the code that makes the changes to the UIView(s).<br>
+Most also have a “completion block” to be executed when the animation is done.<br>
+The changes inside the block are made immediately (even though they will appear “over time”).<br>
+</p>
+
+<h2 id="toc_5.3">Built on top of underlying Core Animation framework</h2>
+<p>
+We’re not going to cover that in this course, but you should know it exists.
+</p>
+
+<h2 id="toc_5.4">Animation class method in UIView</h2>
+<pre>
+  + (void)animateWithDuration:(NSTimeInterval)duration
+                        delay:(NSTimeInterval)delay
+                      options:(UIViewAnimationOptions)options
+                   animations:(void (^)(void))animations
+                   completion:(void (^)(BOOL finished))completion;
+</pre>
+
+
+<h2 id="toc_5.5">Example</h2>
+<pre>
+[UIView animateWithDuration:3.0
+                      delay:0.0
+                    options:UIViewAnimationOptionBeginFromCurrentState
+                 animations:^{ myView.alpha = 0.0; }
+                 completion:^(BOOL fin) { if (fin) [myView removeFromSuperview]; }];
+</pre>
+<p>
+This would cause myView to “fade” out over 3 seconds (starting immediately).<br>
+Then it would remove myView from the view hierarchy (but only if the fade completed).<br>
+If, within the 3 seconds, someone animated the alpha to non-zero, the removal would not happen.<br>
+</p>
+
+<h2 id="toc_5.6">Another example</h2>
+<pre>
+if (myView.alpha == 1.0) {
+    [UIView animateWithDuration:3.0
+                          delay:2.0
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{ myView.alpha = 0.0; }
+                     completion:nil];
+    NSLog(@“alpha is %f.”, myView.alpha);
+}
+</pre>
+
+<p>
+This would also cause myView to “fade” out over 3 seconds (starting in 2 seconds in this case).<br>
+The NSLog() would happen immediately (i.e. not after 3 or 5 seconds) and would print “alpha is 0.” In other words, the animation block’s changes are executed immediately, but the animation itself<br>
+(i.e. the visual appearance of the change to alpha) starts in 2 seconds and takes 3 seconds.<br>
+</p>
+
+<h2 id="toc_5.7">UIViewAnimationOptions</h2>
+<p>
+BeginFromCurrentState     // interrupt other, in-progress animations of these properties
+AllowUserInteraction      // allow gestures to get processed while animation is in progress 
+LayoutSubviews            // animate the relayout of subviews along with a parent’s animation
+Repeat                    // repeat indefinitely
+</p>
+
+<p>
+Autoreverse               // play animation forwards, then backwards 
+OverrideInheritedDuration //ifnotset,usedurationofanyin-progressanimation
+OverrideInheritedCurve    // if not set, use curve (e.g. ease-in/out) of in-progress animation
+AllowAnimatedContent      // if not set, just interpolate between current and end state image 
+CurveEaseInEaseOut        // slower at the beginning, normal throughout, then slow at end
+CurveEaseIn               // slower at the beginning, but then constant through the rest
+CurveLinear               // same speed throughout
+TransitionFlipFromLeft/Right // only for hiding/removing views from the view hierarchy 
+TransitionCurlUp/Down     // only for hiding/removing views from the view hierarchy
+</p>
+
+<h2 id="toc_5.8">Animating changes to the view hierarchy is slightly different</h2>
+<pre>
++ (void)transitionFromView:(UIView *)fromView
+                    toView:(UIView *)toView
+                  duration:(NSTimeInterval)duration
+                   options:(UIViewAnimationOptions)options
+completion:(void (^)(BOOL finished))completion;
+</pre>
+<p>
+Include <code>UIViewAnimationOptionShowHideTransitionViews</code> if you want <code>hidden</code> property to be set.<br>
+Otherwise it will actually remove fromView from the view hierarchy and add toView.
+</p>
+
+<p>
+Or you can do the removing/adding/hiding yourself in a block with ...
+</p>
+<pre>
++ (void)transitionWithView:(UIView *)view
+                  duration:(NSTimeInterval)duration
+                   options:(UIViewAnimationOptions)options
+                animations:(void (^)(void))animations
+                completion:(void (^)(BOOL finished))completion;
+</pre>
+<hr />
+<h1 id="toc_6">NSTimer</h1>
+<h2 id="toc_6.1">Scheduled invocation of a method in the main queue</h2>
+<pre>
+NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)seconds
+                                                  target:self
+                                                selector:@selector(doSomething:)
+                                                userInfo:(id)anyObject
+                                                 repeats:(BOOL)yesOrNo];
+</pre>
+
+<h2 id="toc_6.2">Not “real time” since it can run only each time around run loop</h2>
+<p>
+Setting the time interval too short will essentially block the main thread.<br>
+Taking too long each time you’re called could also essentially block the main thread.<br>
+Do any time consuming stuff in a thread and just use the timer to update state quickly.<br>
+</p>
+
+<h2 id="toc_6.3">Check documentation for more</h2>
+<p>
+For example, you can <code>invalidate</code> a repeating timer when you want it to stop.
+Or you can create a timer that will fire at a specific time (NSDate) in the future.
+</p>
+
+</body>
+</html>
