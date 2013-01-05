@@ -44,5 +44,77 @@ Alerts
 Universal apps require care here (though some can work on both platforms, e.g., showFromRect:).<br>
 </p>
 
+<h3 id="toc_1.2.4">Finding out what the user has chosen via the <code>delegate</code></h3>
+<pre>
+  - (void)actionSheet:(UIActionSheet *)sender clickedButtonAtIndex:(NSInteger)index;
+</pre>
+
+<h3 id="toc_1.2.5">Remember from initializer that Cancel/Destructive are special</h3>
+<pre>
+  @property NSInteger cancelButtonIndex; // don’t set this if you set it in initializer 
+  @property NSInteger destructiveButtonIndex; // don’t set this if you set it in initializer
+</pre>
+
+<h3 id="toc_1.2.6">Other indexes</h3>
+<pre>
+  @property (readonly) NSInteger firstOtherButtonIndex;
+  @property (readonly) NSInteger numberOfButtons;
+  - (NSString *)buttonTitleAtIndex:(NSInteger)index;
+</pre>
+<p>
+The “other button” indexes are in the order you specified them in initializer and/or added them
+</p>
+
+<h3 id="toc_1.2.7">You can programmatically dismiss the action sheet as well</h3>
+<pre>
+  - (void)dismissWithClickedButtonIndex:(NSInteger)index animated:(BOOL)animated;
+</pre>
+<p>
+It is generally recommended to call this on UIApplicationDidEnterBackgroundNotification. Remember also that you might be terminated while you are in the background, so be ready.
+</p>
+
+<h3 id="toc_1.2.8">Special popover considerations: no Cancel button</h3>
+<p>
+An action sheet in a popover (that is not inside a popover) does not show the cancel button. It does not need one because clicking outside the popover dismisses it.<br>
+It will automatically not show the Cancel button (just don’t be surprised that it’s not there).
+</p>
+
+<h3 id="toc_1.2.9">Special popover considerations: the popover’s passthroughViews</h3>
+<p>
+If you <code>showFromBarButtonItem:animated:</code><code>, it adds the toolbar to popover’s </code>passthroughViews``. This is annoying because repeated touches on the bar button item give multiple action sheets! Also, other buttons in your toolbar will work (which might or might not make sense). Unfortunately, you just have to handle this in all of your bar buttons, including the action sheet’s.
+</p>
+
+<h3 id="toc_1.2.10">Special popover considerations: bar button item handling</h3>
+<p>
+Have a <code>weak</code> @property in your class that points to the <code>UIActionSheet</code>.<br>
+Set it right after you show the action sheet.<br>
+Check that @property at the start of your bar button item’s action method.<br>
+If it is not-nil (since it is weak, it will only be non-nil if it’s still on-screen), just dismiss it. If it is nil, prepare and show your action sheet.<br>
+<hr />
+</p>
+
+<h2 id="toc_1.3">UIAlertView</h2>
+<h3 id="toc_1.3.1">Very similar to Action Sheet ...</h3>
+<pre>
+  -(id)initWithTitle:(NSString *)title
+             message:(NSString *)message // different from UIActionSheet
+            delegate:(id &lt;UIActionSheetDelegate&gt;)delegate 
+   cancelButtonTitle:(NSString *)cancelButtonTitle 
+   otherButtonTitles:(NSString *)otherButtonTitles, ...;
+</pre>
+
+<h3 id="toc_1.3.2">And you can add more buttons programmatically</h3>
+<pre>
+  - (void)addButtonWithTitle:(NSString *)buttonTitle;
+</pre>
+
+<h3 id="toc_1.3.3">Displaying the Action Sheet</h3>
+<pre>
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:...];
+  [alertView show]; // different from UIActionSheet, always appears in center of screen
+</pre>
+
+<h3 id="toc_1.3.4">Rest of the mechanism is the same as UIActionSheet</h3>
+
 </body>
 </html>

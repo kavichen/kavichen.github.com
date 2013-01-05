@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>UIImagePickerController</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<p>
+%UIImagePickerController
+</p>
+<h1 id="toc_1">UIImagePickerController</h1>
+<h2 id="toc_1.1">Modal view to get media from camera or photo library</h2>
+<p>
+Modal means you put it up with <code>presentViewController:animated:completion:.</code><br>
+On iPad, you put it up in a <code>UIPopoverController</code>
+</p>
+
+<h2 id="toc_1.2">Usage</h2>
+<ol>
+<li>
+Create it with <code>alloc/init</code> and set <code>delegate</code>.
+
+<li>
+Configure it (source, kind of media, user editability).
+
+<li>
+Present it.
+
+<li>
+Respond to delegate method when user is done picking the media.
+
+</ol>
+
+<h2 id="toc_1.3">What the user can do depends on the platform</h2>
+<p>
+Some devices have cameras, some do not, some can record video, some can not.<br>
+Also, you can only offer camera OR photo library on iPad (not both together at the same time). <br>
+As with all device-dependent API, we want to start by check what’s available.<br>
+</p>
+<pre>
++ (BOOL)isSourceTypeAvailable:(UIImagePickerControllerSourceType)sourceType; 
+</pre>
+<p>
+Source type is UIImagePickerControllerSourceTypePhotoLibrary/Camera/SavedPhotosAlbum
+</p>
+
+<h2 id="toc_1.4">But don’t forget that not every source type can give video</h2>
+<p>
+So, you then want to check ...<br>
+</p>
+<pre>
++ (NSArray *)availableMediaTypesForSourceType:(UIImagePickerControllerSourceType)sourceType; 
+</pre>
+<p>
+Returns an array of strings you check against constants.<br>
+Check documentation for all possible, but there are two key ones ...<br>
+<code>kUTTypeImage</code> // pretty much all sources provide this<br>
+<code>kUTTypeMovie</code> // audio and video together, only some sources provide this<br>
+_Hint:_These are declared in the MobileCoreServices framework.
+</p>
+<pre>
+#import &lt;MobileCoreServices/MobileCoreServices.h&gt;
+</pre>
+<p>
+and <strong>add MobileCoreServices to your list of linked frameworks</strong>
+</p>
+
+<h2 id="toc_1.5">You can get even more specific about front/rear cameras</h2>
+<p>
+(Though usually this is not necessary.)
+</p>
+<pre>
+  + (BOOL)isCameraDeviceAvailable:(UIImagePickerControllerCameraDevice)cameraDevice;
+</pre>
+<p>
+Either <code>UIImagePickerControllerCameraDeviceFront</code> or <code>UIImagePickerControllerCameraDeviceRear</code>.<br>
+Then check out more about each available camera:
+</p>
+<pre>
++ (BOOL)isFlashAvailableForCameraDevice:(UIImagePickerControllerCameraDevice);
++ (NSArray *)availableCaptureModesForCameraDevice:(UIImagePickerControllerCameraDevice); 
+</pre>
+<p>
+This array contains NSNumber objects with constants UIImagePic...lerCaptureModePhoto/Video.
+</p>
+
+<h2 id="toc_1.6">Set the source and media type you want in the picker</h2>
+<p>
+(From here out, UIImagePickerController will be abbreviated UIIPC for space reasons.)
+</p>
+<pre>
+UIIPC *picker = [[UIIPC alloc] init];
+picker.delegate=self; //selfhastosayitimplementsUINavigationControllerDelegatetoo:( if ([UIIPC isSourceTypeAvailable:UIIPCSourceTypeCamera]) {
+picker.sourceType = UIIPCSourceTypeCamera;
+} // else we’ll take what we can get (photo library by default) NSString*desired=(NSString*)kUTTypeMovie; //e.g.,couldbekUTTypeImage
+if ([[UIIPC availableMediaTypesForSourceType:picker.sourceType] containsObject:desired]) {
+    picker.mediaTypes = [NSArray arrayWithObject:desired];
+// proceed to put the picker up
+} else {
+    // fail, we can’t get the type of media we want from the source we want
+}
+</pre>
+
+<h3 id="toc_1.6.1">Editability</h3>
+<pre>
+@property BOOL allowsEditing;
+</pre>
+<p>
+If YES, then user will have opportunity to edit the image/video inside the picker.<br>
+When your delegate is notified that the user is done, you’ll get both raw and edited versions.<br>
+</p>
+
+<h3 id="toc_1.6.2">Limiting Video Capture</h3>
+<pre>
+@property UIIPCQualityType videoQuality; 
+UIIPCQualityTypeMedium // default
+UIIPCQualityTypeHigh
+UIIPCQualityType640x480
+UIIPCQualityTypeLow
+UIPCQualityTypeIFrame1280x720 // native on some devices 
+UIPCQualityTypeIFrame960x540 // native on some devices 
+@property NSTimeInterval videoMaximumDuration;
+</pre>
+
+<h3 id="toc_1.6.3">Other</h3>
+<p>
+You can control which camera is used, how flash is used, etc., as well (or user can choose).
+</p>
+
+<h3 id="toc_1.6.4">Present the picker</h3>
+<p>
+Note that on iPad, if you are not offering Camera, you must present with popover.<br>
+If you are offering the Camera on iPad, then popover or full-screen modal is okay.<br>
+Remember: on iPad, it’s Camera OR Photo Library (not both at the same time).<br>
+</p>
+
+<h3 id="toc_1.6.5">Delegate will be notified when user is done</h3>
+<pre>
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+  //extract image/movie data/metadata here, more on the next slide
+  [self dismissModalViewControllerAnimated:YES]; // or popover dismissal 
+}
+</pre>
+
+<h3 id="toc_1.6.6">Also dismiss it when cancel happens</h3>
+<pre>
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [self dismissModalViewControllerAnimated:YES]; // or popover dismissal
+}
+</pre>
+
+<h3 id="toc_1.6.7">What is in that info dictionary?</h3>
+<pre>
+UIImagePickerControllerMediaType      // kUTTypeImage or kUTTypeMovie
+UIImagePickerControllerOriginalImage  //UIImage
+UIImagePickerControllerEditedImage    // UIImage
+UIImagePickerControllerCropRect       // CGRect (in an NSValue)
+UIImagePickerControllerMediaMetadata  //NSDictionaryinfoabouttheimagetosavelater
+UIImagePickerControllerMediaURL       // NSURL edited video
+UIImagePickerControllerReferenceURL   // NSURL original (unedited) video
+</pre>
+
+<h3 id="toc_1.6.8">Overlay View</h3>
+<p>
+<code>@property UIView *cameraOverlayView;</code>
+Be sure to set this view’s frame properly.
+Camera is always full screen (modal only, iPhone/iPod Touch only), [[UIScreen mainScreen] bounds]. But if you use the built-in controls at the bottom, you might want your view to be smaller.
+</p>
+
+<h3 id="toc_1.6.9">Hiding the normal camera controls (at the bottom)</h3>
+<p>
+<code>@property BOOL showsCameraControls;</code>
+Will leave a blank area at the bottom of the screen (camera’s aspect 4:3, not same as screen’s). With no controls, you’ll need an overlay view with a “take picture” (at least) button.<br>
+That button should send <code>- (void)takePicture</code> to the picker.<br>
+Don’t forget to dismissModalViewController: when you are done taking pictures.<br>
+</p>
+
+<h3 id="toc_1.6.10">]You can zoom or translate the image while capturing</h3>
+<p>
+<code>@property CGAffineTransform cameraViewTransform;</code>
+For example, you might want to scale the image up to full screen (some of it will get clipped).
+</p>
+
+</body>
+</html>
