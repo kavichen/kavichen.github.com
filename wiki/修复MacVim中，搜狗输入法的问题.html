@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>修复MacVim中，搜狗输入法的问题</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">修复MacVim中，搜狗输入法的问题</h1>
+<p>
+之前配置的<code>.vimrc</code>文件中，开启了<code>'</code>符号的配对，输入法单元拼音之间也会用<code>'</code>符号分割字，所以将<code>.vimrc</code>文件中相应的代码注释即可，如下
+</p>
+<pre>
+  ""':inoremap ' ''&lt;ESC&gt;i
+</pre>
+
+</body>
+</html>

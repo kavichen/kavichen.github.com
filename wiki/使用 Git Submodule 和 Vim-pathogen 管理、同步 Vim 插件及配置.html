@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>使用 Git Submodule 和 Vim-pathogen 管理、同步 Vim 插件及配置</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">使用 Git Submodule 和 Vim-pathogen 管理、同步 Vim 插件及配置</h1>
+<p>
+<a href="http://liluo.org/blog/2012/05/using-git-submodule-and-vim-pathogen-for-vim-configuraction-management/">原文链接</a>
+</p>
+
+<h2 id="toc_1.1">备份原来的 .vimrc 文件和 .vim 目录</h2>
+<pre>
+  mv .vimrc{,.bak} # .vimrc -&gt; .vimrc.bak
+  mv .vim{,.bak}   # .vim -&gt; .vim.bak 
+</pre>
+
+<h2 id="toc_1.2">新建 .vim/bundle 目录</h2>
+<pre>
+  mkdir -p ~/.vim/bundle
+</pre>
+
+<h2 id="toc_1.3">初始化 Git 仓库</h2>
+<pre>
+  cd ~/.vim
+  git init
+  git add .
+  git commit -m "init"
+</pre>
+
+<h2 id="toc_1.4">将代码托管到 Github</h2>
+<p>
+登陆到 <a href="https://github.com/">https://github.com/</a> ，新建一个 Repositorie 命名为 dotvim，然后执行：
+</p>
+<pre>
+  git remote add origin git@github.com:liluo/dotvim.git # 请改成自己的代码仓库地址
+  git push origin master
+</pre>
+
+<h2 id="toc_1.5">安装并配置启用 vim-pathogen 插件</h2>
+<pre>
+  git submodule add git://github.com/tpope/vim-pathogen.git bundle/vim-pathogen
+  echo -e "runtime bundle/vim-pathogen/autoload/pathogen.vim\ncall pathogen#infect()\n" &gt;&gt; ~/.vim/vimrc
+  # 如果想使用原来的 .vimrc 文件则可以
+  # cp ~/.vimrc.bak ~/.vim/vimrc
+  # 但是必须将以下2行加到 vimrc 的首行
+  # runtime bundle/vim-pathogen/autoload/pathogen.vim
+  # call pathogen#infect()
+  ln -s ~/.vim/vimrc ~/.vimrc
+</pre>
+
+<h2 id="toc_1.6">安装插件</h2>
+<pre>
+  #git submodule add 插件 Git 仓库地址 bundle/插件名字
+  git submodule add git://github.com/tpope/vim-markdown.git bundle/vim-markdown
+</pre>
+
+<h2 id="toc_1.7">升级插件</h2>
+<pre>
+  cd ~/.vim/bundle/vim-markdown # 将 vim-markdown 替换为需要升级的插件名字
+  git pull origin master
+</pre>
+
+<h2 id="toc_1.8">升级所有插件</h2>
+<pre>
+  cd ~/.vim
+  git submodule foreach git pull origin master
+</pre>
+
+<h2 id="toc_1.9">删除插件</h2>
+<pre>
+  git rm bundle/vim-markdown # 将 vim-markdown 替换为需要升级的插件名字
+</pre>
+
+<h2 id="toc_1.10">将整个目录提交到 Github</h2>
+<pre>
+  cd ~/.vim
+  git push origin master
+</pre>
+
+<h2 id="toc_1.11">在其他机器使用相同配置</h2>
+<pre>
+  git clone http://github.com/username/dotvim.git ~/.vim
+  ln -s ~/.vim/vimrc ~/.vimrc
+  cd ~/.vim
+  git submodule init
+  git submodule update
+</pre>
+
+</body>
+</html>
