@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>我的Vim配置</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">我的Vim配置</h1>
+<p>
+<a href="http://pengqi.me/2011/11/我的vim配置（一）/">原文链接1</a>
+<a href="http://pengqi.me/2011/11/我的vim配置（二）/">原文链接2</a>
+<a href="http://pengqi.me/2011/12/我的vim配置（三）/">原文链接3</a>
+</p>
+
+<p>
+使用vim开发有一段时间了，经常会做些配置装些插件，导致.vimrc变得臃肿不堪，.vim文件夹也很混乱，很多配置和插件自己都忘了有什么用处，所以今天打算好好整理下，写篇博客做下总结，因为要配置的东西很多，所以我计划分成几篇来写。
+</p>
+
+<h2 id="toc_1.1">使用Git来管理vim配置，并使用Dropbox备份</h2>
+
+<p>
+因为vim的配置很多很乱，时间长了难免忘记，所以我打算用版本控制工具来管理，为了避免误删文件夹，我打算用dropbox来将vim配置备份。vim的配置有三部分，.vimrc文件，.gvimrc文件，.vim文件夹，我将他们都设为软连接，指向~/Work/Tools/Vim文件夹下，再将Vim文件夹使用Git来管理（Git是我最爱用的版本控制工具）。再用Dropbox把这个文件夹云备份，这样我就可以高枕无忧的使用vim啦！
+</p>
+
+<h2 id="toc_1.2">程序员通用的配置</h2>
+<p>
+下面我就介绍一些vim的基本配置，这些配置不管你是写什么语言的都会用到
+</p>
+<pre>
+  syntax enable "语法高亮
+  set nu "显示行号
+  set ruler "在右下角显示光标的坐标
+  set hlsearch "高亮显示搜索结果
+  set incsearch "边输边搜，即时反馈搜索结果，这个可能看个人喜好
+  set showcmd "在ruler左边显示当前正在输入的命令，提示性的，避免误操作
+  set expandtab "将tab键改为空格，默认是8个
+  set tabstop=4 "将tab键改为4个空格
+  set cindent "使用C语言的规则自动缩进，当你敲回车时会自动缩进，所有类C语言（PHP，JAVA）都试用，比smartindent更智能
+  set shiftwidth=4 "自动缩进时，使用4个空格，默认是8个
+</pre>
+<p>
+以上就是一些程序员常用的基本配置，我会在后续的博客中介绍更多的配置和插件。
+</p>
+
+<h2 id="toc_1.3">使用pathogen来管理你的插件</h2>
+<p>
+安装vim插件是件很麻烦的事情，首先要把*****.vim文件放到plugin目录里，其次要把文档放到doc目录里，而很多插件还自带了一些文件和目录，久而久之，.vim文件夹就显得臃肿不堪了，你都不知道哪个文件是属于哪个插件的！<a href="https://github.com/tpope/vim-pathogen">pathogen</a>就是一个专门对付这种问题的插件。装了此插件后，你其他所有的插件都可以放到.vim/bundle目录下，每个插件对应的是一个单独的目录，这样插件自带的文件就不会混在一起，管理起来就轻松多了！
+</p>
+
+<p>
+pathogen的安装我就不多说了，链接里介绍的很清楚。
+</p>
+
+<h2 id="toc_1.4">NERDTree</h2>
+<p>
+<a href="http://www.vim.org/scripts/script.php?script_id=1658">NERDTree</a>是我装过的第一个插件，它可以在vim里显示目录和文件的结构，类似IDE里的Navigator功能，方便你找到文件，非常好用，安装也很简单，参照链接里的指示就行了。不过我建议你安装Github里的最新版本，命令如下
+</p>
+<pre>
+  git submodule add https://github.com/scrooloose/nerdtree.git .vim/bundle/nerdtree
+</pre>
+<p>
+它将nerdtree的git repository作为一个子项目下载到bundle目录里，并可以通过以下命令更新
+</p>
+<pre>
+  git submodule foreach git pull origin master
+</pre>
+<p>
+这样你就可以方便的更新你的vim插件，并同时管理好你自己的vim配置了！
+</p>
+
+<p>
+此外，NERDTree的书签功能是我的最爱，我将常用的几个项目地址设为书签，这样就可以很方便的在不同项目间导航！
+</p>
+
+<p>
+为了更方便的使用，你可能还需要下面3行配置
+</p>
+<pre>
+  autocmd VimEnter * NERDTree "启动Vim时自动打开nerdtree
+  let NERDTreeShowBookmarks=1 "一直显示书签
+  let NERDTreeChDirMode=2 "打开书签时，自动将Vim的pwd设为打开的目录，如果你的项目有tags文件，你会发现这个命令很有帮助
+</pre>
+<p>
+因为我使用的是MacVim，所以我将以上三行放到了.gvimrc里。放在.vimrc里的话，NERDTree会占用很大的空间，而通常终端窗口都很小，所以不推荐
+</p>
+
+<h2 id="toc_1.5">Command-T</h2>
+<p>
+<a href="https://wincent.com/products/command-t">Command-T</a>是一个比NERDTree更好用的插件！使用NERDTree打开文件你还需要从目录树里层层打开文件夹，找到文件再按o打开，使用Command-T，你只需要输几个简单的字符，它就能帮你定位到pwd目录下最匹配的那个文件！类似你在使用google搜索时，下面实时反馈的搜索建议。具体演示可看链接里的第一个视频，非常强大！
+</p>
+
+<p>
+然而使用Command-T有一个条件，就是你的vim得支持ruby，通常原生的vim是不带这个这个功能的，不过MacVim没有这个问题，大可以直接安装这个插件。Command-T的安装过程比NERDTree稍微复杂点，需要编译，不过<a href="http://git.wincent.com/command-t.git/blob_plain/HEAD:/doc/command-t.txt">这个文档</a>说得也很清楚了，注意第四节，使用pathogen。
+</p>
+
+<p>
+安装好了后就可以直接使用了，添加以下两个快捷键可以让你用的更加顺手！
+</p>
+
+<pre>
+  nmap ,t :CommandT&lt;CR&gt;
+  nmap ,b :CommandTBuffer&lt;CR&gt;
+</pre>
+
+<h2 id="toc_1.6">Github</h2>
+<p>
+我将我的vim配置上传到<a href="https://github.com/perrywky/dotfiles">github</a>上了，感兴趣的可以去看看
+</p>
+
+<h2 id="toc_1.7">使用taglist来实现IDE中的outline功能</h2>
+<p>
+以前使用IDE时，有个很贴心的功能我很喜欢，就是把当前文件的类函数全部列出来，这样当你的函数很多时，能很方便的找到自己想要的，而不需要在代码里翻来翻去。taglist就是这样的一个插件，它使用ctags动态生成当前文件的tag并在一个新窗口里显示出来，你只需点击这个窗口里的函数名，就能快速定位到某个函数的开始位置，非常好用。安装也很简单，跟以前一样将这个插件放到bundle目录下，就能使用了。因为我主要使用MacVim，所以我添加了以下配置信息到.gimvrc里，使用起来更加方便。
+</p>
+<pre>
+  autocmd VimEnter * TlistToggle "启动时强制打开taglist窗口
+  let Tlist_Show_One_File=1 "一次只显示一个文件的tag，默认会显示所有打开过的
+  let Tlist_Use_Right_Window=1 "将taglist窗口放到右边，因为左边放了NERDTree，所以这条很有用！
+  let Tlist_Compact_Format=1 "紧凑显示，在有限的窗口里可以多显示几行内容
+</pre>
+
+<h2 id="toc_1.8">使用snipMate减少你的敲代码字数</h2>
+<p>
+对于程序员来说，snipMate可是不可或缺的利器，它可以帮你自动完成一些代码片段，省去你不少敲击代码的时间，尤其是当你手动编辑html标签时，会觉得如释重负！比如当你输入div再按下tab键，一个完整的div标签就输入完整了，不需要一堆尖括号反斜杠等等重复烦人的输入，而且光标还会自动停留在id上等你来修改！
+</p>
+
+<p>
+snipMate支持几乎所有主流语言，PHP，HTML自然不在话下，你可以放心使用！使用这个插件注意要在.vimrc中加入以下这行
+</p>
+<pre>
+  filetype plugin indent on     "自动检测文件类型以调用相应的语法
+</pre>
+
+<h2 id="toc_1.9">让Vim能检查PHP语法错误</h2>
+<p>
+Vim默认带了PHP的语法高亮，但这还不够，它不如IDE那样能帮你自动检测语法错误，但要实现这功能也不难，在.vimrc文件里添加以下配置，就能使用CTRL-L键来检查语法，如果有错误，它会告诉你在哪一行。注意你的PHP路径可能和我的不一样。
+</p>
+<pre>
+  autocmd FileType php noremap &lt;C-L&gt; :!/usr/local/bin/php -l %&lt;CR&gt; " 使用(CTRL-L)命令来检查PHP语法
+</pre>
+
+<h2 id="toc_1.10">让taglist能正确显示PHP的类函数</h2>
+<p>
+当使用taglist时，我发现它不能很好的支持PHP文件，每个方法和变量都显示了两次，在网上搜了下，发现这是ctags的问题，添加以下配置到.ctags文件，就能解决，注意这个文件是ctags的配置，和Vim没有关系。
+</p>
+<pre>
+  -f ./tags
+  -R
+  --totals=yes
+  --tag-relative=yes
+  --PHP-kinds=+cf-v
+  --regex-PHP
+  --regex-PHP=/(^|^[^*]+[[:blank:]])class[[:blank:]]+([[:alpha:]][[:alnum:]_]*)/\2/c/
+  --regex-PHP=/(^|^[^*]+[[:blank:]])function[[:blank:]]+&amp;?[[:blank:]]*([[:alpha:]][[:alnum:]_]*)/\2/f/
+</pre>
+
+<h2 id="toc_1.11">让snipMate识别模版文件</h2>
+<p>
+snipMate会自动根据文件名的后缀来判断文件类型，但是我使用的cakephp框架里有自定义的.ctp模版文件，我需要它能同时支持html和php的snip，节省我敲代码的数量。很简单，在.vimrc中添加以下配置，将.ctp文件的类型同时设为php和html就可以了
+</p>
+<pre>
+  au BufRead,BufNewFile *.ctp    set filetype=php.html    "将.ctp文件的类型同时设为php和html
+</pre>
+<p>
+我已经更新了<a href="https://github.com/perrywky/dotfiles">github</a>，并把之前的.ctags文件也加了进来，去看看吧.
+</p>
+
+<p>
+--EOF--
+</p>
+
+</body>
+</html>
