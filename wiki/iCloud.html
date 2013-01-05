@@ -17,8 +17,202 @@ Most importantly, latency and the ramifications of shared access.<br>
 <h2 id="toc_1.2">Entitlements</h2>
 <p>
 In order for your application to access the cloud, you must set up its entitlements. Luckily this is a single button click in Xcode:
-<a href="http://ww1.sinaimg.cn/large/a74ecc4cjw1e0irdjvytyj.jpg/pic.jpg">http://ww1.sinaimg.cn/large/a74ecc4cjw1e0irdjvytyj.jpg/pic.jpg</a>
+<a href="http://ww1.sinaimg.cn/large/a74ecc4cjw1e0irdjvytyj.jpg">http://ww1.sinaimg.cn/large/a74ecc4cjw1e0irdjvytyj.jpg</a>
 </p>
+
+<h2 id="toc_1.3">The URL</h2>
+<p>
+Assuming you just have one container in your Entitlements ...
+<code>[[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];</code><br>
+Usually you put your documents in the <code>@“Documents”</code> directory (special) inside this URL.
+</p>
+
+<h2 id="toc_1.4">NSFileManager</h2>
+<p>
+You can use it, but you don’t want to use it in the main thread (it’s happening over the network). Don’t use it to enumerate the contents of directories (need an always-updating query for that). And you also will want to “coordinate” any file operations with other devices.<br>
+Coordination happens among NSFilePresenters using the NSFileCoordinator class.<br>
+</p>
+
+<h2 id="toc_1.5">NSFilePresenter</h2>
+<p>
+This class is an abstraction for something that “presents” the data of a file/directory to the user. Your presenter would get involved whenever a coordinated change to the file/directory occurs. Not going to cover NSFilePresenter’s API in this class.<br>
+Instead, we’ll talk about UIManagedDocument (which is an NSFilePresenter).<br>
+</p>
+
+<h2 id="toc_1.6">UIDocument</h2>
+<p>
+An NSFilePresenter.<br>
+Abstraction for a document.<br>
+Automatically coordinates changes to the document.<br>
+Primary methods you’d override would be ...<br>
+</p>
+<pre>
+- (id)contentsForType:(NSString *)type error:(NSError **)error;
+- (BOOL)loadFromContents:(id)contents ofType:(NSString *)type error:(NSError **)error;
+</pre>
+<p>
+If your data is stored in a Core Data database, though, you’d use UIManagedDocument.
+</p>
+
+<h2 id="toc_1.7">UIManagedDocument</h2>
+<p>
+Fully iCloud capable.<br>
+You need only sign up for the appropriate notifications to keep your UI in sync.<br>
+Put your UIManagedDocuments into the Documents directory in iCloud. <br>
+<code>iCloudDocumentsURL = [iCloudURL URLByAppendingPathComponent:@“Documents”];</code>
+</p>
+
+<h2 id="toc_1.8">Only UIManagedDocument changes should be synced to iCloud</h2>
+<p>
+Uploading only a log of changes is a lot better performing than uploading the whole database!<br>
+To get this, you must set your document’s <code>persistentStoreOptions</code> dictionary to include these ...<br>
+<code>NSPersistentStoreUbiquitousContentNameKey</code> (the “name” of the document) <br>
+<code>NSPersistentStoreUbiquitousContentURLKey</code> (where all change logs are stored in iCloud) <br>
+Change logs directory (ContentURLKey) should not be stored in the Documents directory in iCloud! <br>
+ContentURLKey is something like <code>[iCloudURL URLByAppendingPathComponent:@“CoreData”]</code> <br>
+All of your documents can share the same ContentURLKey. <br>
+</p>
+
+<h2 id="toc_1.9">Document Metadata</h2>
+<p>
+Strictly speaking, you should get the ContentNameKey from the document’s metadata.<br>
+You can read it from <code>DocumentMetadata.plist</code> inside the document’s file wrapper.<br>
+For example, if “docURL” were the URL that pointed to the UIManagedDocument in the cloud,<br>
+then create a dictionary from the following URL (coordinated!) to get the values for the keys ...<br>
+<code>NSURL *metadataURL = [docURL URLByAppendingPathComponent:@“DocumentMetadata.plist”];</code><br>
+Then set the keys in persistentStoreOptions, and then call openWithCompletionHandler:.<br>
+</p>
+
+<h2 id="toc_1.10">Enumerating what’s in the Cloud</h2>
+<p>
+Create a query, start it, then watch for NSNotifications that the results have changed.
+</p>
+
+<h2 id="toc_1.11">Creating a query</h2>
+<pre>
+NSMetadataQuery *query = [[NSMetadataQuery alloc] init]; 
+query.searchScopes = [NSArray arrayWithObjects:scope1, scope2, nil]; 
+</pre>
+<p>
+<code>NSMetadataQueryUbiquitousDocumentsScope</code> is all files in the Documents directory. 
+<code>NSMetadataQueryUbiquitousDataScope</code> is all files NOT in the Documents directory. 
+</p>
+<pre>
+  query.predicate =
+    [NSPredicate predicateWithFormat:@“%K like ‘*’”, NSMetadataItemFSNameKey]; // all
+</pre>
+
+<h2 id="toc_1.12">Starting/stopping the query</h2>
+<p>
+<code>[query startQuery]</code> or<code>[query stopQuery]</code>
+</p>
+
+<h2 id="toc_1.13">Enabling/disabling NSNotifications</h2>
+<p>
+<code>[query enableUpdates]</code> or <code>[query disableUpdates]</code><br>
+Probably a good idea to do this in <code>viewWillAppear:</code>/<code>viewWillDisappear:</code><br>
+</p>
+
+<h2 id="toc_1.14">Signing up to receive the query NSNotifications</h2>
+<pre>
+NSNotificationCenter *center = [NSNotificationCenter defaultCenter]; 
+[center addObserver:self
+            selector:@selector(processQueryResults:) name:NSMetadataQueryDidFinishGatheringNotification // first results
+             object:query];
+
+[center addObserver:self
+selector:@selector(processQueryResults:) name:NSMetadataQueryDidUpdateNotification // subsequent updates
+             object:query];
+</pre>
+
+<h2 id="toc_1.15">Don’t forget to remove yourself as an observer</h2>
+<pre>
+  - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+  }
+</pre>
+
+<h2 id="toc_1.16">Processing NSMetadataQuery NSNotifications</h2>
+<pre>
+- (void)processQueryResults:(NSNotification *)notification
+    [query disableUpdates];
+    int resultCount = [query resultCount];
+    for (int i = 0; i &lt; resultCount; i++) {
+        NSMetadataItem *item = [query resultAtIndex:i];
+        NSURL *url = [item valueForAttribute:NSMetadataItemURLKey];
+        // do something with the urls here
+        // but remember that these are URLs of the files inside the file wrapper!
+    }
+    [query enableUpdates];
+}
+</pre>
+
+<h2 id="toc_1.17">Coordinating changes</h2>
+<p>
+Should be done whenever you access an iCloud URL using NSFileManager.<br>
+Do this outside the main thread!
+</p>
+
+<h2 id="toc_1.18"><code>NSFileCoordinator</code></h2>
+<pre>
+NSFileCoordinator *coordinator = [[NSFileCoordinator alloc] initWithFilePresenter:nil]; NSError *coordinationError;
+[coordinator coordinateReadingItemAtURL:(NSURL *)url
+                                options:(NSFileCoordinatorReadingOptions)options
+                                  error:(NSError **)error
+                             byAccessor:^(NSURL *urlToUse) { // do your NSFileManager stuff here using urlToUse
+}];
+if (coordinationError) { } // handle error
+</pre>
+<p>
+Similar methods for coordinating writing, or reading and writing together, or multiple URLs.<br>
+</p>
+
+<h2 id="toc_1.19">Document State</h2>
+<p>
+It is more important to pay attention to <code>documentState</code> in an iCloud environment. <br>
+There are two states that occur more often now: <code>EditingDisabled</code> and <code>InConflict</code>.<br>
+It is also important to watch for <code>SavingError</code> state (and perhaps retry your saves).<br>
+</p>
+
+<h2 id="toc_1.20">Conflict</h2>
+<p>
+What if a device detached from the network changed a document that another device changed? <br>
+And then the detached device reattached and tried to apply the change and it conflicted?<br>
+You must manage this conflict by looking for the <code>InConflict</code> document state.<br>
+When it happens, you must decide which version of the document to use and/or merge changes. <br>
+Probably want to set your NSManagedObjectContext’s <code>mergePolicy</code> to other than default (<code>Error</code>).<br> 
+Then update the old, conflicting <code>NSFileVersions</code> to no longer conflict (and remove those versions).<br>
+See the demo for a simple example of how to just take the most recent version.
+</p>
+
+<h2 id="toc_1.21">Editing Disabled</h2>
+<p>
+Don’t let the user modify a document that is in the EditingDisabled state.
+</p>
+
+<h2 id="toc_1.22">Moving a file to or from iCloud</h2>
+<p>
+It would be nice to allow your users to choose whether a document is shared via iCloud or not. <br>
+You can switch a document from being shared or not at any time that you are connect to iCloud.<br>
+Always do this outside the main thread.
+</p>
+
+<h2 id="toc_1.23">API</h2>
+<p>
+Example of exporting to iCloud (you can also go the opposite direction) ...<br>
+</p>
+<pre>
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+     NSURL *localURL = ...; // url of document to transfer to iCloud
+     NSString *name = [localURL lastPathComponent];
+     NSURL *iCloudURL = [iCloudDocumentsURL URLByAppendingPathComponent:name]; 
+     NSError *error = nil;
+     [[[NSFileManager alloc] init] setUbiquitous:YES
+                                       itemAtURL:localURL
+                                  destinationURL:iCloudURL 
+                                           error:&amp;error]; // move the document
+   });
+</pre>
 
 </body>
 </html>
