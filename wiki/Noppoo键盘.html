@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Noppoo键盘</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<p>
+%Noppoo键盘设置
+</p>
+<h1 id="toc_1">Noppoo键盘</h1>
+<p>
+首先键盘拔了，需要到<a href="https://github.com/thefloweringash/iousbhiddriver-descriptor-override下载代码然后用XCode编译。自己编译了一个连同启动加载的.plist一起在">https://github.com/thefloweringash/iousbhiddriver-descriptor-override下载代码然后用XCode编译。自己编译了一个连同启动加载的.plist一起在</a> <a href="http://115.com/file/c2dffw0p#Noppoo_Choc_Mini84.zip下载。">http://115.com/file/c2dffw0p#Noppoo_Choc_Mini84.zip下载。</a>
+</p>
+
+<p>
+把编译或下载下来的IOUSBHIDDriverDescriptorOverride.kext复制到/System/Library/Extensions/里。驾起Terminal输入:
+</p>
+<pre>
+  sudo chown -R root:wheel /System/Library/Extensions/IOUSBHIDDriverDescriptorOverride.kext
+  sudo chmod -R 755 /System/Library/Extensions/IOUSBHIDDriverDescriptorOverride.kext
+</pre>
+
+<p>
+改好正确权限后需要开机启动加载此kext，把com.apple.IOUSBHIDDriverDescriptorOverride.plist复制到/Library/LaunchDaemons/下面，然后让LaunchDaemon每次开机启动加载，并检查一下：
+</p>
+<pre>
+  launchctl load -w /Library/LaunchDaemons/com.apple.IOUSBHIDDriverDescriptorOverride.plist
+  launchctl list | grep om.apple.IOUSBHIDDriverDescriptorOverride
+</pre>
+
+<p>
+有返回信息就说明正确，这样基本hack完毕，但还是会发现部分按键Shift状态没用，这时候需要键盘工具Keyremap4Macbook的辅助:<a href="http://pqrs.org/macosx/keyremap4macbook/">http://pqrs.org/macosx/keyremap4macbook/</a>
+</p>
+
+<p>
+安装完毕，重启，搞定！
+</p>
+
+
+<p>
+参考网址:
+</p>
+
+<p>
+<a href="http://geekhack.org/showthread.php?24672-Noppoo-Choc-Mini-on-MacOS">http://geekhack.org/showthread.php?24672-Noppoo-Choc-Mini-on-MacOS</a>
+<a href="https://github.com/thefloweringash/iousbhiddriver-descriptor-override/issues/1">https://github.com/thefloweringash/iousbhiddriver-descriptor-override/issues/1</a>
+<a href="http://superuser.com/questions/47233/how-can-i-force-a-mac-os-x-kext-to-load-prior-to-login">http://superuser.com/questions/47233/how-can-i-force-a-mac-os-x-kext-to-load-prior-to-login</a>
+</p>
+
+<p>
+Collapse this post
+</p>
+
+<h2 id="toc_1.1">关机后重新设置</h2>
+<p>
+launchctl有点问题，目前只能每次启动手动加载，先输入:
+</p>
+<pre>
+  sudo kextload /System/Library/Extensions/IOUSBHIDDriverDescriptorOverride.kext
+</pre>
+<p>
+然后再插上键盘即可，记得keyremap一定要装。
+</p>
+
+</body>
+</html>
