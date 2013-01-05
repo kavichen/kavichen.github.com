@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Alerts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Alerts</h1>
+<h2 id="toc_1.1">Two kinds of "pop up and ask the user something"mechanisms</h2>
+<ul>
+<li>
+Action Sheets
+
+<li>
+Alerts
+
+</ul>
+
+<h2 id="toc_1.2">UIActionSheet</h2>
+<h3 id="toc_1.2.1">Initializer</h3>
+<pre>
+  - (id)initWithTitle:(NSString *)title
+             delegate:(id &lt;UIActionSheetDelegate&gt;) delegate
+    cancelButtonTitle:(NSString *)cancelButtonTitle
+    destructiveButtonTitile:(NSString *)destructiveButtonTitle
+    otherButtonTitles:(NSString *)otherButtonTitles, ...;    
+</pre>
+
+<h3 id="toc_1.2.2">And you can add more buttons programmatically</h3>
+<pre>
+- (void)addButtonWithTitle:(NSString *)buttonTitle;
+</pre>
+
+<h3 id="toc_1.2.3">Displaying the Action Sheet</h3>
+<pre>
+  UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:...];
+  [actionSheetshowInView:(UIView*)]; //centerstheviewoniPad(don’tusethisoniPad) 
+  [actionSheet showFromRect:(CGRect) inView:(UIView *) animated:(BOOL)]; // good on iPad 
+  [actionSheet showFromBarButtonItem:(UIBarButtonItem *) animated:(BOOL)]; // good on iPad 
+</pre>
+<p>
+Universal apps require care here (though some can work on both platforms, e.g., showFromRect:).<br>
+</p>
+
+</body>
+</html>

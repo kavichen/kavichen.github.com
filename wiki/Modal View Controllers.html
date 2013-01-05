@@ -326,5 +326,49 @@ For example, you can <code>invalidate</code> a repeating timer when you want it 
 Or you can create a timer that will fire at a specific time (NSDate) in the future.
 </p>
 
+<h1 id="toc_7">Preform after Delay</h1>
+<h2 id="toc_7.1">Alternative to NSTimer</h2>
+<p>
+<code>NSObject</code> method:
+</p>
+<pre>
+  - (void)performSelector:(SEL)aSelector
+               withObject:(id)argument
+</pre>
+
+<h2 id="toc_7.2">Executes on the run loop (if any) of the current thread</h2>
+<p>
+Only call this on the main thread (after threads possible, but not straightforward)<br>
+Not real time (just like NSTimer is not).<br>
+Does not execute immediately, even if <code>seconds</code> is <code>0</code> (executes "very very soon" in that case)<br>
+Can reschedule itself.<br>
+Be careful that it stops calling itself when your view controller goes off screen, though.
+</p>
+
+<p>
+<em>Hint</em>: What's the meaning of "not real time"?<br>
+<em>Ans</em>:if you say Preform after Delay 0.72 seconds, 但是run loop可能很忙,在这种情况下，可能实际上到0.74秒后才执行.
+</p>
+
+<p>
+<em>Hint</em>:It never executes immedicately, even if you say afterDelay:0.
+</p>
+
+<h2 id="toc_7.3">Canceling</h2>
+<p>
+NSObject class method:
+</p>
+<pre>
++ (void)cancelPreviousPerformRequestsWithTarget:(id)target
+                                       selector:(SEL)aSelector
+                                         object:(id)object;
++ (void)cancelPreviousPerformRequestsWithTarget:(id)target;
+</pre>
+
+<h2 id="toc_7.4">There is no way to query what requests are outstanding</h2>
+<p>
+At best, you can cancel and repost to be sure (but it will reset timing, of course).
+</p>
+
 </body>
 </html>
