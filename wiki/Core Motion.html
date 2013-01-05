@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Core Motion</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<p>
+%Core Motion
+</p>
+<h1 id="toc_1">Core Motion</h1>
+<h2 id="toc_1.1">API to access motion sensing hardware on your device</h2>
+
+<h2 id="toc_1.2">Primary inputs: Accelerometer, Gyro, Magnetometer</h2>
+<p>
+Not all devices have all inputs (e.g. only iPhone4 and newest iPod Touch and iPad 2 have a gyro).
+</p>
+
+<h2 id="toc_1.3">Primary class used to get input is <code>CMMotionManager</code></h2>
+<p>
+Create with alloc/init, but use only one instance per application (else performance hit).<br>
+It is a “global resource,” so getting one via an application delegate method or class method is okay.
+</p>
+
+<h2 id="toc_1.4">Usage</h2>
+<ol>
+<li>
+Check to see what hardware is available.
+
+<li>
+Start the sampling going and poll the motion manager for the latest sample it has.
+
+</ol>
+<p>
+... or ...
+</p>
+<ol>
+<li>
+Check to see what hardware is available.
+
+<li>
+Set the rate at which you want data to be reported from the hardware,
+
+<li>
+Register a block (and a dispatch queue to run it on) each time a sample is taken.
+
+</ol>
+
+<h2 id="toc_1.5">Checking availability of hardware sensors</h2>
+<p>
+<code>@property (readonly) BOOL {accelerometer,gyro,magnetometer,deviceMotion}Available;</code>
+The “device motion” is a combination of all available (accelerometer, magnetometer, gyro). <br>
+We’ll talk more about that in a couple of slides.<br>
+</p>
+
+<h2 id="toc_1.6">Starting the hardware sensors collecting data</h2>
+<p>
+You only need to do this if you are going to poll for data.<br>
+<code>- (void)start{Accelerometer,Gyro,Magnetometer,DeviceMotion}Updates;</code>
+</p>
+
+<h2 id="toc_1.7">Is the hardware currently collecting data?</h2>
+<p>
+<code>@property (readonly) BOOL {accelerometer,gyro,magnetometer,deviceMotion}Active;</code>
+</p>
+
+<h2 id="toc_1.8">Stop the hardware collecting data</h2>
+<p>
+It is a performance hit to be collecting data, so stop during times you don’t need the data.
+<code>- (void)stop{Accelerometer,Gyro,Magnetometer,DeviceMotion}Updates;</code>
+</p>
+
+<h2 id="toc_1.9">Checking the data (polling not recommended, more later)</h2>
+<p>
+<code>@property (readonly) CMAccelerometerData *accelerometerData;</code>
+<code>CMAccelerometerData</code> object provides <code>@property (readonly) CMAcceleration acceleration;</code> 
+<code>typedef struct { double x; double y; double z; } CMAcceleration; // x, y, z in “g”</code>
+This raw data includes acceleration due to gravity.
+</p>
+
+<p>
+<code>@property (readonly) CMGyroData *gyroData;</code>
+<code>CMGyroDat</code> object has one property <code>@property (readonly) CMRotationRate rotationRate;</code>
+<code>typedef struct { double x; double y; double z; } CMRotationRate; // x, y, z in radians/second</code> 
+Sign of rotation rate follows right hand rule. This raw data will be biased.
+</p>
+
+<p>
+<code>@property (readonly) CMMagnetometerData *magnetometerData;</code>
+<code>CMMagnetometerData</code> object has one property <code>@property (readonly) CMMagneticField magneticField;</code> 
+<code>typedef struct { double x; double y; double z; } CMMagneticField; // x, y, z in microteslas</code>
+This raw data will be biased.
+</p>
+
+<p>
+<code>@property (readonly) CMDeviceMotion *deviceMotion;</code>
+<code>CMDeviceMotion</code> is an intelligent combination of gyro and acceleration.
+If you have multiple detection hardware, you can report better information about each.
+</p>
+
+<h1 id="toc_2">CMDeviceMotion</h1>
+<h2 id="toc_2.1">Acceleration Data in <code>CMDeviceMotion</code></h2>
+<p>
+<code>@property (readonly) CMAcceleration gravity;</code><br>
+<code>@property(readonly)CMAccelerationuserAcceleration;</code> //gravityfactoredoutusinggyro <br>
+<code>typedef struct { double x; double y; double z; } CMAcceleration;</code> // x, y, z in “g”
+</p>
+
+<h2 id="toc_2.2">Rotation Data in CMDeviceMotion</h2>
+<p>
+<code>@propertyCMRotationRaterotationRate;</code> //biasremovedfromrawdatausingaccelerometer <br>
+<code>typedef struct { double x; double y; double z; } CMRotationRate;</code> // x, y, z in radians/second 
+<code>@property CMAttitude *attitude;</code> //device’sattitude(orientation)in3Dspace
+<code>@interface CMAttitude : NSObject</code> // roll, pitch and yaw are in radians
+<code>@property (readonly) double roll;</code> // around longitudinal axis passing through top/bottom
+<code>@property (readonly) double pitch;</code> // around lateral axis passing through sides
+<code>@property (readonly) double yaw;</code> // around axis with origin at center of gravity and
+</p>
+<blockquote>
+// perpendicular to screen directed down
+// other mathematical representations of the device’s attitude also available
+</blockquote>
+<p>
+<code>@end</code>
+</p>
+
+<h2 id="toc_2.3">Magnetic Field Data in <code>CMDeviceMotion</code></h2>
+<pre>
+  @property (readonly) CMCalibratedMagneticField magneticField; struct {
+    CMMagneticField field;
+    CMMagneticFieldCalibrationAccuracy accuracy;
+  } CMCalibratedMagneticField;
+  enum {
+    CMMagneticFieldCalibrationAccuracyUncalibrated,
+                                      Low,
+                                      Medium,
+                                      High
+  } CMMagneticFieldCalibrationAccuracy;
+</pre>
+
+<h2 id="toc_2.4">Registering a block to receive Accelerometer data</h2>
+<pre>
+- (void)startAccelerometerUpdatesToQueue:(NSOperationQueue *)queue
+                             withHandler:(CMAccelerometerHandler)handler;
+typedef void (^CMAccelerationHandler)(CMAccelerometerData *data, NSError *error); 
+</pre>
+<p>
+We haven’t talked about <code>NSOperationQueue</code>, but think of it as an OO <code>dispatch_queue_t</code>.
+Use <code>[[NSOperationQueue alloc] init]</code> or <code>[NSOperation mainQueue (or currentQueue)]</code>.
+</p>
+
+<h2 id="toc_2.5">Registering a block to receive Gyro data</h2>
+<pre>
+- (void)startGyroUpdatesToQueue:(NSOperationQueue *)queue
+                    withHandler:(CMGyroHandler)handler;
+</pre>
+
+<h2 id="toc_2.6">Registering a block to receive Magnetometer data</h2>
+<pre>
+- (void)startMagnetometerUpdatesToQueue:(NSOperationQueue *)queue
+                            withHandler:(CMMagnetometerHandler)handler;
+typedef void (^CMMagnetometerHandler)(CMMagnetometerData *data, NSError *error)
+</pre>
+
+<h2 id="toc_2.7">Registering a block to receive (intelligently) combined data</h2>
+<pre>
+- (void)startDeviceMotionUpdatesToQueue:(NSOperationQueue *)queue
+                            withHandler:(CMDeviceMotionHandler)handler;
+typedef void (^CMDeviceMotionHandler)(CMDeviceMotion *motion, NSError *error); 
+</pre>
+<p>
+Interesting <code>NSError</code> types: <code>CMErrorDeviceRequiresMovement</code>/<code>CMErrorTrueNorthNotAvailable</code>
+</p>
+<pre>
+- (void)startDeviceMotionUpdatesUsingReferenceFrame:(CMAttitudeReferenceFrame)frame
+                                            toQueue:(NSOperationQueue *)queue
+                                        withHandler:(CMDeviceMotionHandler)handler;
+enum {
+CMAttitudeReferenceFrameXArbitraryZVertical,
+XArbitraryCorrectedZVertical, // needs magnetometer; more CPU
+XMagneticZVertical, // above + device movement XTrueNorthZVertical // requires GPS + magnetometer
+}
+@property (nonatomic) BOOL showsDeviceMovementDisplay; // whether to put up UI if required
+</pre>
+
+<h2 id="toc_2.8">Setting the rate at which your block gets executed</h2>
+<pre>
+@property NSTimeInterval accelerometerUpdateInterval;
+@property NSTimeInterval gyroUpdateInterval;
+@property NSTimeInterval magnetometerUpdateInterval;
+@property NSTimeInterval deviceMotionUpdateInterval;
+</pre>
+
+<h2 id="toc_2.9">It is okay to add multiple handler blocks</h2>
+<p>
+Even though you are only allowed one CMMotionManager.<br>
+However, each of the blocks will receive the data at the same rate (as set above).<br>
+(Multiple objects are allowed to poll at the same time as well, of course.)
+</p>
+
+</body>
+</html>
