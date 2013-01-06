@@ -197,7 +197,7 @@ You can switch a document from being shared or not at any time that you are conn
 Always do this outside the main thread.
 </p>
 
-<h2 id="toc_1.23">API</h2>
+<h3 id="toc_1.22.1">API</h3>
 <p>
 Example of exporting to iCloud (you can also go the opposite direction) ...<br>
 </p>
@@ -213,6 +213,62 @@ Example of exporting to iCloud (you can also go the opposite direction) ...<br>
                                            error:&amp;error]; // move the document
    });
 </pre>
+
+<h2 id="toc_1.23">Sharing a file via iCloud</h2>
+<p>
+iCloud is mostly for a single user to share stuff between his or her own devices. <br>
+However, it is also possible to temporarily export a URL to share a file between users.<br>
+Only files (not directories) maybe exported in this way.<br>
+The URL points to a copy of the file (so it is a read-only sharing mechanism).<br>
+</p>
+
+<h3 id="toc_1.23.1">API</h3>
+<pre>
+NSURL *urlToShare = ...; NSDate *date;
+NSError *error;
+NSURL *sharedURL =
+    [[NSFileManager defaultManager] URLForPublishingUbiquitousItemAtURL:urlToShare
+                                                         expirationDate:&amp;date
+                                                                  error:&amp;error];
+</pre>
+
+<h2 id="toc_1.24"><code>NSUbiquitousKeyValueStore</code></h2>
+<p>
+Like NSUserDefaults, but iCloud-style.<br>
+Very limited in size (64kb) (overall and per value).<br>
+Use <code>[NSUbiquitousKeyValueStore defaultStore]</code> to get the shared instance.<br>
+</p>
+
+<h2 id="toc_1.25">Set and get just like NSUserDefaults</h2>
+<pre>
+  NSUbiquitousKeyValueStore *store = [NSUbiquitousKeyValueStore defaultStore]; [store setObject:  @“MyValue” forKey:@“MyKey”];
+  [store synchronize]; // not instantaneous! this is networking!
+</pre>
+
+<p>
+Synchronize synchronizes both ways, so a good idea to call it in your app’s launch somewhere.
+</p>
+
+<h2 id="toc_1.26">Since store can change at any time, need NSNotification</h2>
+<pre>
+  NSNotificationCenter *center = [NSNotificationCenter defaultCenter]; 
+  [center addObserver:self
+           selector:@selector(ubiquitousKeyValueStoreChanged:)
+               name:NSUbiquitousKeyValueStoreDidChangeExternallyNotification
+             object:[NSUbiquitousKeyValueStore defaultStore]];
+</pre>
+
+<pre>
+  - (void)ubiquitousKeyValueStoreChanged:(NSNotification *)notification
+  {
+    notification.userInfo contains ...
+    NSUbiquitousKeyValueStoreChangeReasonKey (Server, InitialSync, QuotaViolation) 
+    NSUbiquitousKeyValueStoreChangedKeysKey (NSArray of NSStrings of keys that changed)
+}
+</pre>
+<p>
+Does NOT get called if YOU change a key, only if the cloud does!
+</p>
 
 </body>
 </html>

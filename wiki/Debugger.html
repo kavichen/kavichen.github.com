@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Debugger</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Debugger</h1>
+<h2 id="toc_1.1">Exception Breakpoints</h2>
+<p>
+在编辑每个程序时，都要设置Exception breakpoint.
+</p>
+<h3 id="toc_1.1.1">设置方法</h3>
+<ol>
+<li>
+按Command + 6
+
+<li>
+找到左下角“+”
+
+<li>
+Add Exception breakpoint ...
+
+</ol>
+<h3 id="toc_1.1.2">作用</h3>
+<p>
+在当前exception的时候停下程序
+</p>
+
+<h2 id="toc_1.2">调用Debugger</h2>
+<h3 id="toc_1.2.1">设置方法</h3>
+<ol>
+<li>
+在问题语句上设置断点】
+
+<li>
+用step into调试
+
+<li>
+需要观察参数时，在Console中输入命令
+
+<li>
+(gdb)<code>print [...]</code>, 里面不能使用<code>.</code>,要用例如<code>[self operandStack]</code> / po [self operandStack](po = print object)
+
+</ol>
+
+<h3 id="toc_1.2.2">在断点上设置条件</h3>
+<ol>
+<li>
+右键点击断点
+
+<li>
+选择Edit Breakpoint
+
+<li>
+在Condition框中输入条件，例如: resutl == 0
+
+<li>
+点击Done
+
+</ol>
+
+<h3 id="toc_1.2.3">在类中建立自己的description</h3>
+<ol>
+<li>
+在类中建立<code>description</code>方法，例如：
+<pre>
+    - (NSString *)description
+      {
+        return [NSString stringWithFormat:@"stack = %@",self.operandStack];
+      }
+</pre>
+
+</ol>
+
+<ol>
+<li>
+在Console的(gdb)中输入<code>po self</code>
+
+</ol>
+
+</body>
+</html>
