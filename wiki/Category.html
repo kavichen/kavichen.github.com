@@ -13,21 +13,21 @@
 This lets you add your own methods to an existing class. For example, if you want to extend NSString to apply special capitalization, you could create a new class called, say NSString+Capitals. in the NSString+Capitals.h you would have: 
 </p>
 <pre>
- 	@interface NSString (Capitals)
-	
-	-(NSString *)alternateCaps:(NSString *)aString;
-	
-	@end  
+  @interface NSString (Capitals)
+  
+  -(NSString *)alternateCaps:(NSString *)aString;
+  
+  @end  
 </pre>
 <p>
 and in NSString+Capitals.m you would implement the method
 </p>
 <pre>
- 	@implementation NSString (Capitals)
-	-(NSString *)alternateCaps:(NSString *)aString
-	{
-	    // Implementation
-	}
+  @implementation NSString (Capitals)
+  -(NSString *)alternateCaps:(NSString *)aString
+  {
+      // Implementation
+  }
 </pre>
 
 </body>
