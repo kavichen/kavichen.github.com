@@ -129,6 +129,321 @@ BUGS 是否有相關的錯誤
 </ol>
 <hr />
 <h3 id="toc_1.2.2">第六章</h3>
+<p>
+Linux文件屬性
+</p>
+<pre>
+[-][rwx][r-x][r--]
+ 1  234  567  890
+</pre>
+<ul>
+<li>
+1:代表這個文件名為目錄或者文件,本例中為文件(-)
+
+<li>
+234:擁有者的權限
+
+<li>
+567:同用戶組用戶權限
+
+<li>
+890:其他用戶權限
+
+</ul>
+<hr />
+<p>
+如何改變文件屬性與權限
+</p>
+<ol>
+<li>
+<code>chgrp</code>
+
+<ul>
+<li>
+改變文件所屬用戶組
+
+</ul>
+<li>
+<code>chown</code>
+
+<ul>
+<li>
+改變文件所有者
+
+<li>
+<code>cp 源文件 目標文件</code>之後,文件owner還是之前的,經常要在這個後面使用<code>chown</code>
+
+<li>
+<code>chown [-R] 帳號名稱 文件或目錄</code> <code>[-R]</code>表示遞歸,即所有在改目錄下的文件都要改變owner.
+
+</ul>
+<li>
+<code>chmod</code>
+
+<ul>
+<li>
+改變文件權限
+
+<li>
+r:4 w:2 x:1 例子:rwx = 4+2+1 = 7
+
+<li>
+例子:<code>chmod 777 .bashrc</code>
+
+</ul>
+</ol>
+<hr />
+<p>
+Linux文件種類與擴展名
+<strong>文件種類</strong>:
+</p>
+<ol>
+<li>
+普通文件
+    #純文本文件(ASCII)
+    #二進制文件(binary)
+    #數據格式文件(data)
+  #目錄(directory)
+
+<ul>
+<li>
+第一個屬性為[d]
+  #連接文件(link)
+
+<li>
+類似windows下的快捷方式,第一屬性為[l]
+  #設備與設備文件
+
+<li>
+塊(block)設備文件:就是一些存儲數據,以提供系統隨機訪問的接口設備,例如硬盤等.第一個屬性為[d]
+
+<li>
+字符(character)設備文件:也即是一些串行端口的接口設備,例如鍵盤鼠標等.第一個屬性為[c]
+
+<li>
+套接字(sockets):既然被成為數據接口,這種類型的文件通常被用在網絡的數據連接.第一屬性為[s]
+
+<li>
+管道
+
+<ul>
+<li>
+FIFO是一個特殊文件類型,它主要目的在解決多個程序同時訪問一個文件所造成的錯誤問題.first in first out.第一屬性為[p]
+
+</ul>
+</ul>
+</ol>
+<hr />
+<p>
+Linux目錄配置標準:FHS
+  FHS需要有下面這些子目錄
+</p>
+<ol>
+<li>
+/bin 放置的是在單用戶維護模式下還能夠被操作的命令
+
+<li>
+/boot 放置與開機有關的文件
+
+<li>
+/dev 任何設備與接口設備都是以文件的形式存在于這個目錄當中
+
+<li>
+/etc 系統主要的配置文件幾乎都在這個目錄內,例如人員的帳號密碼文件,各種服務器的啟始文件
+
+<li>
+/home 這是系統默認的用戶文件夾
+
+<li>
+/lib 系統的函數庫非常多,而/lib是放置在開機時會用到的函數庫 
+
+<li>
+/media 放置可刪除的設備,軟盤,光盤和DVD等
+
+<li>
+/mnt 暫時需要掛載額外的設備,就要放置到這個文件夾下
+
+<li>
+/opt 放置第三方軟件的目錄
+
+<li>
+/root 系統管理員的主文件夾
+
+<li>
+/sbin Linux有非常多的命令是用來設置系統環境的,這些命令只有root才能夠利用來"設置"系統,其他用戶最多只能用來"查詢".放在/sbin 下面的為開機過程中所需要的,裡面包括了開機,修復,還遠系統嗦需要的命令.
+
+<li>
+/srv 可以視為「service」的縮寫,是一些網絡服務啟動之後,這些服務嗦需要取用的數據目錄
+
+<li>
+/tmp 這是讓一般用戶或者正在執行的程序暫時放置文件的地方
+
+</ol>
+<hr />
+<p>
+絕對路徑 vs 相對路徑
+</p>
+<ol>
+<li>
+絕對路徑:由根目錄(/)開始寫起的文件名或目錄名稱,例如/home/dmtsai/.bashrc
+
+<li>
+相對路徑:相對於目前路徑的文件名寫法.例如./home/dmtsai
+
+<ol>
+<li>
+<code>.</code>代表當前的目錄
+
+<li>
+<code>..</code>代表上一層目錄
+
+</ol>
+</ol>
+<hr />
+<h3 id="toc_1.2.3">Linux文件與目錄管理</h3>
+<p>
+目錄的相關操作
+</p>
+<ol>
+<li>
+<code>.</code> 代表此層目錄
+
+<li>
+<code>..</code>代表上一層目錄
+
+<li>
+<code>-</code>代表前一個工作目錄
+
+<li>
+<code>~</code>代表"目前用戶身份"所在的主目錄
+
+<li>
+<code>~account</code>代表account這個用戶的主文件夾(account是個帳戶名稱)
+
+</ol>
+<hr />
+<p>
+常用處理目錄的命令:
+</p>
+<ol>
+<li>
+<code>cd</code>: 切換目錄
+
+<li>
+<code>pwd</code>: 顯示當前目錄
+
+<li>
+<code>mkdir</code>: 新建一個新的目錄
+
+<ul>
+<li>
+<code>mkdir</code> [-p] 目錄名稱
+
+<ul>
+<li>
+創建所有目錄
+
+</ul>
+</ul>
+<li>
+<code>rmdir</code>: 刪除一個空的目錄
+
+<ul>
+<li>
+<code>rmdir [-p] 目錄名稱</code>
+
+<ul>
+<li>
+參數p:連同上層「空的」目錄也一起刪除
+
+</ul>
+</ul>
+</ol>
+<hr />
+<p>
+關於執行文件路徑的變量:$PATH
+</p>
+<ol>
+<li>
+先用root身份掠出查詢的路徑: <code>#echo $PATH</code>
+
+<li>
+<code>PATH</code>這個變量的內容一定是由一對目目錄所組成的,每個目錄中間用(:)隔開
+
+<li>
+若要加入命令,就要修改<code>PATH</code>,例如<code># PATH="$PATH":/root</code>,這樣就改到/root了
+
+</ol>
+<hr />
+<p>
+文件與目錄管理
+</p>
+<ol>
+<li>
+查看文件與目錄:<code>ls</code>
+
+<li>
+複製,刪除與移動:<code>cp</code>,<code>rm</code>,<code>mv</code>
+
+<ul>
+<li>
+注意<code>-l</code>和<code>-s</code>,硬鏈接與軟連接
+
+</ul>
+<li>
+取得路徑的文件名
+
+<ul>
+<li>
+<code>#basename /etc/sysconfig/network</code>
+
+<li>
+network &lt;==文件名
+
+</ul>
+<li>
+取得目錄名稱
+
+<ul>
+<li>
+<code>#dirname /etc/sysconfig/networ</code>
+
+<li>
+/etc/sysconfig &lt;== 取得目錄名
+
+</ul>
+</ol>
+<hr />
+<p>
+文件內容查閱
+</p>
+<ol>
+<li>
+<code>cat</code>:由第一行開始顯示文件內容
+
+<li>
+<code>tac</code>:由最後一行開始顯示
+
+<li>
+<code>nl</code>:顯示的時候,順便輸出行號
+
+<li>
+<code>less</code>:與more相似,但是比more更好的是,它可以往前翻頁
+
+<li>
+<code>head</code>:只看頭幾行
+
+<li>
+<code>tail</code>:只看尾幾行
+
+<li>
+<code>od</code>:以二進制的方式讀取文件內容.
+
+<li>
+<code>touch</code>:修改文件時間或創建文件
+
+</ol>
+<hr />
 
 </body>
 </html>
