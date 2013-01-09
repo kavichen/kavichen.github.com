@@ -9,6 +9,126 @@
 
 <h1 id="toc_1">Linux</h1>
 <h2 id="toc_1.1"><a href="ssh.html">ssh</a></h2>
+<h2 id="toc_1.2">「鳥哥的私房菜- 基礎學習版3ED」學習筆記</h2>
+<h3 id="toc_1.2.1">第五章</h3>
+<ol>
+<li>
+XWindow與命令行模式的切換
+
+<ul>
+<li>
+[Ctrl]+[Alt]+[F1]~[F6]:文字介面登陸tty1~tty6終端;
+
+<li>
+[Ctrl]+[Alt]+[F7]:圖形介面桌面
+
+</ul>
+<li>
+<code>~</code>代表/root = /home/kavi
+
+<li>
+<code>#</code>代表root,<code>$</code>代表一般用戶
+
+</ol>
+<hr />
+<p>
+在命令行模式下執行命令
+</p>
+<ol>
+<li>
+command [-options] parameter1 paremeter2 ...
+
+<ul>
+<li>
+<code>ls -al ~</code>
+
+</ul>
+</ol>
+<p>
+重要的熱鍵[Tab],[Ctrl]-c,[Ctrl]-d
+</p>
+<ol>
+<li>
+[Tab]補全
+
+<li>
+[Ctrl]-c 停止當前程序
+
+<li>
+[Ctrl]-d 代表按鍵輸入<code>exit</code>
+
+</ol>
+<hr />
+<p>
+Linux系統的在線求助man page與info page
+  #man page
+</p>
+<ul>
+<li>
+NAME 簡短的命令.數據名稱說明
+
+<li>
+SYNOPSIS 簡短的命令執行語法(syntax)簡介
+
+<li>
+DESCRIPTION 較為完成的說明,這部份最好仔細看
+
+<li>
+OPTIONS 針對SYNOPSIS部份中,有列舉的所有可能的選項說明
+
+<li>
+COMMANDS 當這個程序或者軟件執行的時候,可以在此程序或軟件中中執行的命令
+
+<li>
+FILES 這個程序貨數據所是用或者參考或者連接到的某些文件
+
+<li>
+SEE ALSO  這個命令貨數據有相關的其他說明
+
+<li>
+EXAMPLE 一些可以參考的範例
+
+<li>
+BUGS 是否有相關的錯誤
+
+<li>
+按下<code>/date</code>就可以超找文中的date關鍵字
+  #info page
+
+</ul>
+<hr />
+<p>
+正確的關機方法
+</p>
+<ol>
+<li>
+需要關機時,要注意如下:
+
+<ul>
+<li>
+用<code>who</code>命令查看目前有誰在線
+
+<li>
+用<code>netstat -a</code>網絡聯機狀態
+
+<li>
+用<code>ps -aux</code>查看後臺程序
+
+<li>
+用<code>shutdown</code>命令來關機
+
+</ul>
+<li>
+慣用關機命令<code>shutdown</code>
+
+<ul>
+<li>
+<code>sync</code>把保存在緩存中的命令寫入硬盤
+
+</ul>
+</ol>
+<hr />
+<h3 id="toc_1.2.2">第六章</h3>
 
 </body>
 </html>
