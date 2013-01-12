@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>TightVNCServer連接</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Mac連接RPi步驟</h1>
+<h2 id="toc_1.1">RPi端</h2>
+<ol>
+<li>
+<code>sudo apt-get install tightvncserver</code>
+
+<li>
+<code>tightvncserver</code>
+
+<li>
+To address a virtual screen ,you need two things: the IP address of the Pi and the port of the screen. VNC's base port is 5900, so to access screen number 1, you have to use port 5901.
+
+</ol>
+<h2 id="toc_1.2">Mac端</h2>
+<ol>
+<li>
+Open safari
+
+<li>
+Type network address vnc://xx.xx.xx.xx:5901
+
+<li>
+Enter the password
+
+</ol>
+
+<h1 id="toc_2">RPi連接Mac步驟</h1>
+<h2 id="toc_2.1">Mac端</h2>
+<ol>
+<li>
+System Performence =&gt; Sharing =&gt; Screen Sharing
+
+</ol>
+<h2 id="toc_2.2">RPi端</h2>
+<ol>
+<li>
+Install <code>sudo apt-get install xtightvncviewer</code>
+
+<li>
+<code>xtightvncviewer 10.0.10.45:5900</code>
+
+</ol>
+
+</body>
+</html>

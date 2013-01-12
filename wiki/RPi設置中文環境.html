@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Raspberry Pi設置中文環境</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">步驟</h1>
+<ol>
+<li>
+<code>sudo apt-get update</code>
+
+<li>
+安裝中文字型，文泉驛微米黑、文泉驛正黑、文泉驛點陣宋體。<br>
+
+<ul>
+<li>
+<code>sudo apt-get install tff-wqy-microhei tff-wqy-zenhei xfonts-wqy</code>
+
+</ul>
+<li>
+然後將locale設定成繁體中文
+
+<ul>
+<li>
+<code>sudo dpkg-reconfigure locales</code>
+
+</ul>
+<li>
+選擇需要的中文編碼
+
+<ul>
+<li>
+zh_CN GB2312
+
+<li>
+zh_CN.GB18030 GB18030
+
+<li>
+zh_CN.GBK GBK
+
+<li>
+zh_CN.UTF-8 UTF-8
+
+</ul>
+<li>
+按回車確認
+
+<li>
+默認選擇 zh_CN.UTF-8
+
+<li>
+完成
+
+</ol>
+
+</body>
+</html>
