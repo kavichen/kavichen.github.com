@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>语系对正则表达式的影响</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">语系对正则表达式的影响</h1>
+<ol>
+<li>
+LANG=C时:0 1 2 3 4 ... A B C D ... Z a b c d ... z
+
+<li>
+LANG=zh_CN:0 1 2 3 4 ... a A b B c C ... z Z
+
+</ol>
+
+<ul>
+<li>
+LANG=C可以仅找到大写字母,因为是连续的.
+
+<li>
+LANG=zh_CN.gb2312时,b-z也会被选出来.
+
+</ul>
+
+<ol>
+<li>
+[:alnum:]  表示英文大小写字符及数字
+
+<li>
+[:alpha:]  代表任何英文大小写
+
+<li>
+[:blank:]  代表空格和[tab]键
+
+<li>
+[:cntrl:]  代表键盘上的控制按键,包括CR,LF,Tab,Del等
+
+<li>
+[:digit:]  代表数字
+
+<li>
+[:graph:]  除了空格符(空格键与[tab]键外的其他)所有按键
+
+<li>
+[:lower:]  代表小写字符
+
+<li>
+[:print:]  代表任何可以被打印出来的字符
+
+<li>
+[:punct:]  代表标点符号
+
+<li>
+[:upper:]  代表大写字符
+
+<li>
+[:space:]  任何会产生空白的字符,包括空格键[Tab]CR等
+
+<li>
+[:xdigit:] 代表十六进制的数字类型,因此包括0-9,A-F,a-f的数字与字符 
+
+</ol>
+
+</body>
+</html>
