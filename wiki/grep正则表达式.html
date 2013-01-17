@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>grep正则表达式</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">grep</h1>
+<h2 id="toc_1.1">基本查询</h2>
+<ol>
+<li>
+一般先设置语系<code>export LANG=C</code>
+
+<li>
+将grep使用alias 
+<pre>
+  alias grep="grep --color=auto"
+</pre>
+
+<li>
+<code>grep -n '需要查询的字段' [文件名]</code>
+
+<ul>
+<li>
+在指定文件中查询字段
+
+</ul>
+<li>
+<code>grep -vn '需要查询的字段' [文件名]</code>
+
+<ul>
+<li>
+反向选择,指的是没有需要查询字段的行
+
+</ul>
+<li>
+<code>grep -in '需要查询的字段' [文件名]</code>
+
+<ul>
+<li>
+忽略需要查询字段的大小写
+
+</ul>
+</ol>
+<hr />
+<h2 id="toc_1.2">利用括号中的[]来查找字符合集</h2>
+<ol>
+<li>
+<code>grep -n 't[ae]st' [文件名]</code>
+
+<ul>
+<li>
+查找test或者taste
+
+<li>
+里面不论有几个字符,它都只代表某"一个"字符
+
+</ul>
+<li>
+<code>grep -n 'oo' [文件名]</code>
+
+<ul>
+<li>
+可以查询两个字符
+
+</ul>
+<li>
+<code>grep -n '[^g]oo [文件名]</code>
+
+<ul>
+<li>
+去掉前面有g的oo
+
+</ul>
+<li>
+<code>grep -n [^a-z]oo [文件名]</code> 或者 <code>grep -n '[^[:lower:]]' [文件名]</code>
+
+<ul>
+<li>
+去掉前面是小写字母的oo
+
+</ul>
+<li>
+<code>grep -n '[0-9]' [文件名]</code> 或者 <code>grep -n '[[:digit:]]' [文件名]</code>
+
+<ul>
+<li>
+去掉前面是数字的oo
+
+</ul>
+</ol>
+<hr />
+<h2 id="toc_1.3">行首字符<code>^</code> 与 行尾字符<code>$</code></h2>
+<ol>
+<li>
+<code>grep -n '^the' [文件名]</code>
+
+<ul>
+<li>
+<code>the</code>只出现在句首
+
+</ul>
+<li>
+<code>grep -n '^[^a-zA-Z]' [文件名]</code>
+
+<ul>
+<li>
+不想要英文字母开头
+
+<li>
+<code>^</code>符号在<code>[]</code>里面代表反向选择
+
+</ul>
+<li>
+<code>grep -n '\.$' [文件名]</code>
+
+<ul>
+<li>
+结尾为小数点<code>.</code>
+
+<li>
+<code>\</code>为转义字符
+
+</ul>
+<li>
+<code>grep -n '^$' [文件名]</code>
+
+<ul>
+<li>
+显示空白行
+
+</ul>
+</ol>
+<hr />
+<h2 id="toc_1.4">任意一个字符<code>.</code> 与 重复字符<code>*</code></h2>
+<ol>
+<li>
+<code>o*</code>代表有0到无穷个o
+
+<li>
+<code>o.o</code>代表o与o之间有一个任意字符
+
+<li>
+<code>grep -n 'g.*g' [文件名]</code>
+
+<ul>
+<li>
+代表g与g之间有零个货多个任意字符
+
+</ul>
+</ol>
+<hr />
+<h2 id="toc_1.5">限定连续RE字符范围{}</h2>
+<ol>
+<li>
+<code>grep -n 'o\{2\}' [文件名]</code>
+
+<ul>
+<li>
+这里的<code>\</code>不代表转义字符
+
+<li>
+找出含有连续两个<code>o</code>
+
+</ul>
+<li>
+<code>grep -n 'go\{2,5\}g' [文件名]</code>
+
+<ul>
+<li>
+找出g和g之间含有2到5个o
+
+</ul>
+<li>
+<code>grep -n 'go\{2,\}g' [文件名]</code>
+
+<ul>
+<li>
+找出2个以上o
+
+</ul>
+</ol>
+<hr />
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>sed工具</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">sed定义</h1>
+<p>
+sed本身也是一种管道命令,可以分析standard input的,而且sed还可以将数据进行替换,删除,增加,选取等特定功能.
+<hr />
+</p>
+<h1 id="toc_2">sed用途</h1>
+<h2 id="toc_2.1">以行为单位的新增/删除功能</h2>
+<ol>
+<li>
+<code>sed '2,5d'</code>
+
+<ul>
+<li>
+删除2至5行
+
+</ul>
+<li>
+<code>sed '2a drink tea'</code>
+
+<ul>
+<li>
+在第2行后面加drink tea
+
+</ul>
+<li>
+<code>sed '2i drink tea'</code>
+
+<ul>
+<li>
+在第2行前面加drink tea 
+
+</ul>
+<li>
+<code>sed '2a Drink tea or ....\i</code> + 回车
+  <code>&gt;drink tea ?'</code>
+
+<ul>
+<li>
+可以增加两行
+
+</ul>
+</ol>
+<hr />
+<h2 id="toc_2.2">以行为单位的替换与显示功能</h2>
+<ol>
+<li>
+<code>sed '2,5c No 2-5 number'</code>
+
+<ul>
+<li>
+把2至5行替换为<code>No 2-5 number</code>
+
+</ul>
+<li>
+<code>sed -n '5,7p'</code>
+
+<ul>
+<li>
+仅列出5至7行
+
+<li>
+<code>-n</code>代表安静模式
+
+</ul>
+<li>
+<code>sed 's/要被替换的字符串/新的字符串/g'</code>
+
+</ol>
+<hr />
+<h2 id="toc_2.3">直接修改文件内容</h2>
+<ol>
+<li>
+<code>sed -i 's/\.\(/\.\)!/g' [文件名]</code>
+
+<ul>
+<li>
+每行由<code>.</code>结尾的替换成<code>!</code>
+
+<li>
+参数<code>-i</code>可以直接修改文件内容
+
+</ul>
+</ol>
+<hr />
+
+</body>
+</html>

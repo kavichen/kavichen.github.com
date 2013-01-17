@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>扩展正则表达式</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">扩展正则表达式</h1>
+<ol>
+<li>
+<code>grep -v '^$' [文件名]|grep -v '^#'</code>
+
+<ul>
+<li>
+可以合并为<code>egrep -v '^$|^#' [文件名]</code>
+
+</ul>
+</ol>
+<h2 id="toc_1.1">egrep</h2>
+<ol>
+<li>
+<code>+</code>
+
+<ul>
+<li>
+重复一个或一个以上的前一个RE字符
+
+<li>
+<code>egrep -n 'go+d' [文件名]</code>
+
+<li>
+找god good goood 
+
+</ul>
+<li>
+<code>?</code>
+
+<ul>
+<li>
+零个或一个的前一个RE字符
+
+<li>
+<code>egrep -n 'go?d' [文件名]</code>
+
+<li>
+找gd god good
+
+</ul>
+<li>
+<code>|</code>
+
+<ul>
+<li>
+用或(or)的方式找出数个字符串
+
+<li>
+<code>egrep -n 'gd|good' [文件名]</code>
+
+</ul>
+<li>
+<code>()</code>
+
+<ul>
+<li>
+找出"组"字符串
+
+<li>
+<code>egrep -n 'g(la|oo)d' [文件名]</code>
+
+<li>
+找出 glad 或 good
+
+</ul>
+<li>
+<code>()+</code>
+
+<ul>
+<li>
+多个重复组的判别
+
+<li>
+<code>egrep 'AxyzxyzxyzxyzC'|egrep 'A(xyz)+C'</code>
+
+<li>
+找到开头是A结尾是C,中间有一个以上的"xyz"字符串
+
+</ul>
+</ol>
+<p>
+<strong>注意:</strong>
+  <code>!</code>在正则表达式当中并不是特殊字符,所以,如果你要找文件中<code>!&gt;</code>的字行时,可以这样:<br>
+  <code>grep -n '[!&gt;]' [文件名]</code>
+<hr />
+</p>
+
+</body>
+</html>

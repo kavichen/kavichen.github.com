@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>文件的格式化与相关处理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">格式化打印</h1>
+<h2 id="toc_1.1">print</h2>
+<ol>
+<li>
+<code>printf '打印格式' 实际内容</code>
+
+<ul>
+<li>
+格式方面的几个特殊样式:
+
+<ul>
+<li>
+<code>\a</code>  警告声音输出
+
+<li>
+<code>\b</code>  退格键(backspace)
+
+<li>
+<code>\f</code>  清除屏幕(form feed)
+
+<li>
+<code>\n</code>  输出新的一行
+
+<li>
+<code>\r</code>  Enter键
+
+<li>
+<code>\t</code>  水平的tab键
+
+<li>
+<code>\v</code>  垂直的tab键
+
+<li>
+<code>xNN</code> NN为两位数的数字,可以转换成为字符
+
+</ul>
+<li>
+关于c程序语言内,常见的变量格式
+
+<ul>
+<li>
+<code>%ns</code> 那个n是数字,s代表string,即多少个字符;
+
+<li>
+<code>%ni</code> 那个n是数字,i代表integer,即多少整数字数;
+
+<li>
+<code>%N.nf</code> 那个N与n都是数字,f代表floating,如果有小数字数,假设我共要十个位数,但小数点有两位,即为%10.2f
+
+</ul>
+</ul>
+</ol>
+<hr />
+<h2 id="toc_1.2">awk</h2>
+<ol>
+<li>
+awk:好用的数据处理工具: awk倾向于将每一行分成数个"字段"来处理.
+
+<li>
+<code>awk '条件类型 1{动作 1} 条件类型 2{动作 2} ...' filename</code>
+
+<ul>
+<li>
+<code>last -n 5</code> &lt;== 仅取出前五行
+
+</ul>
+<li>
+<code>last -n 5 | awk '{print \(1 "\t" \)3}</code>  
+
+<ul>
+<li>
+<code>\(1</code>代表第一列,<code>\)3</code>代表第三列
+
+<li>
+...
+
+</ul>
+</ol>
+
+</body>
+</html>
