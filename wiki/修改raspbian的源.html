@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>修改raspbian的源</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Raspbian Sources List</h1>
+<p>
+<a href="http://www.raspbian.org/RaspbianMirrors">源列表地址</a>
+</p>
+<h2 id="toc_1.1">国内用户推荐</h2>
+<p>
+Asia        Singapore        NUS School of Computing SigLabs  <a href="http://mirror.nus.edu.sg/raspbian/raspbian">http://mirror.nus.edu.sg/raspbian/raspbian</a> <br>
+Asia        China        Tsinghua University Network Administrators   <a href="http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</a> <br>
+</p>
+<h1 id="toc_2">步骤</h1>
+<ol>
+<li>
+备份之前文件
+
+<ul>
+<li>
+<code>sudo cp /etc/apt/sources.list /etc/apt/sources.list_bk</code>
+
+</ul>
+<li>
+更新源
+
+<ul>
+<li>
+<code>sudo vi /etc/apt/sources.list</code>
+
+<li>
+将里面的默认地址替换成上面的地址
+
+</ul>
+<li>
+更新源信息
+
+<ul>
+<li>
+<code>sudo apt-get update</code>
+
+</ul>
+<li>
+DONE
+
+</ol>
+
+</body>
+</html>

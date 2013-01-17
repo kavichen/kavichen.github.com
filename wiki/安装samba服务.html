@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>安装samba服务</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">samba简介</h1>
+<p>
+本文只是对samba的最基本的配置，即利用samba来实现电脑读写树莓派间上指定文件夹内的文件，更多samba服务器的内容等待大家去挖掘。
+</p>
+<h1 id="toc_2">步骤</h1>
+<ol>
+<li>
+<code>sudo apt-get update</code>
+
+<li>
+<code>sudo apt-get install samba</code>
+
+<li>
+<code>sudo apt-get install samba-common-bin</code>
+
+<li>
+<code>cd /etc/samba/</code>
+
+<li>
+将原来的<code>smb.conf</code>命名为<code>smb.conf.backup</code>
+
+<li>
+新建一个<code>smb.conf</code>
+
+<li>
+输入:{{{
+
+</ol>
+<p>
+[global]
+</p>
+<blockquote>
+log file = /var/log/samba/log.%m
+</blockquote>
+<p>
+[tmp]
+</p>
+<blockquote>
+comment = Temporary file space
+path = /tmp
+read only = no
+public = yes
+</blockquote>
+<p>
+}}}
+</p>
+<ol>
+<li>
+保存
+
+<li>
+<code>sudo /etc/init.d/samba restart</code>
+
+<li>
+创建一个samba用户
+
+<ul>
+<li>
+<code>sudo useradd xxx</code>
+
+<li>
+新建smbpasswd文件
+
+<ul>
+<li>
+<code>sudo touch /etc/samba/smbpasswd</code>
+
+</ul>
+<li>
+<code>sudo smbpasswd -a xxx</code>
+
+<li>
+输入密码两次
+
+</ul>
+<li>
+Done
+
+</ol>
+<hr />
+<p>
+<a href="http://www.eeboard.com/bbs/thread-5473-1-1.html">原文链接</a> (略有改动)
+</p>
+
+</body>
+</html>

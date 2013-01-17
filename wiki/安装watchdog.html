@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>安装watchdog</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">什么是看门狗程序</h1>
+<p>
+看门狗程序就是一个健康监控程序，每间隔一定时间（默认10秒)检查一次是否在设定的健康工作范围内，如果超过即启动硬件复位程序，让设备重新启动，恢复健康。
+<hr />
+</p>
+<h1 id="toc_2">树莓派支持硬件自动复位？</h1>
+<p>
+是的，开源的BCM2708芯片让树莓派拥有了硬件看门狗芯片功能，加上linux内核编译好了的bcm2708_wdog模块，树莓派通过watchdog程序实现硬件看门狗功能，达到自动复位功能。
+<hr />
+</p>
+<h1 id="toc_3">看门狗能做些什么？</h1>
+<p>
+比如CPU占用过高假死一定时间，系统严重报错无法响应，CPU温度过高…各种状态均可
+<hr />
+</p>
+<h1 id="toc_4">步骤</h1>
+<ol>
+<li>
+<code>modprobe bcm2708_wdag</code>
+
+<li>
+<code>vi /etc/modules</code>
+
+<ul>
+<li>
+加入一行<code>bcm2708_wdog</code>
+
+</ul>
+<li>
+<code>apt-get install watchdog</code>
+
+<li>
+<code>apt-get install chkconfig</code>
+
+<li>
+<code>chkconfig watchdog on</code>
+
+<ul>
+<li>
+chkconfig是设定看门狗程序随系统启动自动运行
+
+</ul>
+<li>
+<code>vi /etc/watchdog.conf</code>
+
+<ul>
+<li>
+在运行watchdog之前,先配置一下这个程序
+
+</ul>
+<li>
+取消掉 watchdog-device = /dev/watchdog 前的注释#号，让他监控的设备指向CPU的硬件看门狗 
+
+<li>
+取消掉 max-load-1 = 24 前的注释#号，当1分钟load进程超过24个的时候（一般5个就是超高负载了，再&lt;FONT face="Courier New"&gt;高可以认为是死机，这在遭遇DDOS攻击的时候很容易遇到）就触发重启&lt;/FONT&gt;
+
+<li>
+temperature-device = /sys/class/thermal/thermal_zone0/temp
+
+<ul>
+<li>
+温度一般不超过85度就不会损坏芯片，/sys/class/thermal/thermal_zone0/temp记录的是实时的温度，单位为千分之一摄氏度，所以75000就是75
+
+</ul>
+<li>
+max-temperature = 75000
+
+<ul>
+<li>
+75000就是75°
+
+</ul>
+<li>
+<code>/etc/init.d/watchdog start</code>
+
+<ul>
+<li>
+运行程序
+
+</ul>
+</ol>
+<hr />
+<h1 id="toc_5">测试</h1>
+<ul>
+<li>
+输入<code>: (){ :|:&amp; };:</code>
+
+<ul>
+<li>
+关于上述炸点,点击<a href="http://blog.163.com/peipeigang@126/blog/static/199866922008488017676/">这里</a>
+
+</ul>
+<li>
+10s后重新启动
+
+</ul>
+<hr />
+<p>
+转自:geekpi
+</p>
+
+</body>
+</html>
