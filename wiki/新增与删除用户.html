@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>新增与删除用户</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1"><code>useradd</code></h1>
+<ul>
+<li>
+<code>useradd 账号</code>
+
+<li>
+默认处理以下:
+
+<ul>
+<li>
+在<code>/etc/passwd</code>里面创建一行与账号相关的数据
+
+<li>
+在<code>/etc/shadow</code>里面将此账号的密码相关参数填入,但是尚未有密码
+
+<li>
+在<code>/etc/group</code>里面加入一个与账号名称一模一样的组名
+
+<li>
+在<code>/home</code>下创建一个与账号同名的目录作为用户主文件夹,且权限为700
+
+</ul>
+</ul>
+<h1 id="toc_2">账户操作</h1>
+<ul>
+<li>
+修改密码 <code>passwd</code>
+
+<li>
+密码参数显示 <code>chage -l</code>
+
+<li>
+微调账号相关数据 <code>usermod</code>
+
+<li>
+删除用户 <code>userdel</code>
+
+<ul>
+<li>
+用户账号/密码相关:/etc/passwd, /etc/shadow
+
+<li>
+用户组相关参数:/etc/group, /etc/gshadow
+
+<li>
+用户个人文件数据:/home/username,/var/spool/mail/username..
+
+</ul>
+</ul>
+
+</body>
+</html>

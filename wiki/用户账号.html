@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>用户账号</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">输入账号密码后系统处理步骤</h1>
+<ol>
+<li>
+先找到<code>etc/passwd</code>里面是否有你输入的账号,如果没有就跳出,如果有的话则将该账号对应的UID和GID(etc/group中)读出来,该账号的主文件夹和shell设置也一并读出.
+
+<li>
+核对密码 - 进入<code>/etc/shadow</code>里面找出对应的账号与UID,然后核对一下你刚才输入的密码与里面的密码是否相符
+
+<li>
+DONE
+
+</ol>
+<hr />
+<h1 id="toc_2"><code>etc/passwd</code>文件结构</h1>
+<pre>
+  root:x:0:0:root:/root:/bin/bash
+  daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+  bin:x:2:2:bin:/bin:/bin/sh
+  sys:x:3:3:sys:/dev:/bin/sh
+</pre>
+<ul>
+<li>
+账号名称:密码:UID:GID:用户信息说明列:主文件夹:Shell
+
+<ul>
+<li>
+账号名称,用来对应UID
+
+<li>
+密码, 用x表示,密码数据放在<code>/etc/shadow/</code>中
+
+<li>
+UID, 用户标示符
+
+<ul>
+<li>
+0 =&gt; 系统管理员
+
+<li>
+1~499 =&gt; 系统账号
+
+<ul>
+<li>
+1~99: 由distributions自行创建的系统账号
+
+<li>
+100~499: 若用户有系统账号需求时,可以使用的账号UID
+
+</ul>
+<li>
+500~65535: 给一般用户用的
+
+</ul>
+<li>
+GID, 与<code>/etc/group</code>有关
+
+<li>
+用户信息说明列
+
+<li>
+主文件夹
+
+<li>
+Shell
+
+</ul>
+</ul>
+<hr />
+<h1 id="toc_3"><code>/etc/shadow</code>文件结构</h1>
+<pre>
+  root:*:15601:0:99999:7:::
+  daemon:*:15601:0:99999:7:::
+  bin:*:15601:0:99999:7:::
+  sys:*:15601:0:99999:7:::
+</pre>
+<ul>
+<li>
+账号名称: 密码需要与账号对应
+
+<li>
+密码: 已经经过编译
+
+<li>
+最近更动密码的日期
+
+<ul>
+<li>
+Linux的日期是以1970年1月1日开始累加
+
+<li>
+要知道具体某天的累积日数,可以使用如下公式
+<pre>
+    echo $(($(date --date="2013/01/19" +%s)/86400+1))
+</pre>
+
+</ul>
+<li>
+密码不可被更动的天数(与第三个字段相比)
+
+<li>
+密码需要重新更改的天数(与第三个字段相比)
+
+<li>
+密码需要更改期限前的警告天数(与第五个字段相比)
+
+<li>
+密码过期后的账号宽限时间(密码失效)(与第五个字段相比)
+
+<li>
+账号失效日
+
+<li>
+保留
+
+<ul>
+<li>
+为以后的新功能预留
+
+</ul>
+</ul>
+<hr />
+
+</body>
+</html>

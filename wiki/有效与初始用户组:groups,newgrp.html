@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>有效与初始用户组</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1"><code>/etc/group/</code>文件结构</h1>
+<pre>
+  #:head -n 4 /etc/group
+root:x:0: // 用`:`隔开,有四个字段
+  daemon:x:1:
+  bin:x:2:
+  sys:x:3:
+</pre>
+<ul>
+<li>
+用户组名称
+
+<li>
+用户组密码
+
+<li>
+GID
+
+<li>
+此用户组支持的账号名称
+
+</ul>
+<hr />
+<h1 id="toc_2">有效用户组(effective group) 与 初始用户组(initial group)</h1>
+<ol>
+<li>
+initial group:
+
+<ul>
+<li>
+当用户登陆系统,立刻就拥有这个用户组的相关权限
+
+</ul>
+<li>
+effective group:
+
+<ul>
+<li>
+登陆账号后,用<code>groups</code>查看用户所属的用户组
+
+<li>
+显示的第一个用户组 为 effective group
+
+<li>
+用<code>newgrp xxx</code>切换当前用户账号所支持的用户组
+
+<li>
+用<code>exit</code>退出到原来的用户组
+
+</ul>
+</ol>
+<hr />
+<h1 id="toc_3"><code>/etc/gshadow/</code></h1>
+<pre>
+root@raspberrypi:/home/pi# head -n 4 /etc/gshadow
+root:*::
+daemon:*::
+bin:*::
+sys:*::
+</pre>
+<ul>
+<li>
+用户组名
+
+<li>
+密码列
+
+<li>
+用户组管理员账号
+
+<li>
+该用户组的所属账号
+
+</ul>
+<hr />
+
+</body>
+</html>
