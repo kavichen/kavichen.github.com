@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Linux主机上的用户信息传递</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">查询用户</h1>
+<ul>
+<li>
+<code>w</code> 或者 <code>who</code>
+
+<ul>
+<li>
+查询目前已登陆在系统上面的用户
+
+</ul>
+<li>
+<code>lastlog</code>
+
+<ul>
+<li>
+每个账号最近登陆的时间
+
+</ul>
+</ul>
+<hr />
+<h1 id="toc_2">用户对谈</h1>
+<pre>
+  root@raspberrypi:~# w
+   11:39:26 up  4:08,  1 user,  load average: 0.10, 0.11, 0.08
+  USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+  pi       pts/0    10.0.10.182      09:02    0.00s  2.72s  0.50s sshd: pi [priv]  
+</pre>
+<ul>
+<li>
+<code>TTY</code>用户所在的终端接口
+<pre>
+  root@raspberrypi:~# write pi pts/0
+  write: write: you have write permission turned off.
+
+  write: warning: write will appear from pi
+
+  Message from pi@raspberrypi on pts/0 at 11:41 ...
+  hi
+</pre>
+
+<li>
+对系统上的所有用户广播 <code>wall</code>
+<pre>
+    wall "I will shutdown my linux server..."
+</pre>
+
+</ul>
+<hr />
+<h1 id="toc_3">用户邮件信箱:mail</h1>
+<ul>
+<li>
+发送邮件
+<pre>
+    mail kavi -s "nice to meet you"
+</pre>
+
+<li>
+收邮件 <code>mail</code>
+
+<ul>
+<li>
+查阅邮件输入<code>?</code>
+
+</ul>
+</ul>
+
+</body>
+</html>
