@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>逻辑卷管理器</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">什么是LVM</h1>
+<p>
+<strong>Logical Volume Manager</strong> 可以整合多个物理分区在一起,让这些分区看起来像一个磁盘一样,而且,还可以在将来其他的物理分区或将其从这个LVM管理的磁盘当中删除.
+</p>
+<ol>
+<li>
+PhysicalVolume,PV,物理卷:我们的实际分区需要调整系统标示符(system ID)成为8e(LVM的标示符),然后再经过<code>pvcreate</code>的命令将它转换成LVM最底层的物理卷(PV),之后才能够将这些PV加以利用,调整systemID的方式就是通过fdisk
+
+<li>
+Volume Group,VG,卷用户组:LVM的大磁盘就是将许多PV整合成这个VG,所以VG就是LVM组合起来的大磁盘.
+
+<li>
+Physical Extend,PE,物理扩展块:它是整个LVM最小的储存块,也就是说,其实我们的文件数据都是由写入PE来处理的.调整PE会影响VG的最大容量.
+
+<li>
+Logical Volume,LV,逻辑卷:
+
+<li>
+
+</ol>
+
+</body>
+</html>

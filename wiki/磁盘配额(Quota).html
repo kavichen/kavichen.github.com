@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>磁盘配额(Quota)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Quota的使用限制</h1>
+<ol>
+<li>
+仅能针对整个文件夹系统
+
+<li>
+需要Linux内核支持
+
+<li>
+只对一般身份用户有效
+
+</ol>
+<h1 id="toc_2">Quota的设置规范</h1>
+<ol>
+<li>
+容量限制或文件数量限制
+
+<ul>
+<li>
+限制inode用量:管理用户可以新建的"文件数量"
+
+<li>
+限制block用量:管理用户磁盘容量的限制,较常见的为这种方式
+
+</ul>
+<li>
+soft/hard
+
+<ul>
+<li>
+hard:表示用户绝对不能超出这个用量
+
+<li>
+soft:表示用户超出该用量后报警,如果在grace time内(一般设置为7天)内不删除多余文件,则设置该用量为hard
+
+<li>
+hard &gt; soft
+
+</ul>
+</ol>
+
+</body>
+</html>
