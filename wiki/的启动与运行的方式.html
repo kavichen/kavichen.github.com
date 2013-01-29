@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>`atd`的启动与`at`的运行方式</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1"><code>at</code>的运行方式</h1>
+<ul>
+<li>
+我们使用<code>at</code>这个命令来生成所要运行的工作,并将这个工作以文本的方式写入<code>/var/spool/at</code>目录内,该工作便能等待<code>atd</code>这个服务的取用与执行了
+
+<li>
+利用<code>/etc/at.allow</code>和<code>/etc/at.deny</code>这两个文件来进行<code>at</code>的使用限制
+
+<ol>
+<li>
+先寻找<code>/etc/at.allow</code>这个文件,写在这个文件中的用户才能使用<code>at</code>,没有在这个文件中的用户则不能使用<code>at</code>(即使没有写在<code>at.deny</code>当中)
+
+<li>
+如果<code>/etc/at.allow</code>不存在,就寻找<code>/etc/at.deny</code>这个文档,若写在这个<code>at.deny</code>的使用者则不能使用<code>at</code>,而没有在这个<code>at.deny</code>档案中的使用者,就可以使用<code>at</code>
+
+<li>
+如果两个文档都不存在,则只有<code>root</code>可以使用<code>at</code>命令
+
+</ol>
+</ul>
+
+</body>
+</html>

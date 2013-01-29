@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>fork and exec:过程调用的流程</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">fork and exec:过程调用的流程</h1>
+<ol>
+<li>
+程序都会借由父程序以复制(fork)方式产生一个一模一样的子程序,这个程序与父程序的唯一差别就是PID不一样,但是这个程序会多寸一个PPID的参数,它就是父程序的程序标识符.
+
+<li>
+复制出来的子程序以<code>exec</code>方式来执行实际要进行的程序,如果新程序名为qqq,最终子程序的程序代码就会变成qqq了.
+
+<li>
+最终以一个子程序存在
+
+</ol>
+
+</body>
+</html>
