@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>将命令在后台执行</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">例子</h1>
+<p>
+我们要将/etc/整个备份成为/tmp/etc.tar.gz
+</p>
+<pre>
+[root@www ~]# tar -zpcf /tmp/etc.tar.gz /etc &amp;
+[1] 8400 &lt;== [job number] PID
+[root@www ~]# tar: Removing leading `/' from member names
+# 在中括号内的号码为工作号码 (job number),该号码与 bash 的控制有关。 # 后续的 8400 则是这个工作在系统中的 PID。至于后续出现的数据是 tar 执行 的数据流,
+# 由于我们没有加上数据流重导向,所以会影响画面!不过不会影响前景的操作 喔!
+</pre>
+
+</body>
+</html>

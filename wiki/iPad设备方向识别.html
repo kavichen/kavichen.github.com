@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>ipad设备方向识别</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<p>
+由于Apple要求iPad的应用至少提供portrait和landscape两个方向上的支持,因此在程序中检测设备当前的方向是必不可少的,一般情况下,在程序中可以使用:
+</p>
+<pre>
+  [[UIDevice currentDevice] orientation];
+</pre>
+<p>
+来获取当前的设备方向,但是如果是在程序开始启动的时候,此时获取到的是结果为:<br>
+<code>UIDeviceOrientationUnknown</code>
+这是无法判断设备方向的,如果在程序启动的时候我们就要做些与设别方向有关的处理,要怎么做呢?<br>
+实际上,这可以通过获取空间所属的controller的方向,使得相关控件的方向与其controller的方向是一致的,而无需理会当前的设备方向究竟是什么.<br>
+例如:<br>
+</p>
+<pre>
+  if(self.interfaceOrientation == UIDeviceOrientationPortrait)
+</pre>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Priority与Nice值</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Priority</h1>
+<ul>
+<li>
+Priority值越小,优先级越高
+
+<li>
+PRI是核心动态调整的,用户无权干涉PRI
+
+<li>
+用户想要调整程序的优先执行序时,就要透过Nice值了
+
+<li>
+PRI(new) = PRI(old) + nice
+
+</ul>
+<hr />
+<h1 id="toc_2">nice</h1>
+<ul>
+<li>
+nice值有正负,可调整范围为-20~19
+
+<li>
+root可随意调整自己或他人程序的Nice值,且范围为-20~19
+
+<li>
+一般用户可以调整自己的Nice值,且范围仅为0 ~ 19(避免一般用户抢占系统资源)
+
+<li>
+一般使用者仅可将nice值越调越高,例如本来nice为5,则未来仅能调整到大于5
+
+</ul>
+
+</body>
+</html>
