@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>什么是daemon</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">什么是daemon</h1>
+<h2 id="toc_1.1">分类</h2>
+<ul>
+<li>
+stand_alone:此deamon可以自行单独启动任务,因为是一直存在内存内持续的提供服务,因此对于发生客户端的要求时,stand alone的deamon响应速度较快.
+
+<li>
+super daemon:一支特殊的daemon来统一管理,因为有客户端的联机才会唤醒该服务,而该服务加载到内存的时间需要考虑进去,因此服务的反应时间会比较慢一点.
+
+<ul>
+<li>
+multi-threaded(多线程)
+
+<li>
+single-threaded
+
+</ul>
+</ul>
+
+</body>
+</html>
