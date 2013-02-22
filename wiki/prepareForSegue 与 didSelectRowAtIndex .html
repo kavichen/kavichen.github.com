@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>prepareForSegue 与 didSelectRowAtIndexPath</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">解析</h1>
+<h2 id="toc_1.1">prepareForSegue 与 didSelectRowAtIndexPath</h2>
+<h3 id="toc_1.1.1">prepareForSegue</h3>
+<ul>
+<li>
+在Storyboard中连接两个viewcontroller的时候，需要从cell中连接。
+
+</ul>
+<h3 id="toc_1.1.2">didSelectRowAtIndex</h3>
+<ul>
+<li>
+在Storyboard中连接两个viewcontroller的时候，需要从controller中连接。
+
+<li>
+在didSelectRowAtIndexPath中，需要call <code>performSegue</code>
+
+</ul>
+<hr />
+<h1 id="toc_2">范例</h1>
+<h2 id="toc_2.1">条件与要求</h2>
+<ol>
+<li>
+有两个tableViewController - MonthSelectionTableViewController 和 DaySelectionViewController
+
+<li>
+将 MonthSelectionTableViewController 与 DaySelectionViewController 中各有一个<code>@property (nonatomic,strong) NSString *selectedMonthPath;</code>
+
+<li>
+将 MonthSelectionTableViewController 中的 <code>selectedMonthPath</code> 传到 DaySelectionViewController 中去
+
+<li>
+不用delegate
+
+</ol>
+<h2 id="toc_2.2">关键代码</h2>
+<p>
+在MonthSelectionTableViewController中，添加
+</p>
+<pre>
+  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+    if ([[segue identifier] isEqualToString:@"monthselected"]) {
+        DaySelectionViewController *daySelectionViewController =
+        (DaySelectionViewController *)segue.destinationViewController;
+        NSString *selectYear = [self.yFolderMutableArray objectAtIndex:path.section];
+        NSArray *mFolderArray = [NSArray arrayWithArray:[self mFolderMutableArray:selectYear]];
+        mFolderArray = [[mFolderArray reverseObjectEnumerator] allObjects]; //反转array
+        NSString *selectMonth = [mFolderArray objectAtIndex:path.row];
+        NSString *selectedMonthPath = [NSString stringWithFormat:@"%@/%@/%@",
+                                       [self retrieveDirectory],
+                                       selectYear,
+                                       selectMonth];
+        self.selectedMonthPath = selectedMonthPath;
+        daySelectionViewController.selectedMonthPath = self.selectedMonthPath;        
+    }
+}
+</pre>
+
+</body>
+</html>
