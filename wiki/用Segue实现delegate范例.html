@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>用Segue实现delegate范例</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">用Segue实现delegate范例</h1>
+<h2 id="toc_1.1">要求</h2>
+<ol>
+<li>
+在<code>FirstView</code>中，有一个“Change Text”按钮和一个“TextView”
+
+<li>
+点击<code>FirstView</code>中的“Change Text”按钮，通过<code>Segue</code>进入<code>SecondView</code>
+
+<li>
+在<code>SecondView</code>中，有一个“Change”按钮和一个“TextField”
+
+<li>
+在TextField中输入任意字母，点击Change按钮，返回上一级<code>FirstView</code>中
+
+<li>
+在<code>FirstView</code>的“TextView”中，显示刚才输入的字母
+
+</ol>
+<h2 id="toc_1.2">代码</h2>
+<h3 id="toc_1.2.1"><code>FirstViewController.h</code></h3>
+<pre>
+//
+//  FirstViewController.h
+//  DelegateExample1
+//
+//  Created by kavi chen on 2/28/13.
+//  Copyright (c) 2013 kavi chen. All rights reserved.
+//
+
+#import &lt;UIKit/UIKit.h&gt;
+#import "SeconViewController.h"
+
+@interface FirstViewController : UIViewController &lt;changeTextDelegate&gt;
+- (IBAction)changeTextButtonPressed:(id)sender;
+@end  
+</pre>
+<h3 id="toc_1.2.2"><code>FirstViewController.m</code></h3>
+<pre>
+//
+//  FirstViewController.m
+//  DelegateExample1
+//
+//  Created by kavi chen on 2/28/13.
+//  Copyright (c) 2013 kavi chen. All rights reserved.
+//
+
+#import "FirstViewController.h"
+
+@interface FirstViewController ()
+@property (strong, nonatomic) IBOutlet UIButton *changeTextButton;
+@property (strong, nonatomic) IBOutlet UITextView *textView;
+
+@end
+
+@implementation FirstViewController
+@synthesize changeTextButton = _changeTextButton;
+@synthesize textView = _textView;
+
+- (IBAction)changeTextButtonPressed:(id)sender
+{
+    [self performSegueWithIdentifier:@"gotoSecondVC" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier] isEqualToString:@"gotoSecondVC"]){
+        SeconViewController *secondVC = (SeconViewController *)segue.destinationViewController;
+        secondVC.delegate = self;
+    }
+}
+
+#pragma mark --ChangeTextDelegate
+- (void)ChangeText:(NSString *)text
+{
+    self.textView.text = text; //将传递过来的值作为方程的参数
+}
+@end
+  
+</pre>
+
+<h3 id="toc_1.2.3"><code>SeconViewController.h</code></h3>
+<pre>
+//
+//  SeconViewController.h
+//  DelegateExample1
+//
+//  Created by kavi chen on 2/28/13.
+//  Copyright (c) 2013 kavi chen. All rights reserved.
+//
+
+#import &lt;UIKit/UIKit.h&gt;
+
+@protocol changeTextDelegate &lt;NSObject&gt;
+
+- (void)ChangeText:(NSString *)text;
+
+@end
+
+
+@interface SeconViewController : UIViewController{
+    id&lt;changeTextDelegate&gt; delegate;
+}
+
+@property (nonatomic,strong) id&lt;changeTextDelegate&gt; delegate;
+@property (strong, nonatomic) IBOutlet UITextField *textField;
+
+- (IBAction)changeButtonPressed:(id)sender;
+@end
+  
+</pre>
+<h3 id="toc_1.2.4"><code>SeconViewController.m</code></h3>
+<pre>
+//
+//  SeconViewController.m
+//  DelegateExample1
+//
+//  Created by kavi chen on 2/28/13.
+//  Copyright (c) 2013 kavi chen. All rights reserved.
+//
+
+#import "SeconViewController.h"
+
+@interface SeconViewController ()
+@property (strong, nonatomic) IBOutlet UIButton *changeButton;
+@end
+
+@implementation SeconViewController
+@synthesize textField = _textField;
+@synthesize changeButton = _changeButton;
+@synthesize delegate;
+
+- (IBAction)changeButtonPressed:(id)sender
+{
+    if([delegate respondsToSelector:@selector(ChangeText:)]) {
+        [delegate ChangeText:self.textField.text];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+@end
+  
+</pre>
+
+</body>
+</html>
