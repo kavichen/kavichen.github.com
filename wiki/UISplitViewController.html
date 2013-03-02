@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>UISplitViewController</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">UISplitViewController</h1>
+<h2 id="toc_1.1">Setting/Getting the view controllers</h2>
+<ul>
+<li>
+Both view controllers are almost always set with ctrl-drag in Xcode.
+
+<li>
+<code>@property (nonatomic, copy) NSArray *viewControllers; // 0 is left (master), 1 is right (detail)</code>
+
+<li>
+It doesn't really make sense for this array to have anything but 2 UIViewControllers in it.
+
+<li>
+Note that this is not a readonly @property.
+
+<li>
+But also note that it forces you to set/get the both at the same time.
+
+<li>
+It is <code>copy</code> so that you don't pass a mutable array and then try to modify it afterwards.
+
+</ul>
+<hr />
+<h2 id="toc_1.2">So how does the detail get updated when master changes?</h2>
+<ol>
+<li>
+Target
+
+<li>
+Action
+
+</ol>
+<h3 id="toc_1.2.1">Target/Action</h3>
+<p>
+Example (code in the master view controller):
+</p>
+<pre>
+  - (IBAction)doit
+    {
+      id detailViewContoller = [[self.splitViewController viewControllers] lastObject];
+      [detailViewController setSomeProperty:...];
+    }
+</pre>
+<h3 id="toc_1.2.2">Segue for split view entirely replaces the detail view controlelr</h3>
+<p>
+Complicated ! 
+</p>
+
+</body>
+</html>
