@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>在splitview中，获取masterview和detailview的实例注意事项</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">splitview中获取实例</h1>
+<h2 id="toc_1.1">代码</h2>
+<p>
+<code>[self.splitViewController.viewControllers objectAtIndex:1]</code>
+左边Masterview为1，右边Detailview为0.
+</p>
+<h2 id="toc_1.2">注意事项</h2>
+<p>
+如果view是嵌入到UINavigationController里面，得到的是UINavigationController的实例。接着：
+<code>[navigationController viewControllers]</code>中获取需要的view。
+</p>
+
+</body>
+</html>
