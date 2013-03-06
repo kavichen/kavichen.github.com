@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>MVC</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">简介</h1>
+<p>
+Divide objects in your program into 3 "camps".
+</p>
+<ol>
+<li>
+Model
+
+<li>
+Controller
+
+<li>
+View
+
+</ol>
+<h2 id="toc_1.1">Model</h2>
+<ul>
+<li>
+Model = What your application is  (but not how it is displayed)
+
+<li>
+The Model and View should never speak to each other.
+
+<ul>
+<li>
+Model is completely UI independent.
+
+</ul>
+<li>
+The data source in the delegate always is the controller, or the third class designated by controller, but they will never be the model.
+
+<li>
+So what if the Model has information to update or something?
+
+<ul>
+<li>
+Ans: It uses a "radio station"-like broadcast mechanism. Controllers (or other Model) "tune in" to interesting stuff. A View might "tune in", but probably not to a Model's "station".
+
+</ul>
+</ul>
+
+<h2 id="toc_1.2">Controller</h2>
+<ul>
+<li>
+Controller = How your Model is presented to the user (UI logic)
+
+<li>
+Controllers can always talk directly to  their Model.
+
+<li>
+Controllers can also talk directly to their View. (With outlets)
+
+<li>
+The Controller sets itself as the View's delegate
+
+<ul>
+<li>
+will
+
+<li>
+did
+
+<li>
+should
+
+</ul>
+<li>
+Controllers are almost always that data source (not Model!).
+
+<li>
+The data source in the delegate always is the controller, or the third class designated by controller, but they will never be the model.
+
+<li>
+Controllers interpret/format Model information for the View.
+
+</ul>
+
+<h2 id="toc_1.3">View</h2>
+<ul>
+<li>
+View = Your Controller's minions
+
+<li>
+Be as generic as possible
+
+<li>
+The Model and View should never speak to each other.
+
+<li>
+View could talk to controller with Target - Action.
+
+<li>
+Sometimes the view needs to synchronize with the Controller.
+
+<li>
+<strong>Views do not own the data they display</strong>
+
+</ul>
+
+<h2 id="toc_1.4">MVCs working together</h2>
+<p>
+Q:Every model and every model has one controller.
+A:Yes.
+</p>
+
+<p>
+Q:Can controller talk each other's views?
+A:Usually a controller would only have a point to another controller as it's view, it will ask that controller display something for it.
+</p>
+
+</body>
+</html>
