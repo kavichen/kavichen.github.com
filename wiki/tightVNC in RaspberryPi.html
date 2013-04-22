@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>tightVNC</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">tightVNCServer</h1>
+<ol>
+<li>
+Installing VNC
+
+<ol>
+<li>
+<code>sudo apt-get update</code>
+
+<li>
+<code>sudo apt-get install tightvncserver</code>
+
+</ol>
+<li>
+Modify VNC password
+
+<ol>
+<li>
+<code>vncpasswd</code>
+
+</ol>
+<li>
+Starting up
+
+<ol>
+<li>
+<code>sudo nano /etc/init.d/tightvncserver</code>
+<pre>
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          tightvncserver
+# Required-Start:    $local_fs
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start/stop tightvncserver
+### END INIT INFO
+
+# More details see:
+# http://www.penguintutor.com/linux/tightvnc
+
+### Customize this entry
+# Set the USER variable to the name of the user to start tightvncserver under
+export USER='pi'
+### End customization required
+
+eval cd ~$USER
+
+case "$1" in
+  start)
+    # 启动命令行。此处自定义分辨率、控制台号码或其它参数。
+    su $USER -c '/usr/bin/tightvncserver -geometry 800x600 :1'
+    echo "Starting TightVNC server for $USER "
+    ;;
+  stop)
+    # 终止命令行。此处控制台号码与启动一致。
+    su $USER -c '/usr/bin/tightvncserver -kill :1'
+    echo "Tightvncserver stopped"
+    ;;
+  *)
+    echo "Usage: /etc/init.d/tightvncserver {start|stop}"
+    exit 1
+    ;;
+esac
+exit 0
+</pre>
+
+<li>
+<code>sudo chmod 755 /etc/init.d/tightvncserver</code>
+
+<li>
+<code>sudo update-rc.d tightvncserver defaults</code>
+
+</ol>
+<li>
+Run VNCServer
+
+<ol>
+<li>
+<code>vncserver :1</code> //冒号前面有空格
+
+</ol>
+</ol>
+
+</body>
+</html>
