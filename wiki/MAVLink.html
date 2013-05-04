@@ -14,29 +14,43 @@
 XCode
 
 <li>
-Qt SDK installation 
+Qt SDK installation
 
 </ol>
-<h1 id="toc_2">未完成</h1>
+<h2 id="toc_1.2">读取Mavlink</h2>
 <ol>
 <li>
-mavlink wrapper 
+需要确认mavlink_msg_heart_pack中&amp;msg里面有什么内容
 
 <ul>
 <li>
-mavlink 封装在objective-c中，需要封装
+Server在接受所有message之前，都不知道message种类
+
+<li>
+server接受到一个message之后，通过msg.msgid检测msg种类
+
+<li>
+接着再通过各种message相对应的decode进行解析
+
+<li>
+通过msg.xxx解除里面的内容
+
+</ul>
+<li>
+mavlink wrapper
 
 <ul>
 <li>
-在项目中添加mavlink/include文件
+C语言和objective-C可以混编，所以不需要用wrapper
 
+<ul>
 <li>
 在头文件中加入<code>#include&lt;mavlink.h&gt;</code>
 
 </ul>
 </ul>
 </ol>
-
+<h2 id="toc_1.3">Socket通讯</h2>
 <ol>
 <li>
 建立一个socket库
@@ -46,14 +60,22 @@ mavlink 封装在objective-c中，需要封装
 使用CocoaAsyncSocket
 
 <li>
-已经用mavlinktest建立起通讯 
+已经用mavlinktest建立通讯
 
 </ul>
 </ol>
-
+<h1 id="toc_2">未完成</h1>
 <ol>
 <li>
-需要确认mavlink_msg_heart_pack中&amp;msg里面有什么内容
+完成wifi的IP地址记录
+
+<ul>
+<li>
+使用ssid
+
+</ul>
+<li>
+完成配对模式
 
 </ol>
 
