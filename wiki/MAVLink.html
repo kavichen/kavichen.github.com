@@ -115,6 +115,41 @@ C结构体如何封装
 
 </ul>
 </ol>
+<hr />
+<hr />
+<hr />
+<h1 id="toc_3">备忘</h1>
+<h2 id="toc_3.1">KCMavlinkIO</h2>
+<h3 id="toc_3.1.1">属性</h3>
+<p>
+按字节顺序排序：
+</p>
+<ol>
+<li>
+uint8_t magic 包开始标志，0xFE(254)
+
+<li>
+uint8_t msgid 消息ID
+
+<li>
+uint8_t len   payload长度
+
+<li>
+uint8_t seq   包序列
+
+<li>
+uint8_t sysid 系统ID
+
+<li>
+uint8_t compid 组建ID
+
+<li>
+NSArray/uint64_t payload64[len] 负载数据
+
+<li>
+uint16_t checksum 校验和
+
+</ol>
 
 </body>
 </html>
