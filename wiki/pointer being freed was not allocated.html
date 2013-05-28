@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>pointer being freed was not allocated</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">pointer being freed was not allocated</h1>
+
+<p>
+It looks like you have a corrupted memory bug, and it is probably not in this code. Corrupted memory bugs are my second most-fun bugs, partially because they are often non-deterministic, and the symptoms (aka the crashes) usually happen long after the actual bug hit.
+</p>
+
+<p>
+There are two main types of memory bugs:
+</p>
+
+<p>
+Allocating more than you free.
+Freeing more than you allocate.
+In this case it looks like you're freeing too much, which is the easier case to see (b/c it can crash earlier) but the harder to track down.
+</p>
+
+<p>
+Here is a strategy you can use to help find an extra deallocations:
+</p>
+
+<p>
+Turn off some of your deallocations.
+See if the crash still occurs.
+Ideally, you can find one single deallocation command which, when removed, will allow your code to work correctly. It might be useful to try a binary search approach, if that is practical for your codebase. If it's a large codebase, hopefully you're using version control and you can try to focus on the recent diff's.
+</p>
+
+<p>
+Keep in mind that deallocations can be invoked in several different ways here. Most likely, you're calling release and autorelease on objects. It's also possible you might be explicitly calling dealloc (which is usually a mistake, though). And of course you might even be explicitly calling free directly.
+</p>
+
+<p>
+Once you've gotten rid of the extra deallocations, it's a good idea to also check for memory leaks (aka extra allocations). You can do this by using Instruments and other tools. A good place to start is by reading Finding Memory Leaks in the iPhone development guide.
+</p>
+
+<p>
+Added: It's also a good idea to set a pointer to nil right after you've released it and are done using it. This way, if you call [objectPtr release]; later, it won't do anything.
+</p>
+
+<p>
+(PS Btw, my #1 most-fun bug type is memory corruption in mutlithreaded code. I had one of those once in a multi-million line code base.)
+</p>
+
+</body>
+</html>
