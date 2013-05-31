@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>PDM数据导入</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<p>
+%PDM数据导入
+</p>
+<h1 id="toc_1">PDM数据导入</h1>
+<h2 id="toc_1.1">操作步骤</h2>
+<ol>
+<li>
+打开整理后的Excel表格
+
+<li>
+加入属性行【应对的属性】
+
+<ul>
+<li>
+类的表名.字段名【用name，不要用code】
+
+</ul>
+<li>
+加入唯一标识列(放在第一列)
+
+<li>
+将原有ID复制到唯一标识列
+
+<li>
+清空原有ID列
+
+<li>
+检查数据
+
+<ul>
+<li>
+组码【Code】类型，有没有漏
+
+<li>
+在PDM中新建注册该类，选择它对应的分类，如果有产品编号，新加两个字段【原产品编号】和【产品名称】（具体看模板，有几个就加几个）
+
+<li>
+看界面有没有问题
+
+</ul>
+<li>
+删除Excel中中文表头
+
+<li>
+删除表后面空白行，避免空行产生
+
+<li>
+另存为【文本文件（制表符分隔）】
+
+<li>
+在PDM中菜单栏 - 工具 - 数据迁移 - 数据导入
+
+<li>
+选择对应的文本文件 - 在end1类中选择“weiyibiaoshi”
+
+<li>
+点击【数据导入】
+
+</ol>
+<h2 id="toc_1.2">导入完成</h2>
+<ol>
+<li>
+确认大类已经导入【重要！】
+
+<li>
+处理数据库 - PL/SQL DEVELOPER打开 - 选择DF3_0中 - Object - Tables - XXXX$vf
+
+<ul>
+<li>
+XXXX：Code字段
+
+<li>
+XXXX$VF：数据库表
+
+</ul>
+<li>
+找到该表后，右键点击编辑数据
+
+<li>
+执行更新语句 - 在iPhone照片中记录 - 执行 - 提交
+
+<li>
+在PDM软件菜单栏 - 工具 - 数据迁移 - 重置最大流水码
+
+</ol>
+
+</body>
+</html>
