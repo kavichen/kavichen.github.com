@@ -47,7 +47,7 @@
 直接存取 - 直接根据变量名存取数据，例如：i = 3;
 
 <li>
-简介存取 - 通过指针变量存取相应变量的数据，例如：<code>*i_pointer = 20;</code>
+间接存取 - 通过指针变量存取相应变量的数据，例如：<code>*i_pointer = 20;</code>
 
 </ol>
 <hr />
@@ -95,12 +95,37 @@
 <pre>
   int i;
   int *p = &amp;i;
-  int *q = p;
+  int *q = p; // 先给指针变量p赋值，然后将p赋值给q
 </pre>
 
 <li>
 指针变量必须先赋值，再使用
 
+<ul>
+<li>
+不正确例子
+<pre>
+      main()
+      {
+        int i = 10;
+        int *p;
+        *p = i; //p并没有赋值，而使用间接赋值，i的值会储存在一个随机的地址上【危险】
+      }
+</pre>
+
+<li>
+正确例子：
+<pre>
+      main()
+      {
+        int i = 10,k;
+        int *p;
+        p = &amp;k;
+        *p = i;
+      }
+</pre>
+
+</ul>
 </ol>
 
 </body>
