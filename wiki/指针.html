@@ -355,6 +355,49 @@ C规定：
 </ol>
 </ul>
 <h3 id="toc_1.4.2">数组元素的引用</h3>
+<ol>
+<li>
+用下标法引用数组元素，如：<code>a[3]=45; b[2][5]=200;</code>
+
+<li>
+用指针法引用数组元
+
+<ul>
+<li>
+假如：<code>int a[10], *p, i; p=a;</code>
+
+<li>
+则：
+
+<ol>
+<li>
+<code>*(p+i) *(a+i)</code>则代表元素<code>a[i]</code>
+
+<li>
+<code>*(p+i)</code>也可以写成<code>p[i]</code>
+
+<li>
+<code>*(p+i) *(a+i) a[i] p[i]</code>等价，都代表数组a的第i+1个元素
+
+</ol>
+</ul>
+</ol>
+<h4 id="toc_1.4.2.1">说明</h4>
+<ol>
+<li>
+指针变量与数组名的区别 - 指针变量是地址变量，数组名是地址常量。e.g 指针变量的内容可以在程序运行过过程中被改变；而数组名一旦被定义，它的值就不能被改变了
+
+<ul>
+<li>
+例如：<code>int i, *p, a[6];</code>,则<code>p = &amp;i;</code>可行
+
+<li>
+~~<code>a = &amp;i</code><del>, </del><code>a++</code><del> , </del><code>a+=i</code>~~ 不可行
+
+<li>
+
+</ul>
+</ol>
 
 </body>
 </html>
