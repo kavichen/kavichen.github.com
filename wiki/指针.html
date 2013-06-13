@@ -392,12 +392,30 @@ C规定：
 例如：<code>int i, *p, a[6];</code>,则<code>p = &amp;i;</code>可行
 
 <li>
-~~<code>a = &amp;i</code><del>, </del><code>a++</code><del> , </del><code>a+=i</code>~~ 不可行
-
-<li>
+<code>a = &amp;i</code>,<code>a++</code>,<code>a+=i</code> 不可行
 
 </ul>
+<li>
+利用指针变量编程时特别要注意指针变量的当前值
+
 </ol>
+<h3 id="toc_1.4.3">数组名做函数的参数</h3>
+<ul>
+<li>
+实际上，能够接受并存放值的只能是指针变量。因此，C编译系统都是将形参数组作为指针变量来处理的。
+
+<ul>
+<li>
+<code>f(int arr[],int n)</code>等价于<code>f(int *arr, int n)</code>
+
+<li>
+使用形参数组的概念只是为了与实参数组对应，直观，便于理解而已。
+
+</ul>
+</ul>
+<p>
+P34
+</p>
 
 </body>
 </html>
