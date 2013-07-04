@@ -413,9 +413,83 @@ C规定：
 
 </ul>
 </ul>
-<p>
-P34
-</p>
+<h3 id="toc_1.4.4">一级指针变量与一维数组的关系</h3>
+<ul>
+<li>
+<code>int *p</code> 与 <code>int q[10]</code>
+
+<li>
+数组名是指针（地址）常量
+
+<li>
+<code>p=q;p+i</code>是<code>q[i]</code>的地址
+
+<li>
+数组元素的表示方法：下标法和指针法，即若p=q，则p[i]=q[i]=<strong>(p+i)=</strong>(q+i)
+
+<li>
+形参数组实质上是指针变量，即int q[] = int *q
+
+<li>
+在定义指针变量（不是形参）时，不能把<code>int *p</code>写成<code>int p[]</code>
+
+<li>
+系统只给p分配能保存一个指针值的内存区（一般2字节）而给q分配2*10字节的内存区
+
+</ul>
+<hr />
+<h2 id="toc_1.5">二维数组的指针</h2>
+<h3 id="toc_1.5.1">二维数组的指针概念</h3>
+<ul>
+<li>
+对于一维数组：
+
+<ol>
+<li>
+数组名array表示数组的首地址，即array[0]的地址
+
+<li>
+数组名array是地址常量
+
+<li>
+array+i是元素array[i]的地址
+
+<li>
+array[i] = *(array+i)
+
+</ol>
+<li>
+对二维数组 <code>int a[3][4]</code>
+
+<ul>
+<li>
+a:二维数组的首地址，即第0行的首地址
+
+<li>
+a+i:第i行的首地址
+
+<li>
+a[i] = <code>*(a+i)</code>:第i行第0列的元素地址
+
+<li>
+a[i]+j = <code>*(a+i)+j</code>:第i行第j列的元素地址
+
+<li>
+<code>*(a[i]+j)</code> = <code>*(*(a+i)+j)</code> = <code>a[i][j]</code>
+
+</ul>
+<li>
+<code>a+i</code>=<code>&amp;a[i]</code>=<code>a[i]</code>=<code>*(a+i)</code>=<code>&amp;a[i][0]</code>,值相等，含义不同
+
+<ul>
+<li>
+<code>a+i</code>=<code>&amp;a[i]</code>,表示第i行首地址，指向行
+
+<li>
+<code>a[i]</code>=<code>*(a+i)</code>=<code>&amp;a[i][0]</code>,表示第i行第0列元素地址，指向列
+
+</ul>
+</ul>
 
 </body>
 </html>
