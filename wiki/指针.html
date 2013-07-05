@@ -554,6 +554,92 @@ int main()
 </pre>
 
 </ul>
+<h4 id="toc_1.5.1.3">二维数组与一维数组指针变量的关系</h4>
+<ul>
+<li>
+例如: <code>int a[5][10]</code> 与 <code>int(*p)[10]</code>
+
+<li>
+二维数组名是一个指向有10个元素的一维数组的~指针常量~
+
+<li>
+<code>p=a+i</code>使p指向二维数组的第i行
+
+<li>
+<code>*(*(p+i)+j)</code> = <code>a[i][j]</code>
+
+<li>
+二维数组的形参是一维数组指针变量，即 <code>int x[][10]</code> 与 <code>int (*x)[10]</code>
+
+<li>
+变量定义（不是形参) 时，两者不等价
+
+<li>
+系统只给<code>p</code>分配能保存一个指针值的内存区（一般2字节）；而给<code>a</code>分配2*5*10字节的内存区
+
+</ul>
+<hr />
+<h1 id="toc_2">字符串指针和指向字符串的指针变量</h1>
+<ul>
+<li>
+字符串指针：字符串的首地址
+
+<li>
+字符指针变量：指向字符串的指针变量
+
+<li>
+字符指针变量定义的一般形式：<code>char *指针变量名</code>
+
+<li>
+字符指针变量定义时可以赋初始值
+
+<li>
+例如:<code>char *strp = "Hello!";</code>
+
+<ul>
+<li>
+定义了一个指向字符串的指针变量，并将字符串的首地址赋值给strp指针变量，即：使指针变量strp指向字符串首地址
+
+</ul>
+</ul>
+<h2 id="toc_2.1">C程序访问字符串的方法</h2>
+<ol>
+<li>
+用字符数组存放一个字符串
+
+<ul>
+<li>
+例如:<code>char s[] = "I am a student.";</code>
+
+<li>
+<code>printf("%s\n,s");</code>
+
+<li>
+<code>for(i=0;s[i];i++) printf("%c",s[i]);</code>
+
+</ul>
+<li>
+用字符指针指向一个字符串
+
+<ul>
+<li>
+例如：<code>char *ps = "I am a student.";</code>
+
+<li>
+<code>printf("%s\n",ps);</code>
+
+<li>
+<code>for(;*ps;ps++) printf("%c",*ps);</code>
+
+</ul>
+<li>
+字符数组和字符指针变量都可以在定义时赋初始值，但以下方法对字符数组非法，对字符串合法:
+  <code>char s[10]; s = "hello!"</code> 非法
+  <code>char *ps; ps = "hello!"</code> 合法
+
+<li>
+
+</ol>
 
 </body>
 </html>
