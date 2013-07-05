@@ -638,6 +638,19 @@ int main()
   <code>char *ps; ps = "hello!"</code> 合法
 
 <li>
+字符数组名是指针常量，只能表示一个确定的字符串，不能改变。而字符指针变量的值是可以改变的，它可以代表不同的字符串。
+
+<li>
+若定义了一个指针变量，并使它指向一个字符串，就可以用下标形式引用指针变量所指字符串中的字符，例如：
+  <code>char *a = "Kavi";</code> 
+  <code>printf("%c",a[2]);</code>
+
+<li>
+用指针变量指向一个格式字符串，可以用它代替printf函数的格式字符串
+  <code>int a; char *format; format = "a=%d\n";</code>
+  <code>printf(format,a);</code>相当于<code>printf("a=%d\n",a);</code>
+
+<li>
 
 </ol>
 
