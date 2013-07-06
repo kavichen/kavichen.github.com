@@ -650,9 +650,28 @@ int main()
   <code>int a; char *format; format = "a=%d\n";</code>
   <code>printf(format,a);</code>相当于<code>printf("a=%d\n",a);</code>
 
-<li>
-
 </ol>
+<h2 id="toc_2.2">字符指针变量与字符数组</h2>
+<h3 id="toc_2.2.1"><code>char *cp</code>与<code>char str[20]</code></h3>
+<ul>
+<li>
+str由若干元素组成，每个元素放一个字符；而cp终存放字符串首地址
+
+<li>
+<code>char str[20];</code> <code>str = "kavi";</code> 非法，因为<code>str</code>是地址常量
+
+<li>
+<code>char *cp;</code> <code>cp = "kavi";</code> 合法，因为<code>cp</code>是地址变量
+
+<li>
+<code>cp</code>接收键入字符串时，必须先开辟存储空间，例如：
+<pre>
+    char *cp,str[10];
+    cp = str;
+    scanf("%s",cp);
+</pre>
+
+</ul>
 
 </body>
 </html>
