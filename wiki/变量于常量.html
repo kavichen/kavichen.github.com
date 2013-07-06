@@ -2,7 +2,7 @@
 <html>
 <head>
 <link rel="Stylesheet" type="text/css" href="style.css">
-<title>变量与常量</title>
+<title>变量与常量[转]</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
@@ -94,6 +94,100 @@
 
 </ul>
 <hr />
+<h1 id="toc_2">例子</h1>
+<h2 id="toc_2.1">例子1</h2>
+<pre>
+  char ch = ‘a’;
+  int a = (int)ch;
+  printf(“%d %c\n”, a, ch);
+</pre>
+<ul>
+<li>
+ch是什么？ch里装的是什么？a是什么？a里面装的是什么？打印什么？
+
+<li>
+测试对变量类型的理解和类型转换。ch是字符型变量，ch里是字符’a’的二进制数，a是整型变量，a里面是字符’a’的二进制数的整型表示方式，以十进制数表示出来97。打印结果为97 和 a。
+
+</ul>
+<h2 id="toc_2.2">例子2</h2>
+<pre>
+  int add = 0x12345678;
+  int *p = (int*)add
+</pre>
+<ul>
+<li>
+add是什么？add里装的是什么？p是什么？p里装的是什么？*p又是什么？&amp;p又是什么？
+
+<li>
+测试对整型和地址类型转换。add是一个整数变量，add里是0x12345678的二进制数，以十进制表现出来，p是一个整型指针变量名，p里面是0x12345678的二进制数，以地址的方式表现出来，代表地址0x12345678。*p是通过*去访问地址0x12345678这个地址处的数据（如果你试图去打印它，会出错，因为这个地址你不一定有权限去访问）。&amp;p是取出整型指针变量p的地址，因为p是一个变量，它也有自己的地址，所以可以取出它的地址来（见上面变量的定义）。
+
+</ul>
+<h2 id="toc_2.3">例子3</h2>
+<pre>
+  #define PI 3.14
+  int a = PI;
+  printf(“%d\n”, a);
+</pre>
+<ul>
+<li>
+上面的代码有没有问题？
+
+<li>
+宏定义一个常量PI，PI这个符号代表了3.14，在代码执行前的预处理阶段第二行int a = PI，已经被替换为了int a = 3.14，将3.14赋值给整型，会舍弃掉小数点后面部分结果，仅保留整数部分，打印结果为3。
+
+</ul>
+<h2 id="toc_2.4">例子4</h2>
+<pre>
+  #define PI 3.14
+  printf(“%d\n”, PI); 
+</pre>
+<ul>
+<li>
+代码有没有问题？
+
+<li>
+和上面3一样，在预处理阶段被替换成了printf(“%d\n”, 3.14)，结果为1374389535，这是因为将浮点型的3.14在内存中的数据，以整型来表现的。
+
+</ul>
+<h2 id="toc_2.5">例子5</h2>
+<pre>
+  #define PI 3.14
+  int a = PI;
+  PI = 3.1415926;
+  int b = PI;
+  printf(“%d %d\n”, a, b);
+</pre>
+<ul>
+<li>
+代码有没有问题?
+
+<li>
+第三行PI = 3.1415926会出错，PI是个常量其被替换成了3.14 = 3.1415926，3.14是个字面常量，不能被赋值。错误信息为“向无效左值赋值出错”（关于常见错误信息，见C语言常见错误详解章节）。
+
+</ul>
+<h2 id="toc_2.6">例子6</h2>
+<pre>
+  char *str = “hello world”;
+  printf(“%s\n”, str);
+  *str = “goodbye world”;
+  printf(“%s\n”, str);
+</pre>
+<ul>
+<li>
+代码有没有问题?
+
+<li>
+第三行*str = “goodbye world”出错，第一行中将字符串常量“hello world”的首地址给了字符指针变量str，第三行试图将“goodbye world”的首地址，通过*str的访问方式覆盖str指向的字符串常量“hello world”。这句话理解起来都比较费劲，因为这里有两个错误：
+
+<ol>
+<li>
+试图向常量里写数据。- “hello world” 是字符串常量，那么这个字符串空间里的内容不能改变。
+
+<li>
+指针变量里应该放地址，字符串都是以首地址为地址。 - 向一个地址里写入字符串应该使用strcpy。*str只是代表了str指向的字符串中的第一个字符，将字符串地址写入到一个字符里肯定不行。
+
+</ol>
+</ul>
 
 </body>
 </html>
