@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>struct和typedef struct</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<ul>
+<li>
+在C中定义一个结构体类型<code>typedef</code>
+<pre>
+    typedef struct Student
+    {
+      int a;
+    }Stu;
+</pre>
+
+<li>
+于是在声明变量的时候就可以用：<code>Stu stu1</code>,如果没有<code>typedef</code>就必须用<code>struct Student stu1;</code>来声明
+
+<li>
+这里的<code>Stu</code>实际上就是<code>struct Student</code>的别名(Stu == struct Student)
+
+<li>
+另外这里不可以写Student（于是也不能struct Student stu1;了，必须是Stu stu1;）
+
+</ul>
+
+</body>
+</html>
