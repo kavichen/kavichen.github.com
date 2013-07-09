@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>const</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">const</h1>
+<ul>
+<li>
+<code>const char ch = 'a'</code> - 字符常量
+
+<li>
+<code>const int a[5] = {1,2,3,4,5};</code> - 数组常量
+
+<li>
+<code>const int *p = a</code> - <code>p</code>是指向常量的指针
+
+<ul>
+<li>
+不可以通过给指针复制来改变数组，例如：
+
+<li>
+<code>*p=10</code>是错误的
+
+</ul>
+<li>
+<code>int *const p = a</code> - <code>p</code>是指针常量
+
+<ul>
+<li>
+不可以改变指针的变量，例如：
+
+<li>
+<code>*p = 2</code>是允许的
+
+<li>
+<code>p++</code>是不允许的
+
+</ul>
+<li>
+<code>const int * const p = a</code> - <code>p</code>是指向常量的指针常量
+
+<ul>
+<li>
+即不允许通过指针来改变数组，又不允许改变指针的变量
+
+</ul>
+</ul>
+
+</body>
+</html>

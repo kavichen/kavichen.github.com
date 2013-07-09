@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>memcpy</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">memcpy</h1>
+<ul>
+<li>
+表头文件：<code>#include &lt;string.h&gt;</code>
+
+<li>
+定义函数: <code>void *memcpy(void *dest, const void *src, size_t n)</code>
+
+<li>
+函数说明：<code>memcpy()</code>用来拷贝<code>src</code>所指的内存内容前n个字节到dest所指的内存地址上。与<code>strcpy()</code>不同，<code>memcpy()</code>会完整的复制n个字节，不会因为遇到字符串结束符<code>'\n'</code>而结束
+
+<li>
+附加说明：指针<code>src</code>和<code>dest</code>所指的内存区域不可重叠
+
+</ul>
+
+</body>
+</html>
