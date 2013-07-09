@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>enum</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">enum</h1>
+<ul>
+<li>
+在程序中，需要为某些整数定义一个别名
+<pre>
+  #define MON 1
+  #define TUE 2
+  #define WED 3
+  #define THU 4
+  #define FRI 5
+  #define SAT 6
+  #define SUN 7
+</pre>
+
+</ul>
+
+<ul>
+<li>
+用枚举如下：
+<pre>
+  enum DAY
+  {
+    MON = 1, TUE, WED, THU, FRI, SAT, SUN
+  }; 
+</pre>
+
+<ul>
+<li>
+枚举型是一个集合，集合中的元素（枚举成员）是一些命名的整型常量，元素之间用,隔开
+
+<li>
+DAY是一个标示符，可以看成这个集合的名字，是一个可选项，即是可有可无的项
+
+<li>
+第一个枚举成员的默认值为整型的0，后续枚举成员的值在前一个成员上加1
+
+<li>
+可以人为设置枚举成员的值
+
+<li>
+枚举型是预处理指令<code>#define</code>的替代
+
+<li>
+类型定义以分号;结束
+
+</ul>
+</ul>
+
+</body>
+</html>
