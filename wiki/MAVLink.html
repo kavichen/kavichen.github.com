@@ -114,7 +114,7 @@ ios中另开一个进程不断发送heartBeat[完成]
 
 </ul>
 <li>
-对mavlink_message_t进行封装
+对<a href="mavlink_message_t.html">mavlink_message_t</a>进行封装
 
 </ul>
 <li>
@@ -200,22 +200,7 @@ uint16_t checksum 校验和
 <p>
 每条msg中，payload长度不同。
 <hr />
-<hr />
-<hr />
 </p>
-<ul>
-<li>
-mavlink_msg_command_long_pack -&gt; return mavlink_finlize_message(msg, system_id, component_id, 33, 153)
-
-<ul>
-<li>
-153 is crc_extra
-
-</ul>
-<li>
-mavlink_finlize_message(msg, system_id, component_id, 33, 153) -&gt; mavlink_finalize_message_chan(msg,system_id, component_id, MAVLINK_COMM_0, length, crc)
-
-</ul>
 
 </body>
 </html>
