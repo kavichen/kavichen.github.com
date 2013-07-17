@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>在Ubuntu12.04下安装nginx，MySQL和PHP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">第一步 - 更新Apt-Get</h1>
+<ol>
+<li>
+<code>sudo apt-get update</code>
+
+</ol>
+<h1 id="toc_2">第二步 - 安装MySQL</h1>
+<ol>
+<li>
+<code>sudo apt-get install mysql-server</code>
+
+<li>
+在安装MySQL时输入root密码
+
+</ol>
+<h1 id="toc_3">第三步 - 安装nginx</h1>
+<ol>
+<li>
+<code>sudo apt-get install nginx</code>
+
+<li>
+<code>sudo service nginx start</code> - 启动nginx
+
+<li>
+<code>ifconfig eth0 | grep inet | awk '{print $2}'</code> - 如果显示VPS的IP地址，确认nginx已经被安装
+
+</ol>
+<h1 id="toc_4">第四步 - 安装PHP</h1>
+<ol>
+<li>
+<code>sudo apt-get install php5-fpm</code>
+
+</ol>
+<h1 id="toc_5">第五步 - 配置PHP</h1>
+<ol>
+<li>
+<code>sudo vi /etc/php5/fpm/php.ini</code>
+
+<li>
+找到<code>cgi.fix_pathinfo = 1</code>,把它改成0
+
+<li>
+<code>sudo vi /etc/php5/fpm/pool.d/www.conf</code>
+
+<li>
+找到<code>listen = 127.0.0.1:9000</code>,并修改为<code>listen = /var/run/php5-fpm.sock</code>
+
+<li>
+重启php5-fpm <code>sudo service php5-fpm restart</code>
+
+</ol>
+<h1 id="toc_6">第六步 - 配置nginx</h1>
+<ol>
+<li>
+<code>sudo vi /etc/nginx/sites-available/default</code>
+
+<li>
+更新以下配置
+<pre>
+    server{
+          listen 80;
+          root /usr/share/nginx/www;
+          index index.php index.html index.htm;
+
+          server_name YOUR.IP.ADDR.ESS;
+
+          location / {
+             try_files $uri $uri/ /index.html;
+          }
+          
+          error_page 404 /404.html;
+          error_page 500 502 503 504 /50x.html;
+          location = /50x.html {
+                root /usr/share/nginx/www;
+          }
+          # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+            location ~ \.php$ {
+              #fastcgi_pass 127.0.0.1:9000;
+              # With php5-fpm:
+              fastcgi_pass unix:/var/run/php5-fpm.sock;
+              fastcgi_index index.php;
+              fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+              include fastcgi_params;
+            }
+    }
+</pre>
+
+<ul>
+<li>
+把index.php添加到index line
+
+<li>
+把server_name改为你的IP地址或者域名
+
+<li>
+修改location ~ \.php${
+
+</ul>
+</ol>
+<h1 id="toc_7">第七步 - 新建一个php info的页面</h1>
+<ol>
+<li>
+新建一个php文件 - <code>sudo vi /usr/share/nginx/www/info.php</code>
+
+<li>
+在文件中输入
+<pre>
+    &lt;?php
+      phpinfo();
+    ?&gt;
+</pre>
+
+<li>
+保存退出后重新启动nginx - <code>sudo service nginx restart</code>
+
+<li>
+访问该页面<a href="http://youripaddress/info.php">http://youripaddress/info.php</a>
+
+</ol>
+
+</body>
+</html>
