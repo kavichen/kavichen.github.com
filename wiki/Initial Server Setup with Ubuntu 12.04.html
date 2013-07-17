@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Initial Server Setup with Ubuntu 12.04</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">第一步 - 远程登陆</h1>
+<ol>
+<li>
+<code>ssh root@12.34.56.78</code>
+
+<li>
+登陆vps
+
+</ol>
+<h1 id="toc_2">第二步 - 修改密码</h1>
+<ol>
+<li>
+<code>passwd</code>
+
+</ol>
+<h1 id="toc_3">第三步骤 - 新建新用户</h1>
+<ol>
+<li>
+<code>adduser kavi</code>
+
+</ol>
+<h1 id="toc_4">第四步 - 分配管理员权限</h1>
+<ul>
+<li>
+为了阻止操作者用管理员权限进行误操作
+
+<li>
+用<code>sudo</code>执行的命令会被记录在<code>/var/log/secure</code>中
+
+</ul>
+
+<ol>
+<li>
+执行<code>visudo</code>，Ubuntu会用nano打开sudo configuration
+
+<li>
+修改文件如下：
+<pre>
+  # User privilege specification
+  root  ALL=(ALL:ALL) ALL
+  kavi  ALL=(ALL:ALL) ALL
+</pre>
+
+</ol>
+<h1 id="toc_5">第五步 - 配置ssh</h1>
+<ol>
+<li>
+打开配置文件<code>sudo vi /etc/ssh/sshd_config</code>
+
+<li>
+{{{
+  Port 22
+  Protocal 2
+  PermitRootLogin no
+  AllowUsers kavi
+  }}}
+
+<ul>
+<li>
+Port为登陆接口
+
+<li>
+PremitRootLogin:是否可以用root登陆
+
+<li>
+AllowUsers:允许登陆的User
+
+</ul>
+</ol>
+<h1 id="toc_6">第六步 - 重载ssh</h1>
+<ol>
+<li>
+<code>relaod ssh</code>
+
+<li>
+登陆<code>ssh -p 22 kavi@12.34.56.78</code>
+
+</ol>
+
+</body>
+</html>
