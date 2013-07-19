@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Ubuntu下开启FTP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Ubuntu下开启FTP</h1>
+<ul>
+<li>
+<a href="http://quicker.iteye.com/blog/583117">原文连接</a>
+
+</ul>
+<h2 id="toc_1.1">第一步 - 更新apt-get</h2>
+<ol>
+<li>
+<code>sudo apt-get update</code>
+
+<li>
+<code>sudo apt-get dis-upgrade</code>
+
+</ol>
+<h2 id="toc_1.2">第二步 - 安装vsftpd</h2>
+<ol>
+<li>
+<code>sudo apt-get install vsftpd</code>
+
+</ol>
+<h2 id="toc_1.3">第三步 - 配置vsftpd</h2>
+<ol>
+<li>
+<code>chmod 777 /etc/vsftpd.conf</code> - 修改配置文件权限
+
+<li>
+<code>sudo vi /etc/vsftpd.conf</code> - 打开修改文件
+
+<li>
+以下列代码进行修改
+<pre>
+# 服务器以 standalong 模式运行，如果以 root 用户直接启动 vsftpd 进程，则必须。
+# 注销语句以 xinetd 方式运行
+  listen=YES
+
+# 上传总开关(全局控制)
+    write_enable=YES
+
+# 接受匿名用户，默认无密码请求
+    anonymous_enable=YES
+
+# 接受本地用户
+    local_enable=YES
+
+# 本地用户上传文件(包括目录)的 umask
+# 注意 vsftp 版本，某些旧版的该选项会被 chown_uploads/chown_username 二选项覆盖
+    local_umask=022
+
+# 允许匿名用户上传文件，配合 anon_umask，否则文件权限皆为默认的 600，用户上传的文件不提供给任何匿名用户下载
+    anon_upload_enable=YES
+
+# 匿名用户上传文件(包括目录)的 umask
+# 注意点同 local_umask
+    anon_umask=022
+
+# 允许匿名用户创建目录，配合 anon_umask 实现目录可写，否则依我(aBiNg)看，实际用处很小
+    anon_mkdir_write_enable=YES
+
+# 允许匿名用户删除/重命名文件等操作
+#anon_other_write_enable=YES
+
+# 为 YES 则进入目录时显示此目录下由 message_file 选项指定的文本文件(默认为 .message)的内容
+    dirmessage_enable=YES
+
+# 使用上传/下载日志，日志文件默认为 /var/log/vsftpd.log，可以通过 xferlog_file 选项修改
+    xferlog_enable=YES
+
+# 使用 port 模式连接，并启用 20 端口
+    connect_from_port_20=YES
+
+# 改变用户上传文件的所有者
+#chown_uploads=YES
+#chown_username=whoever
+#xferlog_file=/var/log/vsftpd.log
+
+# 日志使用标准 xferlog 格式
+#xferlog_std_format=YES
+
+# 用户登陆后 idle 时间，超过设置超则被踢出服务器
+#idle_session_timeout=600
+
+# login 时的欢迎信息
+    ftpd_banner=Welcome to blah FTP service.
+
+#deny_email_enable=YES
+#banned_email_file=/etc/vsftpd.banned_emails
+
+# 若为 NO，则记录在 chroot_list_file 选项所指定的文件(默认是 /etc/vsftpd.chroot_list)中的用户将被
+# chroot 在登录后所在目录中，无法离开。如果为 YES，则所记录的用户将不被 chroot。
+    chroot_local_user=YES
+
+# 设置为 YES 则下面的控制有效
+#chroot_list_enable=YES
+#chroot_list_file=/etc/vsftpd.chroot_list
+
+#ls_recurse_enable=YES
+    secure_chroot_dir=/var/run/vsftpd
+    pam_service_name=vsftpd
+    rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+    rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+</pre>
+
+</ol>
+<h2 id="toc_1.4">第四步 - 重启ftp服务</h2>
+<ol>
+<li>
+<code>sudo /etc/init.d/vsftpd restart</code>
+
+<li>
+在ftp工具中，只要输入Ubuntu中的用户名及密码即可登录
+
+</ol>
+
+</body>
+</html>
