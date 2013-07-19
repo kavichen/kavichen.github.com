@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Nginx下域名解析</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Nginx下域名解析</h1>
+<ul>
+<li>
+<a href="http://b.xiacd.com/2013/05/nginx-301/">原文链接</a>
+
+</ul>
+<h2 id="toc_1.1">描述</h2>
+<ul>
+<li>
+将www.chenqiwei.com与chenqiwei.com绑定到106.186.27.28的vps上
+
+<li>
+两个域名对于搜索引擎不友好，需要利用301重定向www.chenqiwei.com至chenqiwei.com上
+
+</ul>
+<h2 id="toc_1.2">第一步 - 配置Nginx</h2>
+<ol>
+<li>
+{{{
+  server {
+    listen 60;
+    server_name chenqiwei.com www.chenqiwei.com;
+  }
+  }}}
+
+</ol>
+<h2 id="toc_1.3">第二步 - 重定向</h2>
+<ol>
+<li>
+将www.chenqiwei.com定向到chenqiwei.com
+<pre>
+    server {
+      listen 80;
+      server_name chenqiwei.com www.chenqiwei.com;
+      if ($host != 'chenqiwei.com') {
+        rewrite ^/(.*)$ http://chenqiwei.com/$1 permanent;
+      }
+    }
+</pre>
+
+<ul>
+<li>
+上述配置文件的if语句与括号必须以一个空格隔开，否则Nginx会报nginx: [emerg] unknown directive “if($host” in…错误。
+
+</ul>
+</ol>
+<h2 id="toc_1.4">第四步 - 重载Nginx</h2>
+<ol>
+<li>
+<code>sudo service nginx reload</code>
+
+</ol>
+<h2 id="toc_1.5">第五步 - 域名绑定</h2>
+<ul>
+<li>
+也可以放在第一步之前
+
+<li>
+设置域名解析1
+
+<ul>
+<li>
+主机记录:www
+
+<li>
+记录类型:A
+
+<li>
+路线类型:默认
+
+<li>
+记录值:YOUR.IP.ADD.RESS
+
+</ul>
+<li>
+设置域名解析2
+
+<ul>
+<li>
+主机记录:@
+
+<li>
+记录类型:A
+
+<li>
+路线类型:默认
+
+<li>
+记录值:YOUR.IP.ADD.RESS
+
+</ul>
+</ul>
+
+</body>
+</html>
