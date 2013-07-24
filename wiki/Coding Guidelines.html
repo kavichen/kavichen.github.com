@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Coding Guidelines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Coding Guidelines</h1>
+<h2 id="toc_1.1">Class和<a href="Protocol.html">Protocol</a>的命名</h2>
+<ul>
+<li>
+Protocal命名中的不能和与其相关类中的名字有关，避免混淆
+
+<li>
+Protocal应该用动名词来命名
+
+<li>
+Example: NSLocking
+
+</ul>
+<h2 id="toc_1.2">Methods的命名</h2>
+<ul>
+<li>
+用小写开头，中间的单词以大写开头（有例外，比如以PDF这种常用词，大写开头也可）
+
+<li>
+如果该方法是一个object takes，用动词开头
+
+<ul>
+<li>
+<code>- (void)invokeWithTarget:(id)target;</code>
+
+<li>
+不要用do 或者 does
+
+</ul>
+<li>
+如果一个method直接返回reveiver的属性，不需要用get作为开头
+
+<ul>
+<li>
+例如：<code>- (NSSize)cellSize</code> - 正确
+
+<li>
+例如：<code>- (NSSize)calcCellSize</code> - 错误
+
+</ul>
+<li>
+Make the word before the argument describe the argument
+
+<ul>
+<li>
+<code>-(id)viewWithTag:(NSInteger)aTag;</code> - 正确
+
+<li>
+<code>-(id)taggedView:(int)aTag;</code> - 错误
+
+</ul>
+<li>
+Add new keywords to the end of an existing method when you create a method that is more specific than the inherited one
+
+<ul>
+<li>
+<code>- (id)initWithFrame:(CGRect)frameRect;</code>
+
+<li>
+<code>- (id)initWithFrame:(CGRect)frameRect mode:(int)aMode cellClass:(Class)factoryId numberOfRows:(int) rowsHigh numberOfColumns:(int)colseWide;</code>
+
+</ul>
+<li>
+不要在receiver的两个属性中加<code>and</code>
+
+<ul>
+<li>
+<code>-(int)runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes;</code> - Right
+
+</ul>
+<li>
+If the method describes two separate actions, use "and" to link them
+
+<ul>
+<li>
+<code>- (BOOL)openFile:(NSString *)fullPath withApplication:(NSString *)appName andDeactivate:(BOOL)flag;</code>
+
+</ul>
+</ul>
+<h2 id="toc_1.3">Accessor Methods</h2>
+<ul>
+<li>
+Use "get" only for methods that return objects and values indirectly. You should use this form for methods only when multiple items need to be returned.
+
+<ul>
+<li>
+<code>- (void)getLineDash:(float *)pattern count:(int *)count phase:(float *)phase;</code>
+
+<ul>
+<li>
+In methods such as these, the implementation should accept <code>NULL</code> for these in-out parameters as an indication that the caller is not interested in one or more of the returned values.
+
+</ul>
+</ul>
+</ul>
+
+<h2 id="toc_1.4">Delegate Methods</h2>
+<ul>
+<li>
+Start the name by identifying the class of the object that's sending the message:
+
+<ul>
+<li>
+<code>- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(int)row;</code>
+
+</ul>
+<li>
+A colon is affixed to the class name (the argument is a reference to the delegating object) unless the method has only one argument, the sender.
+
+<ul>
+<li>
+<code>- (BOOL)applicationOpenUnitiledFile:(NSApplication *)sender;</code>
+
+</ul>
+<li>
+An exception to this are methods that invoked as a result of a notification being posted. In this case, the sole argument is the notification object.
+
+<ul>
+<li>
+<code>- (void)windowDidChangeScreen:(NSNotification *)notification;</code>
+
+</ul>
+</ul>
+<h2 id="toc_1.5">Naming Fucntions</h2>
+<ul>
+<li>
+<a href="http://stackoverflow.com/questions/6672352/objective-c-difference-between-functions-and-methods">Method vs Function</a>
+
+<li>
+if the function returns the property of its first argument, omit the verb.
+
+<ul>
+<li>
+<code>unsigned int NSEventMaskFormType(NSEventType type)</code>
+
+</ul>
+<li>
+if the value is returned by reference, use "Get"
+
+<ul>
+<li>
+<code>const char *NSGetSizeAndAlignment(const char *typePtr, unsigned int *sizep, unsigned int *alignp)</code>
+
+</ul>
+<li>
+if the value is a boolean, the function should begin with an inflected verb.
+
+<ul>
+<li>
+<code>BOOL NSDecimalIsNotANumber(const NSDecimal *decimal)</code>
+
+</ul>
+</ul>
+<h2 id="toc_1.6">Declared Properties and Instance Variables</h2>
+<ul>
+<li>
+If the name of a declared property is expressed as an adjective, however, the property name omits the "is" prefix but specifies the conventional name for the get accessor,for example:
+
+<ul>
+<li>
+<code>@property (assign, getter = isEditable) BOOL editable;</code>
+  *
+
+</ul>
+</ul>
+
+</body>
+</html>
