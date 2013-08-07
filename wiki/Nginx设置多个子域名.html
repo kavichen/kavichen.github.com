@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Nginx设置多个子域名</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Nginx设置多个子域名</h1>
+<ul>
+<li>
+<a href="http://adchoices.sinaapp.com/topic/56/nginx-rewrite-实现二级域名-二级目录跳转学习">原文链接</a>
+
+</ul>
+<h2 id="toc_1.1">实现效果</h2>
+<ul>
+<li>
+当访问 <a href="http://blog.chenqiwei.com">http://blog.chenqiwei.com</a> 时，跳转到 <a href="http://chenqiwei.com/blog">http://chenqiwei.com/blog</a> , 浏览器上的地址显示为 <a href="http://chenqiwei.com/blog/">http://chenqiwei.com/blog/</a>
+
+</ul>
+<h2 id="toc_1.2">实现步骤</h2>
+<ol>
+<li>
+<code>cd /etc/nginx/sites-available/</code> - 找到对应的nginx配置
+
+<li>
+<code>sudo vi wordpress</code> - 用vim打开
+
+<li>
+添加下面配置
+<pre>
+  server {
+          listen 80;
+          server_name *.chenqiwei.com;
+          if ( $http_host ~* "^(.*)\.chenqiwei\.com$") {
+                set $domain $1;
+                rewrite ^(.*) http://chenqiwei.com/$domain break;
+          }
+  }
+</pre>
+
+</ol>
+<h2 id="toc_1.3">其他</h2>
+<ol>
+<li>
+<a href="http://deerchao.net/tutorials/regex/regex.htm">正则表达式30分钟入门教程</a>
+
+<li>
+<a href="http://wangyan.org/blog/nginx-location.html">Nginx Location指令基础</a>
+
+</ol>
+
+</body>
+</html>
