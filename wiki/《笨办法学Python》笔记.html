@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>《笨办法学Python》笔记</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">《笨办法学Python》笔记</h1>
+<h2 id="toc_1.1">习题5：更多的变量和打印</h2>
+<pre>
+    my_name = 'chenqiwei'
+    print "My name is %s ." % my_name # %d for int
+</pre>
+<ul>
+<li>
+如果你使用了非 ASCII 字符而且碰到了编码错误，记得在最顶端加一行 <code># -- coding: utf-8 -- </code>。
+
+</ul>
+<h2 id="toc_1.2">习题6：字符串和文本</h2>
+<pre>
+    x = "There are %d types of people." % 10
+    binary = "binary"
+    do_not = "don't"
+    y = "Those who know %s and those who %s." % (binary, do_not)
+
+    print x
+    print y
+
+    print "I said: %r." % x
+    print "I also said: '%s'." % y
+
+    hilarious = False
+    joke_evaluation = "Isn't that joke so funny?! %r"
+
+    print joke_evaluation % hilarious
+
+    w = "This is the left side of..."
+    e = "a string with a right side."
+
+    print w + e
+</pre>
+<ul>
+<li>
+[[<a href="http://blog.sina.com.cn/s/blog_6c37488301010y3m.html|格式化字符串">http://blog.sina.com.cn/s/blog_6c37488301010y3m.html|格式化字符串</a><code>%r</code>与<code>%s</code>区别]]
+
+<li>
+在 <code>print</code>语句后面加<code>,</code>，打印不换行
+
+<li>
+<code>print "." * 10</code>为打印10个<code>.</code>
+
+</ul>
+<h2 id="toc_1.3">习题9：打印，打印，打印</h2>
+<pre>
+    # Here's some new strange stuff, remember type it exactly.
+
+    days = "Mon Tue Wed Thu Fri Sat Sun"
+    months = "Jan\nFeb\nMar\nApr\nMay\nJun\nJul\nAug"
+
+    print "Here are the days: ", days
+    print "Here are the months: ", months
+
+    print """
+    There's something going on here.
+    With the three double-quotes.
+    We'll be able to type as much as we like.
+    Even 4 lines if we want, or 5, or 6.
+    """
+</pre>
+<ul>
+<li>
+<code>print</code>后面加<code>"""</code>,打印一段话
+
+</ul>
+<h2 id="toc_1.4">习题13：参数，解包，变量</h2>
+<pre>
+    from sys import argv
+
+    script, first, second, third = argv
+
+    print "The script is called:", script
+    print "Your first variable is:", first
+    print "Your second variable is:", second
+    print "Your third variable is:", third
+</pre>
+<ul>
+<li>
+在第 1 行我们有一个“import”语句. 这是你将 python 的功能引入你的脚本的方法. Python 不会一下子将它所有的功能给你，而是让你需要什么就调用什么。这样可以让你的程序保持精简，而后面的程序员看到你的代码的时候，这些“import”可以作为提示，让他们明白你的代码用到了哪些功能。
+
+<li>
+argv 是所谓的“参数变量(argument variable)”，是一个非常标准的编程术语。在其他的编程语言里你也可以看到它。这个变量包含了你传递给 Python 的参数。通过后面的练习你将对它有更多的了解。
+
+<li>
+第 3 行将 argv “解包(unpack)”，与其将所有参数放到同一个变量下面，我们将每个参数赋予一个变量名： script, first, second, 以及 third。这也许看上去有些奇怪, 不过”解包”可能是最好的描述方式了。它的含义很简单：“把 argv 中的东西解包，将所有的参数依次赋予左边的变量名”。
+
+</ul>
+<h2 id="toc_1.5">习题15：读取文件</h2>
+<pre>
+    from sys import argv
+
+    script, filename = argv
+
+    txt = open(filename) # 打开文件，并赋值给 txt 变量
+
+    print "Here's your file %r:" % filename
+    print txt.read() # 打印 txt 变量
+
+    print "Type the filename again:"
+    file_again = raw_input("&gt; ")
+
+    txt_again = open(file_again)
+
+    print txt_again.read()
+</pre>
+<h2 id="toc_1.6">习题16：读写文件</h2>
+<ul>
+<li>
+<code>close</code> - 关闭文件，相当于保存文件
+
+<li>
+<code>read</code> - 读取文件内容，赋值给相关变量
+
+<li>
+<code>readline</code> - 读取文本文件中的一行
+
+<li>
+<code>truncate</code> - 清空文件
+
+<li>
+<code>write(stuff)</code> - 将 stuff 写入文件
+<pre>
+    from sys import argv
+
+    script, filename = argv
+
+    print "We're going to erase %r." % filename
+    print "If you don't want that, hit CTRL-C (^C)."
+    print "If you do want that, hit RETURN."
+
+    raw_input("?")
+
+    print "Opening the file..."
+    target = open(filename, 'w')
+
+    print "Truncating the file.  Goodbye!"
+    target.truncate()
+
+    print "Now I'm going to ask you for three lines."
+
+    line1 = raw_input("line 1: ")
+    line2 = raw_input("line 2: ")
+    line3 = raw_input("line 3: ")
+
+    print "I'm going to write these to the file."
+
+    target.write(line1)
+    target.write("\n")
+    target.write(line2)
+    target.write("\n")
+    target.write(line3)
+    target.write("\n")
+
+    print "And finally, we close it."
+    target.close()
+</pre>
+
+</ul>
+
+</body>
+</html>
