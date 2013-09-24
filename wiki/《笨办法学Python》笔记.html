@@ -168,6 +168,152 @@ argv 是所谓的“参数变量(argument variable)”，是一个非常标准�
 
 </ul>
 <h2 id="toc_1.7">习题17：更多文件操作</h2>
+<ul>
+<li>
+<code>exists</code> - 将文件名字字符串作为参数，如果文件存在的话，返回True.
+<pre>
+    from sys import argv
+    from os.path import exists
+
+    script, from_file, to_file = argv
+
+    print "Copying from %s to %s" % (from_file, to_file)
+
+    # we could do these two on one line too, how?
+    input = open(from_file)
+    indata = input.read()
+
+    print "The input file is %d bytes long" % len(indata)
+
+    print "Does the output file exist? %r" % exists(to_file)
+    print "Ready, hit RETURN to continue, CTRL-C to abort."
+    raw_input()
+
+    output = open(to_file, 'w')
+    output.write(indata)
+
+    print "Alright, all done."
+
+    output.close()
+    input.close() 
+</pre>
+
+</ul>
+<h2 id="toc_1.8">习题18：命名、变量、代码、函数</h2>
+<pre>
+    # this one is like your scripts with argv
+    def print_two(*args):
+        arg1, arg2 = args
+        print "arg1: %r, arg2: %r" % (arg1, arg2)
+
+    # ok, that *args is actually pointless, we can just do this
+    def print_two_again(arg1, arg2):
+        print "arg1: %r, arg2: %r" % (arg1, arg2)
+
+    # this just takes one argument
+    def print_one(arg1):
+        print "arg1: %r" % arg1
+
+    # this one takes no arguments
+    def print_none():
+        print "I got nothin'."
+
+
+    print_two("Zed","Shaw")
+    print_two_again("Zed","Shaw")
+    print_one("First!")
+    print_none()
+</pre>
+<h2 id="toc_1.9">习题31：if 语句</h2>
+<pre>
+    print "You enter a dark room with two doors.  Do you go through door #1 or door #2?"
+
+    door = raw_input("&gt; ")
+
+    if door == "1":
+        print "There's a giant bear here eating a cheese cake.  What do you do?"
+        print "1. Take the cake."
+        print "2. Scream at the bear."
+
+        bear = raw_input("&gt; ")
+
+        if bear == "1":
+            print "The bear eats your face off.  Good job!"
+        elif bear == "2":
+            print "The bear eats your legs off.  Good job!"
+        else:
+            print "Well, doing %s is probably better.  Bear runs away." % bear
+
+    elif door == "2":
+        print "You stare into the endless abyss at Cthulhu's retina."
+        print "1. Blueberries."
+        print "2. Yellow jacket clothespins."
+        print "3. Understanding revolvers yelling melodies."
+
+        insanity = raw_input("&gt; ")
+        
+        if insanity == "1" or insanity == "2":
+            print "Your body survives powered by a mind of jello.  Good job!"
+        else:
+            print "The insanity rots your eyes into a pool of muck.  Good job!"
+
+    else:
+        print "You stumble around and fall on a knife and die.  Good job!"
+</pre>
+<h2 id="toc_1.10">习题32：for语句</h2>
+<pre>
+    the_count = [1, 2, 3, 4, 5]
+    fruits = ['apples', 'oranges', 'pears', 'apricots']
+    change = [1, 'pennies', 2, 'dimes', 3, 'quarters']
+
+    # this first kind of for-loop goes through a list
+    for number in the_count:
+        print "This is count %d" % number
+
+    # same as above
+    for fruit in fruits:
+        print "A fruit of type: %s" % fruit
+
+    # also we can go through mixed lists too
+    # notice we have to use %r since we don't know what's in it
+    for i in change:
+        print "I got %r" % i
+
+    # we can also build lists, first start with an empty one
+    elements = []
+
+    # then use the range function to do 0 to 5 counts
+    for i in range(0, 6):
+        print "Adding %d to the list." % i
+        # append is a function that lists understand
+        elements.append(i)
+
+    # now we can print them out too
+    for i in elements:
+        print "Element was: %d" % i
+</pre>
+<h2 id="toc_1.11">习题33：while 语句</h2>
+<pre>
+    i = 0
+    numbers = []
+
+    while i &lt; 6:
+        print "At the top i is %d" % i
+        numbers.append(i)
+
+        i = i + 1
+        print "Numbers now: ", numbers
+        print "At the bottom i is %d" % i
+
+
+    print "The numbers: "
+
+    for num in numbers:
+        print num
+</pre>
+<p>
+== 
+</p>
 
 </body>
 </html>
