@@ -311,9 +311,103 @@ argv 是所谓的“参数变量(argument variable)”，是一个非常标准�
     for num in numbers:
         print num
 </pre>
-<p>
-== 
-</p>
+<h2 id="toc_1.12">习题39：列表的操作</h2>
+<ul>
+<li>
+<code>join</code>:用来连接字符串
+
+<li>
+<code>split</code>:拆分字符串
+<pre>
+    ten_things = "Apples Oranges Crows Telephone Light Sugar"
+
+    print "Wait there's not 10 things in that list, let's fix that."
+
+    stuff = ten_things.split(' ')
+    more_stuff = ["Day", "Night", "Song", "Frisbee", "Corn", "Banana", "Girl", "Boy"]
+
+    while len(stuff) != 10:
+        next_one = more_stuff.pop()
+        print "Adding: ", next_one
+        stuff.append(next_one)
+        print "There's %d items now." % len(stuff)
+
+    print "There we go: ", stuff
+
+    print "Let's do some things with stuff."
+
+    print stuff[1]
+    print stuff[-1] # whoa! fancy
+    print stuff.pop()
+    print ' '.join(stuff) # what? cool!
+    print '#'.join(stuff[3:5]) # super stellar!
+</pre>
+
+</ul>
+<h2 id="toc_1.13">习题40：字典</h2>
+<pre>
+    cities = {'CA': 'San Francisco', 'MI': 'Detroit',
+                       'FL': 'Jacksonville'}
+
+    cities['NY'] = 'New York'
+    cities['OR'] = 'Portland'
+
+    def find_city(themap, state):
+        if state in themap:
+            return themap[state]
+        else:
+            return "Not found."
+
+    # ok pay attention!
+    cities['_find'] = find_city
+
+    while True:
+        print "State? (ENTER to quit)",
+        state = raw_input("&gt; ")
+
+        if not state: break
+
+        # this line is the most important ever! study!
+        city_found = cities['_find'](cities, state)
+        print city_found
+</pre>
+<ul>
+<li>
+<code>cities['_find'] = find_city</code> 不明白是什么意思！
+
+</ul>
+<h2 id="toc_1.14">习题41：来自 Percal 25 号行星的哥顿人(Gothons)</h2>
+<pre>
+    cities['_find'] = find_city # Line 1
+    city_found = cities['_find'](cities, state) # Line 2
+</pre>
+<ul>
+<li>
+Line 1 - 把<code>find_city</code>函数放入 cities 字典中，key 值为_find
+
+<li>
+Line 2 - 将<code>find_city</code>返回的信息赋值给<code>city_found</code>
+
+</ul>
+<h2 id="toc_1.15">习题42：类</h2>
+<pre>
+  class TheThing(object):
+
+    def __init__(self):
+        self.number = 0
+
+    def some_function(self):
+        print "I got called."
+
+    def add_me_up(self, more):
+        self.number += more
+        return self.number
+</pre>
+<ul>
+<li>
+<code>__init__</code> - Python 内置 _<em>init</em>_ method，在创建一个对象之后，要调用这个 method
+
+</ul>
 
 </body>
 </html>
