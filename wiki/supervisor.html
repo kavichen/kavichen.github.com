@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>supervisor - Python 进程管理工具</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">Supervisor</h1>
+<h2 id="toc_1.1">配置文件</h2>
+<ol>
+<li>
+<code>sudo vi /etc/supervisor/supervisord.conf</code>
+
+<li>
+增加需要进程管理的 python 程序
+<pre>
+    [program:hello] // 程序名称
+    command=python /var/www/hello.py // 程序命令行
+    autostart=true // 自动开始运行
+    stdout_logfile=/home/kavi/log/wx_log/ //捕获标准输出
+</pre>
+
+</ol>
+<h2 id="toc_1.2">基本命令</h2>
+<ul>
+<li>
+<code>sudo supervisor status hello</code> - 查看 hello 程序进程情况
+
+<li>
+<code>sudo supervisorctl start hello</code> - 启动 hello 服务
+
+<li>
+<code>sudo supervisorctl stop hello</code> - 停止 hello 服务
+
+</ul>
+<h2 id="toc_1.3">其他问题</h2>
+<ul>
+<li>
+如何安装 supervisor 保存在 evernote - vps 配置 下
+
+</ul>
+
+</body>
+</html>
