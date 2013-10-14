@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>rsync远程备份数据</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h1 id="toc_1">rsync远程备份数据</h1>
+<ul>
+<li>
+<code>rsync -av [原文件夹] [备份文件夹]</code>
+
+<li>
+在原文件夹中删除的文件，在备份文件夹中是不会删除的
+
+<ul>
+<li>
+如果需要删除<code>rsync -av --delete [原文件夹] [备份文件夹]</code>
+
+</ul>
+</ul>
+<h2 id="toc_1.1">使用 ssh 实现远程备份</h2>
+<ul>
+<li>
+<code>rsync -av -e ssh [原文件夹] kavi@xxx.xxx.xxx.xxx:[备份文件夹]</code>
+
+<li>
+配合不需要密码登录 ssh，实现自动备份
+
+</ul>
+
+</body>
+</html>
